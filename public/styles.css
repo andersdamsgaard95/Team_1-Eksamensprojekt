@@ -61,6 +61,13 @@ main {
   padding-left: 15px;
   background-color: red;
 }
+#contentContainer #tasksContainer .taskContainer {
+  display: flex;
+  gap: 100px;
+  align-items: center;
+  border-bottom: 1px solid black;
+  padding: 10px 0;
+}
 
 #askToMergeOrReplacePopUp {
   display: none;
