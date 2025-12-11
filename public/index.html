@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <img src="img/logo.svg" alt="hjemmeværnets logo">
+    </header>
+    <main>
+        <h1>Opgaver</h1>
+        <div class="greenLine"></div>
+        <div id="contentContainer">
+
+            <aside id="settingsContainer">
+
+                <form class="toolbar">
+                    <div class="search-filter-sort-wrapper">
+                        <!-- SEARCH -->
+                        <div class="search-group">
+                            <input type="search" placeholder="Søg…" name="q">
+                        </div>
+                        <div class="filter-sort-wrapper">
+
+                            <!-- FILTER (Type) -->
+                            <fieldset class="filter-group">
+                                <legend class="legend-group">Type
+                                    <button class="sort-toggle"><img src="img/chevron.svg" alt="sorterings-menu åben/luk ikon"></button>
+                                </legend>
+
+                                <div class="sort-dropdown">
+                                    <label>
+                                        <input type="checkbox" name="type" value="land">
+                                        Land
+                                    </label>
+
+                                    <label>
+                                        <input type="checkbox" name="type" value="sø">
+                                        Sø
+                                    </label>
+                                </div>
+                            </fieldset>
+
+                            <!-- SORTERING -->
+                            <fieldset class="sort-group">
+                                <legend class="legend-group">
+                                    Sortering
+                                    <button class="sort-toggle"><img src="img/chevron.svg" alt="sorterings-menu åben/luk ikon"></button>
+                                </legend>
+                                
+
+                                <div class="sort-dropdown">
+                                    <label>
+                                        <input type="radio" name="sort" value="ældste">
+                                        Ældste først
+                                    </label>
+
+                                    <label>
+                                        <input type="radio" name="sort" value="nyeste" checked>
+                                        Nyeste først
+                                    </label>
+                                </div>
+
+                            </fieldset>
+                        </div>
+
+                    </div>
+
+                    
+
+                    <!-- FILE BUTTONS -->
+                    <div class="file-group">
+
+                        <!-- Upload -->
+                        <div class="btn-info-container">
+                            <label class="file-button">
+                                Upload opgaver
+                                <input type="file" id="fileInput" hidden>
+                            </label>
+                            <div class="info-btn" aria-label="Info om upload">?</div>
+                        </div>
+
+                        <!-- Download -->
+                        <div class="btn-info-container">
+                            <button type="button" class="file-button">Download opgaver</button>
+                            <div class="info-btn" aria-label="Info om download">?</div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </aside>
+            <div id="tasksContainer">
+
+                <!-- STANDARD LANDING PAGE -->
+                <div id="standardLandingPage">
+                    <p>Ingen opgaver tilføjet</p>
+                    <button id="downloadTemplateButton">download excel skabelon til opgaver</button>
+                </div>
+
+                <div id="renderedTasks"></div>
+                <div id="newTask">
+                    <div></div>
+                    <button>Tilføj</button>
+                    <button>Gem</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="askToMergeOrReplacePopUp">
+            <p>Der findes allerede en eksisterende excel fil på serveren. Vil Du merge de to filer eller erstatte den
+                nuværende med denne?</p>
+            <button id="mergeButton">Merge</button>
+            <button id="replaceButton">Erstat</button>
+        </div>
+
+    </main>
+</body>
+
+</html>

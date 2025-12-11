@@ -1,0 +1,303 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 10px;
+}
+
+h1 {
+  font-size: 4.6rem;
+  font-weight: 700;
+  color: #3F5C59;
+  line-height: 1.5;
+  letter-spacing: -2px;
+  padding-bottom: 9px;
+}
+
+header {
+  height: 110px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  max-width: 1140px;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.greenLine {
+  width: 100%;
+  height: 10px;
+  background-color: #3F5C59;
+}
+
+#contentContainer {
+  display: flex;
+  flex-direction: row;
+}
+#contentContainer #settingsContainer {
+  background-color: #FAFAFA;
+  width: 350px;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+#contentContainer #tasksContainer {
+  flex: 1;
+}
+#contentContainer #tasksContainer #standardLandingPage {
+  padding-top: 20px;
+  padding-left: 15px;
+  background-color: red;
+}
+
+#askToMergeOrReplacePopUp {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: orange;
+}
+
+/* GENERELT */
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: gold;
+  padding: 10px;
+}
+
+.search-filter-sort-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: purple;
+}
+
+.filter-sort-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* SEARCH */
+.search-group input {
+  width: 100%;
+  padding: 6px 12px;
+  border-radius: 1.5em;
+  border: 1px solid #000;
+  font-size: 1.6rem;
+}
+
+/* FILTER + SORTERING grupper */
+fieldset {
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.filter-group {
+  gap: 2px;
+}
+
+legend {
+  font-weight: 700;
+  font-size: 1.6rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+}
+
+.legend-group {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  position: relative;
+}
+
+/* CHECKBOXES / RADIO BUTTONS */
+.sort-toggle {
+  display: none;
+}
+
+.sort-toggle img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.sort-group {
+  gap: 2px;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.4rem;
+}
+
+.sort-dropdown {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+/* FILE BUTTONS */
+.file-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #8D1B3D;
+}
+
+.file-button {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 2px solid black;
+  border-radius: 3px;
+  background: white;
+  cursor: pointer;
+  font-size: 1.4rem;
+  letter-spacing: 0.05rem;
+  font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* INFO-KNAPPER */
+.info-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: none;
+  background: black;
+  color: white;
+  cursor: help;
+  font-weight: 600;
+  margin-left: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.info-btn:hover::after {
+  content: "Her skriver du info...";
+  position: absolute;
+  background: #000;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  transform: translate(10px, -5px);
+  white-space: nowrap;
+}
+
+.btn-info-container {
+  display: flex;
+  gap: 1px;
+  align-items: center;
+}
+
+@media (max-width: 1200px) {
+  main {
+    max-width: 960px;
+  }
+  h1 {
+    font-size: 2.4rem;
+  }
+  #settingsContainer {
+    width: 290px;
+  }
+}
+@media (max-width: 992px) {
+  main {
+    max-width: 720px;
+  }
+  #contentContainer {
+    flex-direction: column;
+    background-color: yellow;
+  }
+  #contentContainer #settingsContainer {
+    background-color: green;
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    flex-direction: row;
+  }
+  #contentContainer #tasksContainer #standardLandingPage {
+    padding-left: 0;
+    background-color: blue;
+  }
+  .toolbar {
+    background-color: yellow;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .search-filter-sort-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: purple;
+    flex-grow: 1;
+  }
+  .sort-dropdown {
+    padding: 15px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 3px;
+    width: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .filter-sort-wrapper {
+    flex-direction: row;
+    gap: 50px;
+  }
+  .sort-toggle {
+    display: block;
+    padding: 0;
+    background: none;
+    width: 2rem;
+    height: 2rem;
+    border: none;
+  }
+  .file-group {
+    align-items: end;
+  }
+}
+@media (max-width: 768px) {
+  main {
+    max-width: 540px;
+  }
+}
+@media (max-width: 576px) {
+  main {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}/*# sourceMappingURL=styles.css.map */

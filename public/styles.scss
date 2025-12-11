@@ -1,0 +1,334 @@
+
+
+$darkGreen: #3F5C59;
+$darkRed: #8D1B3D;
+$green: #597E50;
+$lightGray: #FAFAFA;
+$darkGray: #D7DBDA;
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html {
+    font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 10px; //note til omregning: hjemmeværnet har 16px. Deres font-size er faktisk forkert. For at rette, så gang deres faktor med 1,0625
+}
+h1{
+    font-size: 4.6rem; 
+    font-weight: 700;
+    color: $darkGreen;
+    line-height: 1.5;
+    letter-spacing: -2px;
+    padding-bottom: 9px;
+}
+
+header {
+    height: 110px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main {
+    max-width: 1140px;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.greenLine {
+    width: 100%;
+    height: 10px;
+    background-color: $darkGreen;
+}
+
+#contentContainer {
+    display: flex;
+    flex-direction: row;
+
+    #settingsContainer {
+        background-color: $lightGray;
+        width: 350px;
+        padding-right: 15px;
+        padding-left: 15px;
+        //background-color: purple; //TIL DESIGN FASE ONLY
+        padding-top: 20px;
+        padding-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #tasksContainer {
+        flex: 1;
+
+        #standardLandingPage {
+            //display: none;
+            padding-top: 20px;
+            padding-left: 15px;
+            background-color: red; //TIL DESIGN FASE ONLY
+        }
+    }
+}
+
+#askToMergeOrReplacePopUp {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: orange;
+}
+
+//-----------------------------
+//aside styling - START
+//-----------------------------
+
+/* GENERELT */
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: gold;
+  padding: 10px; //delete
+}
+.search-filter-sort-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: purple;
+}
+.filter-sort-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* SEARCH */
+.search-group input {
+  width: 100%;
+  padding: 6px 12px;
+  border-radius: 1.5em;
+  border: 1px solid #000;
+  font-size: 1.6rem;
+}
+
+/* FILTER + SORTERING grupper */
+fieldset {
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.filter-group {
+    gap: 2px;
+}
+
+legend {
+  font-weight: 700;
+  font-size: 1.6rem;
+  letter-spacing: .5px; //-0.5px
+  margin-bottom: 5px;
+}
+.legend-group{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    position: relative;
+}
+
+/* CHECKBOXES / RADIO BUTTONS */
+.sort-toggle{
+    display: none;
+    //padding: 0;
+    //background: none;
+    //width: 2rem;
+    //height: 2rem;
+    //border: none;
+}
+.sort-toggle img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.sort-group {
+    gap: 2px;
+}
+label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.4rem;
+}
+.sort-dropdown { //skal være position absolute
+    //padding: 15px;
+    //background-color: white;
+    //border: 1px solid black;
+    //border-radius: 3px;
+    //width: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5rem;
+    //margin-left: 5px;
+}
+
+/* FILE BUTTONS */
+.file-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #8D1B3D;
+
+}
+
+.file-button {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 2px solid black;
+  border-radius: 3px;
+  background: white;
+  cursor: pointer;
+  font-size: 1.4rem;
+  letter-spacing: 0.05rem;
+  font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; //button tag får ikke font-styling fra html{}
+
+}
+
+/* INFO-KNAPPER */
+.info-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: none;
+  background: black;
+  color: white;
+  cursor: help;
+  font-weight: 600;
+  margin-left: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.info-btn:hover::after {
+  content: "Her skriver du info...";
+  position: absolute;
+  background: #000;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  transform: translate(10px, -5px);
+  white-space: nowrap;
+}
+
+.btn-info-container {
+    display: flex;
+    gap: 1px;
+    align-items: center;
+}
+
+//-----------------------------
+//aside styling - SLUT
+//-----------------------------
+
+@media (max-width: 1200px){
+    main {
+        max-width: 960px;
+    }
+    h1{
+        font-size: 2.4rem;
+    }
+     #settingsContainer {
+        width: 290px;
+    }
+}
+@media (max-width: 992px){
+    main {
+        max-width: 720px;
+    }
+    #contentContainer {
+        flex-direction: column;
+        background-color: yellow;
+    
+        #settingsContainer {
+            background-color: green; //TIL DESIGN FASE ONLY
+            width: 100%;
+            padding-right: 0;
+            padding-left: 0;
+            flex-direction: row;
+        }
+    
+        #tasksContainer #standardLandingPage {
+            padding-left: 0;
+            background-color: blue;
+        }
+    }
+    .toolbar{
+        background-color: yellow;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .search-filter-sort-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: purple;
+    flex-grow: 1;
+    }
+    .sort-dropdown { //skal være position absolute
+    padding: 15px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 3px;
+    width: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5rem;
+    //margin-left: 10px;
+    }
+    .filter-sort-wrapper{
+        flex-direction: row;
+        gap: 50px;
+    }
+    .sort-toggle{
+    display: block;
+    padding: 0;
+    background: none;
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    }
+    .file-group{
+        align-items: end;
+        //width: 300px;
+    }
+    
+}
+@media (max-width: 768px){
+    main {
+        max-width: 540px;
+    }
+}
+
+@media (max-width: 576px){
+    main {
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
