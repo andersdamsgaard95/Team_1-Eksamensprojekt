@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="script.js" defer></script>
+    <script src="chevronRotate.js" defer></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -30,18 +31,22 @@
 
                             <!-- FILTER (Type) -->
                             <fieldset class="filter-group">
-                                <legend class="legend-group">Type
-                                    <button class="sort-toggle"><img src="img/chevron.svg" alt="sorterings-menu åben/luk ikon"></button>
+                                <legend class="legend-group" id="typeFilterBtn">Type
+                                    <button class="sort-toggle" type="button"><img id="typeChevron" src="img/chevron.svg" alt="sorterings-menu åben/luk ikon"></button>
                                 </legend>
 
-                                <div class="sort-dropdown">
+                                <div id="typeDropdown" class="sort-dropdown">
                                     <label>
-                                        <input type="checkbox" name="type" value="land">
+                                        <input type="radio" name="type" value="alle" checked>
+                                        Alle
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="type" value="land">
                                         Land
                                     </label>
 
                                     <label>
-                                        <input type="checkbox" name="type" value="sø">
+                                        <input type="radio" name="type" value="sø">
                                         Sø
                                     </label>
                                 </div>
@@ -49,13 +54,13 @@
 
                             <!-- SORTERING -->
                             <fieldset class="sort-group">
-                                <legend class="legend-group">
+                                <legend class="legend-group" id="sorteringFilterBtn">
                                     Sortering
-                                    <button class="sort-toggle"><img src="img/chevron.svg" alt="sorterings-menu åben/luk ikon"></button>
+                                    <button class="sort-toggle" type="button"><img id="sorteringChevron" src="img/chevron.svg" alt="sorterings-menu åben/luk ikon"></button>
                                 </legend>
                                 
 
-                                <div class="sort-dropdown">
+                                <div id="sorteringDropdown" class="sort-dropdown">
                                     <label>
                                         <input type="radio" name="sort" value="ældste">
                                         Ældste først
@@ -80,16 +85,16 @@
                         <!-- Upload -->
                         <div class="btn-info-container">
                             <label class="file-button">
-                                Upload opgaver
+                                Upload fil
                                 <input type="file" id="fileInput" hidden>
                             </label>
-                            <div class="info-btn" aria-label="Info om upload">?</div>
+                            <div id="uploadInfo" class="info-btn" aria-label="Info om upload">?</div>
                         </div>
 
                         <!-- Download -->
                         <div class="btn-info-container">
-                            <button type="button" class="file-button">Download opgaver</button>
-                            <div class="info-btn" aria-label="Info om download">?</div>
+                            <button type="button" class="file-button">Download fil</button>
+                            <div id="downloadInfo" class="info-btn" aria-label="Info om download">?</div>
                         </div>
 
                     </div>

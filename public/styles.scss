@@ -68,7 +68,7 @@ main {
             //display: none;
             padding-top: 20px;
             padding-left: 15px;
-            background-color: red; //TIL DESIGN FASE ONLY
+            //background-color: red; //TIL DESIGN FASE ONLY
         }
 
         .taskContainer {
@@ -99,14 +99,13 @@ main {
   display: flex;
   flex-direction: column;
   gap: 30px;
-  background-color: gold;
-  padding: 10px; //delete
+  //background-color: gold;
 }
 .search-filter-sort-wrapper {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    background-color: purple;
+    //background-color: purple;
 }
 .filter-sort-wrapper{
     display: flex;
@@ -146,7 +145,6 @@ legend {
     display: flex;
     justify-content: center;
     gap: 5px;
-    position: relative;
 }
 
 /* CHECKBOXES / RADIO BUTTONS */
@@ -166,25 +164,24 @@ legend {
 
 .sort-group {
     gap: 2px;
+    position: relative;
 }
 label {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 1.4rem;
+  white-space: nowrap;
 }
 .sort-dropdown { //skal være position absolute
-    //padding: 15px;
-    //background-color: white;
-    //border: 1px solid black;
-    //border-radius: 3px;
-    //width: 15rem;
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     gap: 0.5rem;
-    //margin-left: 5px;
+}
+#typeDropdown,
+#sorteringDropdown {
+  display: flex; /* default på store skærme */
 }
 
 /* FILE BUTTONS */
@@ -192,7 +189,7 @@ label {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background-color: #8D1B3D;
+  //background-color: #8D1B3D;
 
 }
 
@@ -228,15 +225,27 @@ label {
 }
 
 .info-btn:hover::after {
-  content: "Her skriver du info...";
   position: absolute;
-  background: #000;
-  color: #fff;
-  padding: 4px 8px;
+  background: #fff;
+  color: #000;
+  padding: 10px 10px;
   border-radius: 4px;
-  font-size: 12px;
-  transform: translate(10px, -5px);
-  white-space: nowrap;
+  font-size: 1.2rem;
+  border: 1px solid black;
+  transform: translate(50%, -55%);
+  white-space: wrap;
+  font-weight: 400;
+  //font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  width: 200px;
+  height: auto;
+}
+
+#uploadInfo:hover::after {
+  content: "upload: Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...";
+}
+
+#downloadInfo:hover::after {
+  content: "download: Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...";
 }
 
 .btn-info-container {
@@ -249,6 +258,27 @@ label {
 //aside styling - SLUT
 //-----------------------------
 
+
+
+//-----------------------------
+//chevron styling - START
+//-----------------------------
+.rotate-up {
+  transform: rotate(180deg);
+  transition: transform 0.2s ease;
+}
+
+.rotate-down {
+  transform: rotate(0deg);
+  transition: transform 0.2s ease;
+}
+
+//-----------------------------
+//chevron styling - SLUT
+//-----------------------------
+
+
+
 @media (max-width: 1200px){
     main {
         max-width: 960px;
@@ -256,33 +286,47 @@ label {
     h1{
         font-size: 2.4rem;
     }
-     #settingsContainer {
+    #contentContainer #settingsContainer {
         width: 290px;
+        padding-top: 10px;
+        padding-bottom: 5px;
     }
+    .info-btn:hover::after {
+        transform: translate(-50%, 55%);
+    }
+    
 }
 @media (max-width: 992px){
     main {
         max-width: 720px;
+        margin-top: 40px;
+    }
+    .greenLine {
+        width: 100%;
+        height: 5px;
+        background-color: $darkGreen;
     }
     #contentContainer {
         flex-direction: column;
-        background-color: yellow;
+        //background-color: yellow;
     
         #settingsContainer {
-            background-color: green; //TIL DESIGN FASE ONLY
+            //background-color: green; //TIL DESIGN FASE ONLY
             width: 100%;
             padding-right: 0;
             padding-left: 0;
             flex-direction: row;
+            border-bottom: 2px solid black;
+            //background-color: blue;
         }
     
         #tasksContainer #standardLandingPage {
             padding-left: 0;
-            background-color: blue;
+            //background-color: blue;
         }
     }
     .toolbar{
-        background-color: yellow;
+        //background-color: yellow;
         flex-direction: row;
         width: 100%;
         justify-content: space-between;
@@ -291,7 +335,7 @@ label {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    background-color: purple;
+    //background-color: purple;
     flex-grow: 1;
     }
     .sort-dropdown { //skal være position absolute
@@ -299,44 +343,96 @@ label {
     background-color: white;
     border: 1px solid black;
     border-radius: 3px;
-    width: 15rem;
-    display: flex;
+    width: auto;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     gap: 0.5rem;
     //margin-left: 10px;
+    position: absolute;
+    }
+    #typeDropdown,
+    #sorteringDropdown {
+        display: none;
+    }
+
+    #typeDropdown.open,
+    #sorteringDropdown.open {
+        display: flex;
     }
     .filter-sort-wrapper{
         flex-direction: row;
         gap: 50px;
     }
     .sort-toggle{
-    display: block;
-    padding: 0;
-    background: none;
-    width: 2rem;
-    height: 2rem;
-    border: none;
+        margin-top: 2px;
+        display: block;
+        padding: 0;
+        background: none;
+        width: 1.5rem;
+        height: 1.5rem;
+        border: none;
     }
     .file-group{
         align-items: end;
         //width: 300px;
     }
     
+    
 }
 @media (max-width: 768px){
     main {
         max-width: 540px;
+    }
+    h1{
+        padding-bottom: 5px;
+    }
+    .search-group input {
+        font-size: 1.2rem;
+    }
+    legend {
+        font-size: 1.2rem;
+        margin-bottom: 2px;
+    }
+    label {
+        font-size: 1.2rem;
+    }
+    .sort-toggle{
+        width: 1.1rem;
+        height: 1.1rem;
+    }
+    .file-button {
+        padding: 6px 14px;
+        border: 2px solid black;
+        border-radius: 3px;
+        font-size: 1.2rem;
+    }
+    .info-btn {
+        width: 2.2rem;
+        height: 2.2rem;
+        font-size: 1.2rem;
+    }
+    .search-filter-sort-wrapper {
+        gap: 25px;
+    }
+    .filter-sort-wrapper{
+        gap: 15px;
     }
 }
 
 @media (max-width: 576px){
     main {
         width: 100%;
-        padding-right: 15px;
-        padding-left: 15px;
+        padding-right: 5px;
+        padding-left: 5px;
         margin-right: auto;
         margin-left: auto;
+    }
+    .file-button{
+        padding: 6px 6px;
+        font-size: 1.1rem;
+    }
+    .info-btn{
+        margin-left: 5px;
     }
 }
