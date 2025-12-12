@@ -21,3 +21,5 @@ function setupToggle(btn, chevron, dropdown, state) {
 
 setupToggle(typeFilterBtn, typeChevron, typeDropdown, {open: false});
 setupToggle(sorteringFilterBtn, sorteringChevron, sorteringDropdown, {open: false});
+
+
