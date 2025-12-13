@@ -56,21 +56,212 @@ async function loadTasks() {
 function renderTasks(tasksToRender) {
     const standardLandingPage = document.getElementById('standardLandingPage');
     standardLandingPage.style.display = 'none';
+
     const container = document.getElementById('renderedTasks');
 
-    const taskArray = tasksToRender.map((task, i) => (
-        `<div class="taskContainer">
-            <div class="taskPile">
-                <button>pil op</button>
-                <p>${i + 1}</p>
-                <button>pil ned</button>
-            </div>
-            <p class="taskTitel">${task.Titel}</p>
-        </div>`
-    )).join('');
+    tasksToRender.forEach((task, i) => {
+        const taskHTML =
+            `<div class="taskContainer">
+                <div class="taskPile">
+                    <button>pil op</button>
+                    <p>${i + 1}</p>
+                    <button>pil ned</button>
+                </div>
+                <div id="taskInfoContainer${i}">
+                    <p class="taskTitel">${task.Titel}</p>
+                </div>
+                <button id="toggleAccordian${i}" class="openAccordian">Plus</button>
+            </div>`
 
-    container.innerHTML = taskArray;
+        container.innerHTML += taskHTML;
+    });
+
+    const openAccordianButtons = container.querySelectorAll('.openAccordian');
+
+    openAccordianButtons.forEach((button, i) => {
+        button.dataset.open = "false"; // toggle state
+
+        button.addEventListener('click', () => {
+            const isOpen = button.dataset.open === "true";
+
+            if (isOpen) {
+                closeTask(tasksToRender[i], i);
+                button.dataset.open = "false";
+            } else {
+                openTask(tasksToRender[i], i);
+                button.dataset.open = "true";
+            }
+        });
+    });
+
+    function openTask(task, index) {
+        const taskInfoContainer = document.getElementById(`taskInfoContainer${index}`);
+
+        taskInfoContainer.innerHTML = `
+            <div class="taskItem">
+                <p>Titel:</p>
+                <p>${task.Titel}</p>
+            </div>
+
+            <div class="taskItem">
+                <p>Beskrivelse:</p>
+                <p>${task.Beskrivelse || "-"}</p>
+            </div>
+            
+            <div class="taskItem">
+                <p>Type:</p>
+                <p>${task.Type}</p>
+            </div>
+            
+            <div class="taskItem">
+               <p>Aktiveringsbetingelse:</p>
+                <p>${task.Aktiveringsbetingelse || "-"}</p> 
+            </div>
+            
+            <div class="taskItem">
+                <p>Lokation:</p>
+                <p>
+                    Lon: ${task.Lokation?.[0] ?? "-"} <br>
+                    Lat: ${task.Lokation?.[1] ?? "-"}
+                </p>
+            </div>
+
+            <div class="taskItem">
+                <p>Radius:</p>
+                <p>${task.Radius ?? "-"}</p>
+            </div>
+            
+            <div class="taskItem">
+                <p>Valgmuligheder:</p>
+                <ul>
+                    ${task.Valgmuligheder?.length
+                ? task.Valgmuligheder.map(v => `<li>${v}</li>`).join("")
+                : "<li>-</li>"
+            }
+                </ul>
+            </div>
+
+            <button id="editTask${index}">Redigér opgave</button>
+        `;
+
+        const editTaskButton = document.getElementById(`editTask${index}`);
+        editTaskButton.addEventListener('click', () => {
+            console.log("EDIT CLICK", task, index);
+            editTask(task, index);
+        });
+
+    }
+
+    function closeTask(task, index) {
+        const taskInfoContainer = document.getElementById(`taskInfoContainer${index}`);
+
+        taskInfoContainer.innerHTML = `<p>${task.Titel}</p>`;
+    }
+
+    function editTask(task, index) {
+        const taskInfoContainer = document.getElementById(`taskInfoContainer${index}`);
+
+        taskInfoContainer.innerHTML = `
+            <div class="editItem">
+                <label>Titel:</label >
+                <input id="editTitle${index}" type="text" value="${task.Titel}">
+            </div>
+
+            <div class="editItem">
+                <label>Beskrivelse:</label>
+                <textarea id="editDescription${index}">${task.Beskrivelse || ""}</textarea>
+            </div>
+
+            <div class="editItem">
+                <label>Type:</label>
+                <select id="editType${index}">
+                    <option value="Land" ${task.Type === "Land" ? "selected" : ""}>Land</option>
+                    <option value="Sø" ${task.Type === "Sø" ? "selected" : ""}>Sø</option>
+                </select>
+            </div>
+
+            <div class="editItem">
+                <label>Aktiveringsbetingelse:</label>
+                <input id="editAktiveringsbetingelse${index}" type="text" value="${task.Aktiveringsbetingelse}">
+            </div>
+
+            <div class="editItem">
+                <label>Lokation</label>
+                <input id="editLokationLon${index}" type="number" value="${task.Lokation[0]}">
+                <input id="editLokationLat${index}" type="number" value="${task.Lokation[1]}">
+            </div>
+
+            <div class="editItem">
+                <label>Radius:</label>
+                <input id="editRadius${index}" type="number" value="${task.Radius}">
+            </div>
+
+            <div class="editItem">
+                <label>Valgmuligheder:</label>
+                ${task.Valgmuligheder.map((valgmulighed, vIndex) => `
+                    <input id="editValgmulighed${index}-${vIndex}" type="text" value="${valgmulighed}">
+                `).join("")}
+            </div>
+
+            <div class="editButtons">
+                <button id="saveTask${index}">Gem</button>
+                <button id="cancelEdit${index}">Annuller</button>
+            </div>
+        `;
+
+        const saveTaskButton = document.getElementById(`saveTask${index}`);
+        saveTaskButton.addEventListener('click', () => saveEditedTask(task, index));
+
+        const cancelEditButton = document.getElementById(`cancelEdit${index}`);
+        cancelEditButton.addEventListener('click', () => openTask(task, index));
+    }
+
+    async function saveEditedTask(task, index) {
+
+        const updatedTask = {
+            ...task,
+            Titel: document.getElementById(`editTitle${index}`).value,
+            Beskrivelse: document.getElementById(`editDescription${index}`).value,
+            Type: document.getElementById(`editType${index}`).value,
+            Aktiveringsbetingelse: document.getElementById(`editAktiveringsbetingelse${index}`).value,
+            Lokation: [
+                Number(document.getElementById(`editLokationLon${index}`).value),
+                Number(document.getElementById(`editLokationLat${index}`).value)
+            ],
+            Radius: Number(document.getElementById(`editRadius${index}`).value),
+            Valgmuligheder: task.Valgmuligheder.map((_, vIndex) =>
+                document.getElementById(`editValgmulighed${index}-${vIndex}`).value
+            )
+        };
+
+        // Opdatér arrayet
+        tasksToRender[index] = updatedTask;
+
+        //Send opdateret array til server
+        await updateExcelOnServer(tasksToRender);
+
+        // Vis opgaven igen
+        openTask(updatedTask, index);
+
+        console.log("Opgave opdateret:", updatedTask);
+    }
 }
+
+//Opdater excel-fil på server
+async function updateExcelOnServer(tasks) {
+    const res = await fetch("http://localhost:3000/update-excel", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(tasks)
+    });
+
+    if (!res.ok) {
+        console.error("Kunne ikke opdatere Excel");
+    }
+}
+
 
 //Check for existing excel file on server
 async function checkForExistingXcel() {

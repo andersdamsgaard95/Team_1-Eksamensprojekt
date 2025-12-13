@@ -47,6 +47,56 @@ const server = http.createServer((req, res) => {
         return;
     }
 
+    // UPDATE EXCEL-FILE FROM FRONTEND CHANGE
+    if (pathname === '/update-excel' && req.method === 'POST') {
+
+        let body = "";
+
+        req.on("data", chunk => {
+            body += chunk.toString();
+        });
+
+        req.on("end", () => {
+            try {
+                const tasks = JSON.parse(body);
+
+                const dataPath = path.join(__dirname, "uploads", "data.xlsx");
+
+                // Transformér data så Excel kan forstå det
+                const excelRows = tasks.map(task => ({
+                    Titel: task.Titel,
+                    Beskrivelse: task.Beskrivelse,
+                    Type: task.Type,
+                    Aktiveringsbetingelse: task.Aktiveringsbetingelse,
+                    Lokation: Array.isArray(task.Lokation)
+                        ? task.Lokation.join(", ")
+                        : "",
+                    Radius: task.Radius,
+                    Valgmuligheder: Array.isArray(task.Valgmuligheder)
+                        ? task.Valgmuligheder.join("; ")
+                        : ""
+                }));
+
+                const wb = xlsx.utils.book_new();
+                const ws = xlsx.utils.json_to_sheet(excelRows);
+                xlsx.utils.book_append_sheet(wb, ws, "Sheet1");
+
+                xlsx.writeFile(wb, dataPath);
+
+                res.writeHead(200, { "Content-Type": "text/plain" });
+                res.end("Excel opdateret");
+
+            } catch (err) {
+                console.error(err);
+                res.writeHead(500);
+                res.end("Kunne ikke opdatere Excel");
+            }
+        });
+
+        return;
+    }
+
+
     // --- FETCH JSON DATA FRA EXCEL ---
     if (pathname === "/data" && req.method === "GET") {
         const dataPath = path.join(__dirname, "uploads", "data.xlsx");
