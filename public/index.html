@@ -89,13 +89,13 @@
                                 Upload fil
                                 <input type="file" id="fileInput" hidden>
                             </label>
-                            <div id="uploadInfo" class="info-btn" aria-label="Info om upload">?</div>
+                            <button id="uploadInfo" class="info-btn" aria-label="Info om upload">?</button>
                         </div>
 
                         <!-- Download -->
                         <div class="btn-info-container">
                             <button type="button" class="file-button">Download fil</button>
-                            <div id="downloadInfo" class="info-btn" aria-label="Info om download">?</div>
+                            <button id="downloadInfo" class="info-btn" aria-label="Info om download">?</button>
                         </div>
 
                     </div>
@@ -106,22 +106,139 @@
 
                 <!-- STANDARD LANDING PAGE -->
                 <div id="standardLandingPage">
-                    <p>Ingen opgaver tilføjet</p>
-                    <button id="downloadTemplateButton">download excel skabelon til opgaver</button>
+                    <p>Du har endnu ingen opgaver.</p>
+                     <p>
+                        Klik “Tilføj ny opgave” nedenfor eller 
+                        <button class="inlineBtn tooltip-btn" data-tooltip="Upload en Excel-fil med opgaver i korrekt format">
+                            <input type="file" id="fileInput" hidden>
+                            upload en Excel-fil
+                            <img class="inlineIkon" src="img/upload.svg" alt="upload-ikon">
+                        </button>
+
+                         (skal være formateret<button id="formateretInfo" class="info-btn" aria-label="Info om formateret Excel-fil til upload">
+                            ?
+                        </button>) for at tilføje opgaver.
+                    </p>
+                    <p>
+                        Udfyld denne 
+                       <button class="inlineBtn tooltip-btn" data-tooltip="Download Excel-skabelonen og udfyld opgaver offline">
+                            Excel-fil
+                            <img class="inlineIkon" src="img/download.svg" alt="download-ikon">
+                        </button>
+
+                         , hvis du ønsker at arbejde i Excel og senere uploade den.
+                    </p>
+                    
                 </div>
 
                 <div id="renderedTasks"></div>
                 <div id="newTask">
                     <div id="inputFelter"></div>
-                    <button>Tilføj</button>
-                    <button>Gem</button>
+
+                    <!--NY OPGAVE - START-->
+                <div class="nyOpgWrapper"><!--wrapper-->
+
+                    
+                    <div class="task-form">
+                        <button class="close-btn" type="button" aria-label="Luk">×</button>
+
+                        <!-- Titel -->
+                        <div class="field">
+                            <label for="title">Titel</label>
+                            <input id="title" type="text" placeholder="Titel..." />
+                        </div>
+
+                        <!-- Beskrivelse -->
+                        <div class="field">
+                            <label for="desc">Beskrivelse:</label>
+                            <textarea id="desc" placeholder="Beskriv opgaven..."></textarea>
+                        </div>
+
+                        <!-- Type -->
+                        <div class="field">
+                            <div class="legend">Type</div>
+                            <div class="row checks">
+                            <label class="check">
+                                <input type="checkbox" name="type" value="land" />
+                                <span>Land</span>
+                            </label>
+
+                            <label class="check">
+                                <input type="checkbox" name="type" value="sø" />
+                                <span>Sø</span>
+                            </label>
+                            </div>
+                        </div>
+
+                        <!-- Lokation -->
+                        <div class="field">
+                            <div class="legend">Lokation</div>
+
+                            <div class="row location">
+                            <div class="mini-group">
+                                <div class="mini-labels">
+                                <span>Longitude</span>
+                                <span>Latitude</span>
+                                </div>
+
+                                <div class="mini-inputs">
+                                <input type="number" inputmode="decimal" placeholder="12.3456" />
+                                <input type="number" inputmode="decimal" placeholder="12.3456" />
+                                </div>
+                            </div>
+
+                            <div class="or">eller:</div>
+
+                            <button class="map-link" type="button">
+                                Vælg på map
+                                <span class="map-icon" aria-hidden="true">📍</span>
+                            </button>
+                            </div>
+                        </div>
+
+                        <!-- Radius -->
+                        <div class="field">
+                            <div class="legend">Radius</div>
+                            <div class="row radius">
+                            <input class="radius-input" type="number" min="0" value="0" />
+                            <span class="unit">Meter</span>
+                            </div>
+                        </div>
+
+                        <!-- Valgmuligheder -->
+                        <div class="field">
+                            <label for="options">Valgmuligheder</label>
+                            <input id="options" type="text" placeholder="Valgmuligheder..." />
+                        </div>
+
+                        <!-- Aktiveringsbetingelse -->
+                        <div class="field">
+                            <label for="condition">Aktiveringsbetingelse</label>
+                            <input id="condition" type="text" placeholder="Betingelse..." />
+                        </div>
+                    </div> 
+                    <!--Ny og Gem knapper-->
+                        <div class="btnContainer">
+                            <button id="tilføjNyBtn" class="btn">Tilføj ny opgave</button>
+                            <button id="gemBtn" class="btn">Gem opgave</button>
+                        </div>
+                     
+                </div> <!--wrapper-->
+                    <!--NY OPGAVE - SLUT-->
+
+
+
+                    
+                    
                 </div>
             </div>
         </div>
 
         <div id="askToMergeOrReplacePopUp">
-            <p>Der findes allerede en eksisterende excel fil på serveren. Vil Du merge de to filer eller erstatte den
-                nuværende med denne?</p>
+            <p>
+                Der findes allerede en eksisterende excel fil på serveren. Vil Du merge de to filer eller erstatte den
+                nuværende med denne?
+            </p>
             <button id="mergeButton">Merge</button>
             <button id="replaceButton">Erstat</button>
         </div>

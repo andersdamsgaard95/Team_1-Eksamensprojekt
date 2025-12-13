@@ -1,4 +1,10 @@
 
+//DISPLAYS SKAL JUSTERES DYNAMISK MED JS - START
+#standardLandingPage{
+    display: none !important; 
+    background-color: blue;
+}
+//DISPLAYS SKAL JUSTERES DYNAMISK MED JS - SLUT
 
 $darkGreen: #3F5C59;
 $darkRed: #8D1B3D;
@@ -23,7 +29,12 @@ h1{
     letter-spacing: -2px;
     padding-bottom: 9px;
 }
-
+p {
+    font-size: 1.7rem;
+    line-height: 2.7rem;
+    letter-spacing: -0.5px;
+    margin-bottom: 1rem;
+}
 header {
     height: 110px;
     background-color: black;
@@ -55,7 +66,7 @@ main {
         padding-right: 15px;
         padding-left: 15px;
         //background-color: purple; //TIL DESIGN FASE ONLY
-        padding-top: 20px;
+        padding-top: 30px;
         padding-bottom: 20px;
         display: flex;
         flex-direction: column;
@@ -65,8 +76,12 @@ main {
         flex: 1;
 
         #standardLandingPage {
-            //display: none;
-            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            //gap: 5px;
+            padding-top: 30px;
+            padding-bottom: 100px;
+
             padding-left: 15px;
             //background-color: red; //TIL DESIGN FASE ONLY
         }
@@ -206,54 +221,6 @@ label {
 
 }
 
-/* INFO-KNAPPER */
-/*
-.info-btn { //spørgsmålstegnet
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  border: none;
-  background: black;
-  color: white;
-  cursor: help;
-  font-weight: 600;
-  margin-left: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.4rem;
-  font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
-
-.info-btn:hover::after { //info-boks
-  position: absolute;
-  background: #fff;
-  color: #000;
-  padding: 10px 10px;
-  border-radius: 4px;
-  font-size: 1.2rem;
-  border: 1px solid black;
-  transform: translate(50%, -55%);
-  white-space: wrap;
-  font-weight: 400;
-  //font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  width: 200px;
-  height: auto;
-}
-.info-btn.show-info::after {
-    opacity: 1;
-}
-
-
-#uploadInfo:hover::after {
-  content: "upload: Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...";
-}
-
-#downloadInfo:hover::after {
-  content: "download: Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...";
-}
-*/
-
 .info-btn { // spørgsmåls-ikonet
   width: 2.5rem;
   height: 2.5rem;
@@ -264,13 +231,14 @@ label {
   cursor: help;
   font-weight: 600;
   margin-left: 8px;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   font-size: 1.4rem;
   font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   position: relative; // vigtig for absolut tooltip-position
 }
+
 
 /* Fælles tooltip-style – skjult som default */
 .info-btn::after { // info-boksen
@@ -301,11 +269,27 @@ label {
 /* Tekster – UDEN :hover */
 #uploadInfo::after {
   content: "upload: Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...";
+   display: block;
+   text-align: left;
 }
 
 #downloadInfo::after {
   content: "download: Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...";
+   display: block;
+   text-align: left;
 }
+
+#formateretInfo::after {
+    content: "formateret: Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...";
+    display: block;
+    text-align: left;
+    transform: translate(-50%, 55%);
+
+}
+/*#formateretInfo {
+    width: 2rem !important; 
+    height: 2rem !important;
+}*/
 
 
 .btn-info-container {
@@ -337,7 +321,262 @@ label {
 //chevron styling - SLUT
 //-----------------------------
 
+//-----------------------------
+//inline buttons: upload og download - styling - START
+//-----------------------------
 
+.inlineBtn {
+    color: $darkRed;
+    border-bottom: 1px solid $darkRed;
+    cursor: pointer;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    background: none;
+    font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; //button tag får ikke font-styling fra html{}
+    font-size: 1.7rem;
+}
+
+//-----------------------------
+//inline buttons: upload og download - styling - SLUT
+//-----------------------------
+
+//-----------------------------
+//tooltip på upload og download styling - START
+//-----------------------------
+.tooltip-btn {
+    position: relative;
+}
+
+/* Tooltip-box */
+.tooltip-btn::after {
+    content: attr(data-tooltip);
+    text-align: left;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    margin-top: 6px;
+
+    background: #fff;
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 4px;
+    padding: 8px 10px;
+
+    font-size: 1.2rem;
+    line-height: 1.4;
+    width: 220px;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    z-index: 10;
+}
+
+/* Hover */
+.tooltip-btn:hover::after {
+    opacity: 1;
+}
+//-----------------------------
+//tooltip på upload og download styling - SLUT
+//-----------------------------
+
+//-----------------------------
+//Tilføj ny opg knap - START
+//-----------------------------
+    .btnContainer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .btn {
+        display: inline-block;
+        padding: 12px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.07rem;
+    font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; //button tag får ikke font-styling fra html{}
+
+    }
+    #tilføjNyBtn{
+        background: $green;
+        color: white;
+    }
+    #gemBtn{
+        background: $darkRed;
+        color: white;
+    }
+//-----------------------------
+//Tilføj ny opg knap - SLUT
+//-----------------------------
+
+//-----------------------------
+//Ny opg form - START
+//-----------------------------
+.nyOpgWrapper{
+    border-top: 2px solid black;
+    border-bottom: 1px solid black;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: red;
+    margin-top: 30px;
+    
+}
+.task-form {
+    //display: none;
+  position: relative;
+  max-width: 620px;
+  padding: 0 22px 22px;
+  font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  color: #000;
+}
+
+/* Luk-knap (øverst højre) */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: none;
+  background: #8D1B3D;
+  color: #fff;
+  font-size: 16px;
+  line-height: 22px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Felter */
+.field {
+  margin-bottom: 14px;
+}
+
+label,
+.legend {
+  display: block;
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 100%;
+  border: 1px solid #000;
+  border-radius: 2px;
+  padding: 6px 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+textarea {
+  min-height: 86px;
+  resize: vertical;
+}
+
+/* Rækker */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Checkboxes */
+.checks {
+  gap: 22px;
+}
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+.check input {
+  width: 16px;
+  height: 16px;
+}
+
+/* Lokation */
+.location {
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.mini-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mini-labels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  font-size: 11px;
+}
+
+.mini-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.mini-inputs input {
+  width: 120px;
+  padding: 4px 8px;
+}
+
+/* "eller:" */
+.or {
+  font-size: 14px;
+}
+
+/* "Vælg på map" link-button */
+.map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: none;
+  color: #8D1B3D;
+  text-decoration: underline;
+  font-size: 14px;
+  padding: 0;
+  cursor: pointer;
+}
+.map-icon {
+  font-size: 16px;
+  transform: translateY(1px);
+}
+
+/* Radius */
+.radius {
+  gap: 8px;
+}
+.radius-input {
+  width: 52px;
+  padding: 4px 6px;
+}
+.unit {
+  font-size: 14px;
+}
+
+//-----------------------------
+//Ny opg form - SLUT
+//-----------------------------
 
 @media (max-width: 1200px){
     main {
