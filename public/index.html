@@ -12,11 +12,14 @@
 </head>
 
 <body>
-    <header>
-        <img src="img/logo.svg" alt="hjemmeværnets logo">
-    </header>
+        
+        
     <main>
-        <h1>Opgaver</h1>
+        <div class="heroElements">
+            <h1>Opgaver</h1>
+            <img src="img/logo.svg" alt="hjemmeværnets logo">
+        </div>
+        
         <div class="greenLine"></div>
         <div id="contentContainer">
 
@@ -32,7 +35,7 @@
 
                             <!-- FILTER (Type) -->
                             <fieldset class="filter-group">
-                                <legend class="legend-group" id="typeFilterBtn">Type
+                                <legend class="legend-group mini-header" id="typeFilterBtn">Type
                                     <button class="sort-toggle" type="button"><img id="typeChevron" src="img/chevron.svg" alt="sorterings-menu åben/luk ikon"></button>
                                 </legend>
 
@@ -55,7 +58,7 @@
 
                             <!-- SORTERING -->
                             <fieldset class="sort-group">
-                                <legend class="legend-group" id="sorteringFilterBtn">
+                                <legend class="legend-group mini-header" id="sorteringFilterBtn">
                                     Sortering
                                     <button class="sort-toggle" type="button"><img id="sorteringChevron" src="img/chevron.svg" alt="sorterings-menu åben/luk ikon"></button>
                                 </legend>
@@ -121,7 +124,7 @@
                     </p>
                     <p>
                         Udfyld denne 
-                       <button class="inlineBtn tooltip-btn" data-tooltip="Download Excel-skabelonen og udfyld opgaver offline">
+                       <button id="downloadTemplateButton" class="inlineBtn tooltip-btn" data-tooltip="Download Excel-skabelonen og udfyld opgaver offline">
                             Excel-fil
                             <img class="inlineIkon" src="img/download.svg" alt="download-ikon">
                         </button>
@@ -133,7 +136,7 @@
 
                 <div id="renderedTasks"></div>
                 <div id="newTask">
-                    <div id="inputFelter"></div>
+                    <div id="inputFelter"></div> <!--delete???-->
 
                     <!--NY OPGAVE - START-->
                 <div class="nyOpgWrapper"><!--wrapper-->
@@ -143,36 +146,36 @@
                         <button class="close-btn" type="button" aria-label="Luk">×</button>
 
                         <!-- Titel -->
-                        <div class="field">
-                            <label for="title">Titel</label>
+                        <div>
+                            <label class="mini-header" for="title">Titel</label>
                             <input id="title" type="text" placeholder="Titel..." />
                         </div>
 
                         <!-- Beskrivelse -->
-                        <div class="field">
-                            <label for="desc">Beskrivelse:</label>
+                        <div>
+                            <label class="mini-header" for="desc">Beskrivelse:</label>
                             <textarea id="desc" placeholder="Beskriv opgaven..."></textarea>
                         </div>
 
                         <!-- Type -->
-                        <div class="field">
-                            <div class="legend">Type</div>
+                        <div>
+                            <div class="legend mini-header">Type</div>
                             <div class="row checks">
                             <label class="check">
-                                <input type="checkbox" name="type" value="land" />
+                                <input type="radio" name="type" value="land" checked/>
                                 <span>Land</span>
                             </label>
 
                             <label class="check">
-                                <input type="checkbox" name="type" value="sø" />
+                                <input type="radio" name="type" value="sø" />
                                 <span>Sø</span>
                             </label>
                             </div>
                         </div>
 
                         <!-- Lokation -->
-                        <div class="field">
-                            <div class="legend">Lokation</div>
+                        <div>
+                            <div class="legend mini-header">Lokation</div>
 
                             <div class="row location">
                             <div class="mini-group">
@@ -191,14 +194,14 @@
 
                             <button class="map-link" type="button">
                                 Vælg på map
-                                <span class="map-icon" aria-hidden="true">📍</span>
+                                <span class="map-icon" aria-hidden="true"><img src="img/location.svg" alt="map ikon"></span>
                             </button>
                             </div>
                         </div>
 
                         <!-- Radius -->
-                        <div class="field">
-                            <div class="legend">Radius</div>
+                        <div>
+                            <div class="legend mini-header">Radius</div>
                             <div class="row radius">
                             <input class="radius-input" type="number" min="0" value="0" />
                             <span class="unit">Meter</span>
@@ -206,14 +209,14 @@
                         </div>
 
                         <!-- Valgmuligheder -->
-                        <div class="field">
-                            <label for="options">Valgmuligheder</label>
+                        <div>
+                            <label class="mini-header" for="options">Valgmuligheder</label>
                             <input id="options" type="text" placeholder="Valgmuligheder..." />
                         </div>
 
                         <!-- Aktiveringsbetingelse -->
-                        <div class="field">
-                            <label for="condition">Aktiveringsbetingelse</label>
+                        <div>
+                            <label class="mini-header" for="condition">Aktiveringsbetingelse</label>
                             <input id="condition" type="text" placeholder="Betingelse..." />
                         </div>
                     </div> 
@@ -225,10 +228,6 @@
                      
                 </div> <!--wrapper-->
                     <!--NY OPGAVE - SLUT-->
-
-
-
-                    
                     
                 </div>
             </div>
