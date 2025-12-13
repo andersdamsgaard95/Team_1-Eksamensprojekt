@@ -1,9 +1,11 @@
 
 //DISPLAYS SKAL JUSTERES DYNAMISK MED JS - START
+/*
 #standardLandingPage{
     display: none !important; 
     background-color: blue;
 }
+    */
 //DISPLAYS SKAL JUSTERES DYNAMISK MED JS - SLUT
 
 $darkGreen: #3F5C59;
@@ -11,23 +13,43 @@ $darkRed: #8D1B3D;
 $green: #597E50;
 $lightGray: #FAFAFA;
 $darkGray: #D7DBDA;
+$font: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
 
 *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
+body {
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;   
+    display: flex;
+    flex-direction: column;
+}
+
 html {
     font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 10px; //note til omregning: hjemmeværnet har 16px. Deres font-size er faktisk forkert. For at rette, så gang deres faktor med 1,0625
 }
+.heroElements {
+    background-color: purple;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    //padding-bottom: 10px;
+    height: 80px;
+}
 h1{
+    margin-top: 5px;
     font-size: 4.6rem; 
     font-weight: 700;
     color: $darkGreen;
     line-height: 1.5;
     letter-spacing: -2px;
-    padding-bottom: 9px;
+    padding-bottom: 4px;
 }
 p {
     font-size: 1.7rem;
@@ -44,9 +66,10 @@ header {
 }
 main {
     max-width: 1140px;
-    margin-top: 100px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 40px;
+
 
 }
 
@@ -73,15 +96,20 @@ main {
     }
 
     #tasksContainer {
+        background-color: green;
+        overflow-y: scroll;
+        min-height: 0;
         flex: 1;
+        height: calc(100vh - 130px); //CONTAINER HØJDE  CONTAINER HØJDE CONTAINER HØJDE
+        padding-bottom: 100px;
 
         #standardLandingPage {
+            position: relative;
             display: flex;
             flex-direction: column;
             //gap: 5px;
             padding-top: 30px;
-            padding-bottom: 100px;
-
+            //padding-bottom: 100px;
             padding-left: 15px;
             //background-color: red; //TIL DESIGN FASE ONLY
         }
@@ -150,7 +178,7 @@ fieldset {
     gap: 2px;
 }
 
-legend {
+.mini-header {
   font-weight: 700;
   font-size: 1.6rem;
   letter-spacing: .5px; //-0.5px
@@ -417,6 +445,15 @@ label {
 //Ny opg form - START
 //-----------------------------
 .nyOpgWrapper{
+    position: absolute;
+    width: 790px;
+    margin-left:auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    bottom: 0;
+    //left: 0;
+    //margin-left: 15px;
     border-top: 2px solid black;
     border-bottom: 1px solid black;
     padding-top: 30px;
@@ -424,52 +461,47 @@ label {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    background-color: red;
-    margin-top: 30px;
     
+    background-color: $lightGray;
+    //background-color: red;
+    //left: 50%;
+    //transform: translateX(-50%);
 }
+
 .task-form {
-    //display: none;
+    display: none; //til styling til styling til styling til styling til styling til styling
+    //display: flex;
+    flex-direction: column;
+    gap: 15px;
   position: relative;
-  max-width: 620px;
-  padding: 0 22px 22px;
+  width: 100%;
+  padding: 0 20px ;
   font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   color: #000;
 }
 
-/* Luk-knap (øverst højre) */
+
+//Luk-knap (øverst højre) 
 .close-btn {
   position: absolute;
-  top: 10px;
+  top: -20px;
   right: 10px;
   width: 22px;
   height: 22px;
-  border-radius: 999px;
+  border-radius: 11px;
   border: none;
   background: #8D1B3D;
   color: #fff;
-  font-size: 16px;
+  font-size: 1.6rem;
   line-height: 22px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding-top: 1px;
 }
 
-/* Felter */
-.field {
-  margin-bottom: 14px;
-}
-
-label,
-.legend {
-  display: block;
-  font-weight: 700;
-  font-size: 16px;
-  margin-bottom: 4px;
-}
-
-/* Inputs */
+// Inputs
 input[type="text"],
 input[type="number"],
 textarea {
@@ -481,34 +513,38 @@ textarea {
   font-family: inherit;
 }
 
+
 textarea {
-  min-height: 86px;
+  min-height: 90px;
   resize: vertical;
 }
 
-/* Rækker */
+// Rækker 
 .row {
   display: flex;
   align-items: center;
   gap: 14px;
 }
 
-/* Checkboxes */
+
+// Radio buttons 
 .checks {
-  gap: 22px;
+  gap: 15px;
 }
+
 .check {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
+  gap: 5px;
+  font-size: 1.4rem;
 }
+
 .check input {
   width: 16px;
   height: 16px;
 }
 
-/* Lokation */
+// Lokation 
 .location {
   align-items: flex-end;
   flex-wrap: wrap;
@@ -524,8 +560,10 @@ textarea {
 .mini-labels {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  font-size: 11px;
+  gap: 16px;
+  font-size: 1.1rem;
+  margin-left: 4px;
+  margin-bottom: -2px;
 }
 
 .mini-inputs {
@@ -539,44 +577,53 @@ textarea {
   padding: 4px 8px;
 }
 
-/* "eller:" */
+// "eller:" 
 .or {
-  font-size: 14px;
+  font-size: 1.6rem;
 }
 
-/* "Vælg på map" link-button */
+// "Vælg på map" link-button 
 .map-link {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   border: none;
   background: none;
-  color: #8D1B3D;
+  color: $darkRed;
   text-decoration: underline;
-  font-size: 14px;
+  font-size: 1.6rem;
   padding: 0;
   cursor: pointer;
-}
-.map-icon {
-  font-size: 16px;
-  transform: translateY(1px);
+  font-family: $font;
 }
 
-/* Radius */
+.map-icon {
+    height: 2rem;  
+    transform: translateY(-2px);
+    //background-color: blue;
+
+  img {
+    height: 100%;
+  }
+}
+
+// Radius 
 .radius {
   gap: 8px;
 }
+
 .radius-input {
-  width: 52px;
-  padding: 4px 6px;
+  max-width: 80px;
 }
+
 .unit {
-  font-size: 14px;
+  font-size: 1.4rem;
 }
 
 //-----------------------------
 //Ny opg form - SLUT
 //-----------------------------
+
 
 @media (max-width: 1200px){
     main {
@@ -584,19 +631,35 @@ textarea {
     }
     h1{
         font-size: 2.4rem;
+        padding-bottom: 3px;
+    }
+    #logo{
+        height: 5rem;
     }
     #contentContainer #settingsContainer {
         width: 290px;
         padding-top: 10px;
         padding-bottom: 5px;
     }
+    .nyOpgWrapper{
+        width: 670px;
+    }
     
 }
 @media (max-width: 992px){
     main {
         max-width: 720px;
-        margin-top: 40px;
+        margin-top: 25px;
     }
+    .nyOpgWrapper{
+        width: 720px;
+    }
+    .heroElements {
+        height: 60px;
+    }
+     #tasksContainer{
+        height: calc(100vh - 90px); //CONTAINER HØJDE   CONTAINER HØJDE CONTAINER HØJDE
+     }
     .greenLine {
         width: 100%;
         height: 5px;
@@ -618,7 +681,6 @@ textarea {
     
         #tasksContainer #standardLandingPage {
             padding-left: 0;
-            //background-color: blue;
         }
     }
     .toolbar{
@@ -683,8 +745,11 @@ textarea {
     main {
         max-width: 540px;
     }
+    .nyOpgWrapper{
+        width: 540px;
+    }
     h1{
-        padding-bottom: 5px;
+        padding-bottom: 2px;
     }
     .search-group input {
         font-size: 1.2rem;
@@ -726,6 +791,12 @@ textarea {
         padding-left: 5px;
         margin-right: auto;
         margin-left: auto;
+    }
+    .nyOpgWrapper{
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        
     }
     .file-button{
         padding: 6px 6px;

@@ -1,13 +1,22 @@
 @charset "UTF-8";
-#standardLandingPage {
-  display: none !important;
-  background-color: blue;
+/*
+#standardLandingPage{
+    display: none !important; 
+    background-color: blue;
 }
-
+    */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 html {
@@ -15,13 +24,23 @@ html {
   font-size: 10px;
 }
 
+.heroElements {
+  background-color: purple;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+
 h1 {
+  margin-top: 5px;
   font-size: 4.6rem;
   font-weight: 700;
   color: #3F5C59;
   line-height: 1.5;
   letter-spacing: -2px;
-  padding-bottom: 9px;
+  padding-bottom: 4px;
 }
 
 p {
@@ -41,9 +60,9 @@ header {
 
 main {
   max-width: 1140px;
-  margin-top: 100px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 40px;
 }
 
 .greenLine {
@@ -67,13 +86,18 @@ main {
   flex-direction: column;
 }
 #contentContainer #tasksContainer {
+  background-color: green;
+  overflow-y: scroll;
+  min-height: 0;
   flex: 1;
+  height: calc(100vh - 130px);
+  padding-bottom: 100px;
 }
 #contentContainer #tasksContainer #standardLandingPage {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding-top: 30px;
-  padding-bottom: 100px;
   padding-left: 15px;
 }
 #contentContainer #tasksContainer .taskContainer {
@@ -134,7 +158,7 @@ fieldset {
   gap: 2px;
 }
 
-legend {
+.mini-header {
   font-weight: 700;
   font-size: 1.6rem;
   letter-spacing: 0.5px;
@@ -358,6 +382,13 @@ label {
 }
 
 .nyOpgWrapper {
+  position: absolute;
+  width: 790px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  bottom: 0;
   border-top: 2px solid black;
   border-bottom: 1px solid black;
   padding-top: 30px;
@@ -365,51 +396,39 @@ label {
   display: flex;
   flex-direction: column;
   gap: 30px;
-  background-color: red;
-  margin-top: 30px;
+  background-color: #FAFAFA;
 }
 
 .task-form {
+  display: none;
+  flex-direction: column;
+  gap: 15px;
   position: relative;
-  max-width: 620px;
-  padding: 0 22px 22px;
+  width: 100%;
+  padding: 0 20px;
   font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   color: #000;
 }
 
-/* Luk-knap (øverst højre) */
 .close-btn {
   position: absolute;
-  top: 10px;
+  top: -20px;
   right: 10px;
   width: 22px;
   height: 22px;
-  border-radius: 999px;
+  border-radius: 11px;
   border: none;
   background: #8D1B3D;
   color: #fff;
-  font-size: 16px;
+  font-size: 1.6rem;
   line-height: 22px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding-top: 1px;
 }
 
-/* Felter */
-.field {
-  margin-bottom: 14px;
-}
-
-label,
-.legend {
-  display: block;
-  font-weight: 700;
-  font-size: 16px;
-  margin-bottom: 4px;
-}
-
-/* Inputs */
 input[type=text],
 input[type=number],
 textarea {
@@ -422,27 +441,25 @@ textarea {
 }
 
 textarea {
-  min-height: 86px;
+  min-height: 90px;
   resize: vertical;
 }
 
-/* Rækker */
 .row {
   display: flex;
   align-items: center;
   gap: 14px;
 }
 
-/* Checkboxes */
 .checks {
-  gap: 22px;
+  gap: 15px;
 }
 
 .check {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
+  gap: 5px;
+  font-size: 1.4rem;
 }
 
 .check input {
@@ -450,7 +467,6 @@ textarea {
   height: 16px;
 }
 
-/* Lokation */
 .location {
   align-items: flex-end;
   flex-wrap: wrap;
@@ -466,8 +482,10 @@ textarea {
 .mini-labels {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  font-size: 11px;
+  gap: 16px;
+  font-size: 1.1rem;
+  margin-left: 4px;
+  margin-bottom: -2px;
 }
 
 .mini-inputs {
@@ -481,12 +499,10 @@ textarea {
   padding: 4px 8px;
 }
 
-/* "eller:" */
 .or {
-  font-size: 14px;
+  font-size: 1.6rem;
 }
 
-/* "Vælg på map" link-button */
 .map-link {
   display: inline-flex;
   align-items: center;
@@ -495,28 +511,30 @@ textarea {
   background: none;
   color: #8D1B3D;
   text-decoration: underline;
-  font-size: 14px;
+  font-size: 1.6rem;
   padding: 0;
   cursor: pointer;
+  font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 .map-icon {
-  font-size: 16px;
-  transform: translateY(1px);
+  height: 2rem;
+  transform: translateY(-2px);
+}
+.map-icon img {
+  height: 100%;
 }
 
-/* Radius */
 .radius {
   gap: 8px;
 }
 
 .radius-input {
-  width: 52px;
-  padding: 4px 6px;
+  max-width: 80px;
 }
 
 .unit {
-  font-size: 14px;
+  font-size: 1.4rem;
 }
 
 @media (max-width: 1200px) {
@@ -525,17 +543,33 @@ textarea {
   }
   h1 {
     font-size: 2.4rem;
+    padding-bottom: 3px;
+  }
+  #logo {
+    height: 5rem;
   }
   #contentContainer #settingsContainer {
     width: 290px;
     padding-top: 10px;
     padding-bottom: 5px;
   }
+  .nyOpgWrapper {
+    width: 670px;
+  }
 }
 @media (max-width: 992px) {
   main {
     max-width: 720px;
-    margin-top: 40px;
+    margin-top: 25px;
+  }
+  .nyOpgWrapper {
+    width: 720px;
+  }
+  .heroElements {
+    height: 60px;
+  }
+  #tasksContainer {
+    height: calc(100vh - 90px);
   }
   .greenLine {
     width: 100%;
@@ -611,8 +645,11 @@ textarea {
   main {
     max-width: 540px;
   }
+  .nyOpgWrapper {
+    width: 540px;
+  }
   h1 {
-    padding-bottom: 5px;
+    padding-bottom: 2px;
   }
   .search-group input {
     font-size: 1.2rem;
@@ -653,6 +690,11 @@ textarea {
     padding-left: 5px;
     margin-right: auto;
     margin-left: auto;
+  }
+  .nyOpgWrapper {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
   }
   .file-button {
     padding: 6px 6px;
