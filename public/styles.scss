@@ -107,6 +107,7 @@ main {
         //overflow-y: scroll; 
         //min-height: 0;
         //flex: 1;
+        z-index: -20;
         flex-grow: 1;
         height: calc(100vh - 125px); //CONTAINER HØJDE  CONTAINER HØJDE CONTAINER HØJDE
         //padding-bottom: 100px;
@@ -136,6 +137,7 @@ main {
             overflow-y: scroll;
             width: 100%;
             flex-grow: 1;
+            z-index: -10;
             background-color: burlywood;
         }
     }
