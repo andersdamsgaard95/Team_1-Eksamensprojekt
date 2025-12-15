@@ -5,7 +5,7 @@
     display: none !important; 
     background-color: blue;
 }
-    */
+ */   
 //DISPLAYS SKAL JUSTERES DYNAMISK MED JS - SLUT
 
 $darkGreen: #3F5C59;
@@ -69,7 +69,7 @@ header {
     align-items: center;
 }
 main {
-    max-width: 1140px;
+    width: 1140px;
     margin-left: auto;
     margin-right: auto;
     margin-top: $mainTopMargDesktop;
@@ -86,6 +86,7 @@ main {
 #contentContainer {
     display: flex;
     flex-direction: row;
+    width: auto;
 
     #settingsContainer {
         background-color: $lightGray;
@@ -105,21 +106,23 @@ main {
         background-color: green;
         overflow-y: scroll;
         min-height: 0;
-        flex: 1;
+        //flex: 1;
+        flex-grow: 1;
         height: calc(100vh - 125px); //CONTAINER HØJDE  CONTAINER HØJDE CONTAINER HØJDE
-        padding-bottom: 100px;
+        //padding-bottom: 100px;
         display: flex;
         flex-direction: column;
 
         #standardLandingPage {
             position: relative;
-            display: flex;
+            //display: flex; //add
             flex-direction: column;
             //gap: 5px;
             padding-top: 30px;
             //padding-bottom: 100px;
             padding-left: 15px;
             //background-color: red; //TIL DESIGN FASE ONLY
+            display: none; //delete!!
         }
 
         .taskContainer { //!! obs på navn
@@ -462,7 +465,7 @@ label {
     margin-left:auto;
     margin-right: auto;
     margin-top: 30px;
-    margin-bottom: 100px;
+    //margin-bottom: 100px;
     bottom: 0;
     //left: 0;
     //margin-left: 15px;
@@ -480,7 +483,7 @@ label {
     //transform: translateX(-50%);
 }
 
-.task-form {
+#task-form {
     display: none; //til styling til styling til styling til styling til styling til styling
     //display: flex;
     flex-direction: column;
@@ -640,7 +643,7 @@ textarea {
 
 @media (max-width: 1200px){
     main {
-        max-width: 960px;
+        width: 960px;
     }
     h1{
         font-size: 2.4rem;
@@ -661,7 +664,7 @@ textarea {
 }
 @media (max-width: 992px){
     main {
-        max-width: 720px;
+        width: 720px;
         margin-top: 25px;
     }
     .nyOpgWrapper{
@@ -756,7 +759,7 @@ textarea {
 }
 @media (max-width: 768px){
     main {
-        max-width: 540px;
+        width: 540px;
     }
     .nyOpgWrapper{
         width: 540px;

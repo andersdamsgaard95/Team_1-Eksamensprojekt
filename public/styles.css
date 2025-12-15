@@ -4,7 +4,7 @@
     display: none !important; 
     background-color: blue;
 }
-    */
+ */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -58,7 +58,7 @@ header {
 }
 
 main {
-  max-width: 1140px;
+  width: 1140px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 40px;
@@ -73,6 +73,7 @@ main {
 #contentContainer {
   display: flex;
   flex-direction: row;
+  width: auto;
 }
 #contentContainer #settingsContainer {
   background-color: #FAFAFA;
@@ -90,18 +91,17 @@ main {
   background-color: green;
   overflow-y: scroll;
   min-height: 0;
-  flex: 1;
+  flex-grow: 1;
   height: calc(100vh - 125px);
-  padding-bottom: 100px;
   display: flex;
   flex-direction: column;
 }
 #contentContainer #tasksContainer #standardLandingPage {
   position: relative;
-  display: flex;
   flex-direction: column;
   padding-top: 30px;
   padding-left: 15px;
+  display: none;
 }
 #contentContainer #tasksContainer .taskContainer {
   display: flex;
@@ -395,7 +395,6 @@ label {
   margin-left: auto;
   margin-right: auto;
   margin-top: 30px;
-  margin-bottom: 100px;
   bottom: 0;
   border-top: 2px solid black;
   border-bottom: 1px solid black;
@@ -407,7 +406,7 @@ label {
   background-color: #FAFAFA;
 }
 
-.task-form {
+#task-form {
   display: none;
   flex-direction: column;
   gap: 15px;
@@ -548,7 +547,7 @@ textarea {
 
 @media (max-width: 1200px) {
   main {
-    max-width: 960px;
+    width: 960px;
   }
   h1 {
     font-size: 2.4rem;
@@ -568,7 +567,7 @@ textarea {
 }
 @media (max-width: 992px) {
   main {
-    max-width: 720px;
+    width: 720px;
     margin-top: 25px;
   }
   .nyOpgWrapper {
@@ -652,7 +651,7 @@ textarea {
 }
 @media (max-width: 768px) {
   main {
-    max-width: 540px;
+    width: 540px;
   }
   .nyOpgWrapper {
     width: 540px;
