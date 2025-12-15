@@ -1,24 +1,37 @@
+//Globalt tasks array
+let tasks = [];
 
 //Fetch tasks fra start
 loadTasks();
 
 //When file input changes
-const fileInput = document.getElementById('fileInput');
-fileInput.addEventListener('change', async () => {
+const fileInputs = document.getElementsByClassName('fileInput');
+Array.from(fileInputs).forEach((fileInput) => {
+    fileInput.addEventListener('change', async () => {
 
-    //tag fat i fil
-    const file = fileInput.files[0];
+        //tag fat i fil
+        const file = fileInput.files[0];
 
-    //opret ny formdata og append fil
-    const formData = new FormData();
-    formData.append('file', file);
+        //opret ny formdata og append fil
+        const formData = new FormData();
+        formData.append('file', file);
 
-    const fileExistsOnServerAlready = await checkForExistingXcel();
+        const fileExistsOnServerAlready = await checkForExistingXcel();
 
-    if (fileExistsOnServerAlready) {
-        askToMergeOrReplace(formData);
-    } else uploadNewExcel(formData);
-})
+        if (fileExistsOnServerAlready) {
+            const replaceFile = confirm(
+                'Der er ellerede en eksisternde excel-fil på serveren. Vil du erstatte den eksisterende fil?'
+            );
+
+            if (!replaceFile) {
+                fileInput.value = ''; //nulstil filinput
+                return;
+            }
+        }
+
+        uploadNewExcel(formData);
+    })
+});
 
 //UPLOAD XCEL FIL
 async function uploadNewExcel(file) {
@@ -30,7 +43,7 @@ async function uploadNewExcel(file) {
     });
 
     //fetch json efter upload
-    //const tasks = await loadTasks();
+    loadTasks();
 }
 
 //fetch opgaver fra server
@@ -46,10 +59,9 @@ async function loadTasks() {
         }
     }
 
-    const tasks = await response.json();
+    tasks = await response.json(); //Opdaterer globalt array
 
     renderTasks(tasks);
-
     return tasks;
 }
 
@@ -58,23 +70,64 @@ function renderTasks(tasksToRender) {
     standardLandingPage.style.display = 'none';
 
     const container = document.getElementById('renderedTasks');
+    container.innerHTML = '';
 
     tasksToRender.forEach((task, i) => {
         const taskHTML =
             `<div class="taskContainer">
                 <div class="taskPile">
-                    <button>pil op</button>
+                    <button>
+                        <img src="img/chevron.svg" id="arrowUp${i}" class="pil-op ${i === 0 ? 'hiddenArrow' : ''}" />
+                    </button>
                     <p>${i + 1}</p>
-                    <button>pil ned</button>
+                    <button>
+                        <img src="img/chevron.svg" id="arrowDown${i}" class="pil-ned ${i === tasks.length - 1 ? 'hiddenArrow' : ''}" />
+                    </button>
                 </div>
                 <div id="taskInfoContainer${i}">
                     <p class="taskTitel">${task.Titel}</p>
                 </div>
-                <button id="toggleAccordian${i}" class="openAccordian">Plus</button>
+                <button id="toggleAccordian${i}" class="openAccordian">
+                    <img src="img/plus.svg" id="toggleAccImg${i}" />
+                </button>
             </div>`
 
         container.innerHTML += taskHTML;
     });
+
+    //flyt item et index tilbage
+    const arrowUpButtons = container.querySelectorAll('.pil-op');
+    arrowUpButtons.forEach((button, i) => {
+        button.addEventListener('click', () => {
+            moveBack(tasks, i);
+        })
+    })
+
+    function moveBack(arr, index) {
+        if (index <= 0 || index >= arr.length) return; // kan ikke flytte første element tilbage
+        const [item] = arr.splice(index, 1);  // fjern elementet
+        arr.splice(index - 1, 0, item);      // indsæt det en position tilbage
+
+        updateExcelOnServer(tasks);
+        renderTasks(tasks);
+    }
+
+    //flyt item et index frem
+    const arrowDownButtons = container.querySelectorAll('.pil-ned');
+    arrowDownButtons.forEach((button, i) => {
+        button.addEventListener('click', () => {
+            moveForward(tasks, i);
+        })
+    })
+
+    function moveForward(arr, index) {
+        if (index >= arr.length - 1) return; // kan ikke flytte første element tilbage
+        const [item] = arr.splice(index, 1);  // fjern elementet
+        arr.splice(index + 1, 0, item);      // indsæt det en position tilbage
+
+        updateExcelOnServer(tasks);
+        renderTasks(tasks);
+    }
 
     const openAccordianButtons = container.querySelectorAll('.openAccordian');
 
@@ -84,11 +137,15 @@ function renderTasks(tasksToRender) {
         button.addEventListener('click', () => {
             const isOpen = button.dataset.open === "true";
 
+            const toggleImg = document.getElementById(`toggleAccImg${i}`);
+
             if (isOpen) {
                 closeTask(tasksToRender[i], i);
+                toggleImg.src = 'img/plus.svg';
                 button.dataset.open = "false";
             } else {
                 openTask(tasksToRender[i], i);
+                toggleImg.src = 'img/minus.svg';
                 button.dataset.open = "true";
             }
         });
@@ -149,7 +206,6 @@ function renderTasks(tasksToRender) {
             console.log("EDIT CLICK", task, index);
             editTask(task, index);
         });
-
     }
 
     function closeTask(task, index) {
@@ -235,10 +291,12 @@ function renderTasks(tasksToRender) {
         };
 
         // Opdatér arrayet
-        tasksToRender[index] = updatedTask;
+        tasks[index] = updatedTask;
 
         //Send opdateret array til server
-        await updateExcelOnServer(tasksToRender);
+        await updateExcelOnServer(tasks);
+
+        renderTasks(tasks);
 
         // Vis opgaven igen
         openTask(updatedTask, index);
@@ -246,6 +304,80 @@ function renderTasks(tasksToRender) {
         console.log("Opgave opdateret:", updatedTask);
     }
 }
+
+//Tilføj ny opgave i frontend
+const saveNewTaskButton = document.getElementById('gemBtn');
+saveNewTaskButton.addEventListener('click', addNewTaskInUI);
+
+const openNewTaskFormButton = document.getElementById('tilføjNyBtn');
+
+openNewTaskFormButton.addEventListener('click', () => {
+    const newTaskFormContainer = document.getElementById('task-form');
+
+    const closeTaskButton = document.getElementById('closeTaskForm');
+    closeTaskButton.addEventListener('click', () => {
+        newTaskFormContainer.style.display = 'none';
+    })
+
+    newTaskFormContainer.style.display = 'flex';
+})
+
+
+async function addNewTaskInUI() {
+    const newTask = {
+        Titel: document.getElementById("title").value,
+        Beskrivelse: document.getElementById("desc").value,
+        Type: document.querySelector('.nyOpgWrapper .typeRadio:checked').value,
+        Aktiveringsbetingelse: document.getElementById("condition").value,
+        Lokation: [
+            Number(document.getElementById("longitudeInput").value),
+            Number(document.getElementById("latitudeInput").value)
+        ],
+        Radius: Number(document.getElementById("radiusInput").value),
+        Valgmuligheder: document
+            .getElementById("options")
+            .value
+            .split(";")
+            .map(v => v.trim())
+            .filter(Boolean)
+    };
+
+    // push til array
+    tasks.push(newTask);
+
+    // send HELE arrayet til server
+    await updateExcelOnServer(tasks);
+
+    // re-render
+    renderTasks(tasks);
+
+    console.log("Ny opgave tilføjet:", newTask);
+
+    //Skjul form container
+    const newTaskFormContainer = document.getElementById('task-form');
+    newTaskFormContainer.style.display = 'none';
+
+    //Nulstil input felter
+    resetNewTaskForm();
+}
+
+function resetNewTaskForm() {
+    document.getElementById("title").value = "";
+    document.getElementById("desc").value = "";
+
+    // Type → tilbage til Land
+    document.getElementById("landRadio").checked = true;
+
+    document.getElementById("longitudeInput").value = "";
+    document.getElementById("latitudeInput").value = "";
+
+    document.getElementById("radiusInput").value = 0;
+
+    document.getElementById("options").value = "";
+    document.getElementById("condition").value = "";
+}
+
+
 
 //Opdater excel-fil på server
 async function updateExcelOnServer(tasks) {
@@ -273,46 +405,6 @@ async function checkForExistingXcel() {
         // Fil findes ikke → upload direkte
         return false;
     }
-}
-
-//Render pop-up to ask to merge with or replace new file
-const askToMergeOrReplacePopUp = document.getElementById('askToMergeOrReplacePopUp');
-
-function askToMergeOrReplace(newFile) {
-    askToMergeOrReplacePopUp.style.display = 'block';
-
-    //merge og replace knap
-    const mergeButton = document.getElementById('mergeButton');
-    const replaceButton = document.getElementById('replaceButton');
-
-    mergeButton.addEventListener('click', () => mergeFiles(newFile));
-    replaceButton.addEventListener('click', () => replaceFile(newFile));
-}
-
-async function mergeFiles(newFile) {
-    askToMergeOrReplacePopUp.style.display = 'none';
-    await fetch('http://localhost:3000/merge-files', {
-        method: 'POST',
-        body: newFile
-    })
-
-    //fetch json efter upload
-    const tasks = await loadTasks();
-
-    console.log(tasks);
-}
-
-async function replaceFile(newFile) {
-    askToMergeOrReplacePopUp.style.display = 'none';
-    await fetch('http://localhost:3000/replace-file', {
-        method: 'POST',
-        body: newFile
-    })
-
-    //fetch json efter upload
-    const tasks = await loadTasks();
-
-    console.log(tasks);
 }
 
 //RENDER STANDARD LANDING PAGE

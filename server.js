@@ -31,19 +31,38 @@ const server = http.createServer((req, res) => {
 
     // --- STANDARD UPLOAD (første gang) ---
     if (pathname === "/upload" && req.method === "POST") {
-        handleUpload(req, res, "upload");
-        return;
-    }
+        const form = new formidable.IncomingForm({ multiples: false });
 
-    // --- MERGE NEW FILE WITH EXISTING ---
-    if (pathname === "/merge-files" && req.method === "POST") {
-        handleUpload(req, res, "merge");
-        return;
-    }
+        form.parse(req, (err, fields, files) => {
+            if (err) {
+                res.writeHead(500);
+                res.end("Fejl ved upload");
+                return;
+            }
 
-    // --- REPLACE EXISTING FILE ---
-    if (pathname === "/replace-file" && req.method === "POST") {
-        handleUpload(req, res, "replace");
+            let uploadedFile = files.file;
+            if (Array.isArray(uploadedFile)) uploadedFile = uploadedFile[0];
+
+            if (!uploadedFile) {
+                res.writeHead(400);
+                res.end("Ingen fil modtaget");
+                return;
+            }
+
+            const dataPath = path.join(__dirname, "uploads", "data.xlsx");
+
+            try {
+                // Overskriv altid eksisterende fil
+                fs.renameSync(uploadedFile.filepath, dataPath);
+                res.writeHead(200);
+                res.end("Excel uploadet");
+            } catch (err) {
+                console.error(err);
+                res.writeHead(500);
+                res.end("Kunne ikke gemme fil");
+            }
+        });
+
         return;
     }
 
@@ -63,7 +82,8 @@ const server = http.createServer((req, res) => {
                 const dataPath = path.join(__dirname, "uploads", "data.xlsx");
 
                 // Transformér data så Excel kan forstå det
-                const excelRows = tasks.map(task => ({
+                const excelRows = tasks.map((task, index) => ({
+                    ID: index + 1,
                     Titel: task.Titel,
                     Beskrivelse: task.Beskrivelse,
                     Type: task.Type,
@@ -153,69 +173,36 @@ const server = http.createServer((req, res) => {
     // --- SERVE FRONTEND FILES ---
     if (req.method === "GET") {
         const filePath = path.join(__dirname, "public", req.url === "/" ? "index.html" : req.url);
+
         fs.readFile(filePath, (err, data) => {
-            if (err) { res.writeHead(404); res.end("Fil ikke fundet"); return; }
+            if (err) {
+                res.writeHead(404);
+                res.end("Fil ikke fundet");
+                return;
+            }
+
             const ext = path.extname(filePath).toLowerCase();
-            const contentType = ext === ".css" ? "text/css" : ext === ".js" ? "application/javascript" : ext === ".html" ? "text/html" : "application/octet-stream";
+
+            const mimeTypes = {
+                ".html": "text/html",
+                ".css": "text/css",
+                ".js": "application/javascript",
+                ".png": "image/png",
+                ".jpg": "image/jpeg",
+                ".jpeg": "image/jpeg",
+                ".svg": "image/svg+xml",
+                ".gif": "image/gif",
+                ".ico": "image/x-icon",
+            };
+
+            const contentType = mimeTypes[ext] || "application/octet-stream";
+
             res.writeHead(200, { "Content-Type": contentType });
             res.end(data);
         });
         return;
     }
 
-    // --- FALLBACK ---
-    res.writeHead(404);
-    res.end("Not found");
 });
 
 server.listen(3000, () => console.log("Server kører på http://localhost:3000"));
-
-// --- HANDLE UPLOAD ---
-function handleUpload(req, res, mode) {
-    const form = new formidable.IncomingForm({ multiples: false });
-    form.parse(req, (err, fields, files) => {
-        if (err) { res.writeHead(500); res.end("Fejl ved upload"); return; }
-
-        let uploadedFile = files.file;
-        if (Array.isArray(uploadedFile)) uploadedFile = uploadedFile[0];
-        if (!uploadedFile) { res.writeHead(400); res.end("Ingen fil modtaget"); return; }
-
-        const tempPath = path.join(__dirname, "uploads", "temp.xlsx");
-        fs.renameSync(uploadedFile.filepath, tempPath);
-
-        const dataPath = path.join(__dirname, "uploads", "data.xlsx");
-
-        try {
-            if (mode === "upload") {
-                fs.renameSync(tempPath, dataPath);
-                res.end("Første fil uploadet og gemt som data.xlsx");
-            } else if (mode === "replace") {
-                fs.renameSync(tempPath, dataPath);
-                res.end("Eksisterende fil erstattet med ny fil");
-            } else if (mode === "merge") {
-                if (!fs.existsSync(dataPath)) {
-                    fs.renameSync(tempPath, dataPath);
-                    res.end("Ingen eksisterende fil → gemt som data.xlsx");
-                } else {
-                    const oldData = xlsx.utils.sheet_to_json(xlsx.readFile(dataPath).Sheets[xlsx.readFile(dataPath).SheetNames[0]]);
-                    let newData = xlsx.utils.sheet_to_json(xlsx.readFile(tempPath).Sheets[xlsx.readFile(tempPath).SheetNames[0]]);
-
-                    // Fjern duplikater
-                    const oldJSONStrings = oldData.map(r => JSON.stringify(r));
-                    newData = newData.filter(r => !oldJSONStrings.includes(JSON.stringify(r)));
-
-                    const mergedData = [...oldData, ...newData];
-                    const wb = xlsx.utils.book_new();
-                    xlsx.utils.book_append_sheet(wb, xlsx.utils.json_to_sheet(mergedData), "Sheet1");
-                    xlsx.writeFile(wb, dataPath);
-                    fs.unlinkSync(tempPath);
-                    res.end("Filer merged og gemt i data.xlsx");
-                }
-            }
-        } catch (err) {
-            console.error(err);
-            res.writeHead(500);
-            res.end("Kunne ikke gemme fil");
-        }
-    });
-}
