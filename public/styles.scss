@@ -24,7 +24,7 @@ $font: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sa
 body {
     height: 100vh;
     margin: 0;
-    overflow: hidden;   
+    //overflow: hidden;   
     display: flex;
     flex-direction: column;
 }
@@ -96,6 +96,7 @@ main {
     }
 
     #tasksContainer {
+        width: 100%;
         background-color: green;
         overflow-y: scroll;
         min-height: 0;
@@ -120,6 +121,11 @@ main {
             align-items: center;
             border-bottom: 1px solid black;
             padding: 10px 0;
+        }
+        #newTask{
+            width: 100%;
+            height: 90%;
+            background-color: red;
         }
     }
 }
@@ -469,7 +475,7 @@ label {
 }
 
 .task-form {
-    display: none; //til styling til styling til styling til styling til styling til styling
+    //display: none; //til styling til styling til styling til styling til styling til styling
     //display: flex;
     flex-direction: column;
     gap: 15px;

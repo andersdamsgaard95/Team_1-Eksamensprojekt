@@ -136,98 +136,97 @@
 
                 <div id="renderedTasks"></div>
                 <div id="newTask">
-                    <div id="inputFelter"></div> <!--delete???-->
 
                     <!--NY OPGAVE - START-->
-                <div class="nyOpgWrapper"><!--wrapper-->
+                    <div class="nyOpgWrapper"><!--wrapper-->
 
-                    
-                    <div class="task-form">
-                        <button class="close-btn" type="button" aria-label="Luk">×</button>
+                        
+                        <div class="task-form">
+                            <button class="close-btn" type="button" aria-label="Luk">×</button>
 
-                        <!-- Titel -->
-                        <div>
-                            <label class="mini-header" for="title">Titel</label>
-                            <input id="title" type="text" placeholder="Titel..." />
-                        </div>
-
-                        <!-- Beskrivelse -->
-                        <div>
-                            <label class="mini-header" for="desc">Beskrivelse:</label>
-                            <textarea id="desc" placeholder="Beskriv opgaven..."></textarea>
-                        </div>
-
-                        <!-- Type -->
-                        <div>
-                            <div class="legend mini-header">Type</div>
-                            <div class="row checks">
-                            <label class="check">
-                                <input type="radio" name="type" value="land" checked/>
-                                <span>Land</span>
-                            </label>
-
-                            <label class="check">
-                                <input type="radio" name="type" value="sø" />
-                                <span>Sø</span>
-                            </label>
+                            <!-- Titel -->
+                            <div>
+                                <label class="mini-header" for="title">Titel</label>
+                                <input id="title" type="text" placeholder="Titel..." />
                             </div>
-                        </div>
 
-                        <!-- Lokation -->
-                        <div>
-                            <div class="legend mini-header">Lokation</div>
+                            <!-- Beskrivelse -->
+                            <div>
+                                <label class="mini-header" for="desc">Beskrivelse:</label>
+                                <textarea id="desc" placeholder="Beskriv opgaven..."></textarea>
+                            </div>
 
-                            <div class="row location">
-                            <div class="mini-group">
-                                <div class="mini-labels">
-                                <span>Longitude</span>
-                                <span>Latitude</span>
-                                </div>
+                            <!-- Type -->
+                            <div>
+                                <div class="legend mini-header">Type</div>
+                                <div class="row checks">
+                                <label id="landRadioLabel" class="check">
+                                    <input id="landRadio" type="radio" name="type" value="land" checked/>
+                                    <span>Land</span>
+                                </label>
 
-                                <div class="mini-inputs">
-                                <input type="number" inputmode="decimal" placeholder="12.3456" />
-                                <input type="number" inputmode="decimal" placeholder="12.3456" />
+                                <label id="søRadioLabel" class="check">
+                                    <input id="søRadio" type="radio" name="type" value="sø" />
+                                    <span>Sø</span>
+                                </label>
                                 </div>
                             </div>
 
-                            <div class="or">eller:</div>
+                            <!-- Lokation -->
+                            <div>
+                                <div class="legend mini-header">Lokation</div>
 
-                            <button class="map-link" type="button">
-                                Vælg på map
-                                <span class="map-icon" aria-hidden="true"><img src="img/location.svg" alt="map ikon"></span>
-                            </button>
+                                <div class="row location">
+                                    <div class="mini-group">
+                                        <div class="mini-labels">
+                                            <span>Longitude</span>
+                                            <span>Latitude</span>
+                                        </div>
+
+                                        <div class="mini-inputs">
+                                            <input id="longitudeInput" type="number" inputmode="decimal" placeholder="12.3456" />
+                                            <input id="latitudeInput" type="number" inputmode="decimal" placeholder="12.3456" />
+                                        </div>
+                                    </div>
+
+                                    <div class="or">eller:</div>
+
+                                    <button id="vælgPåMap" class="map-link" type="button">
+                                        Vælg på map
+                                        <span class="map-icon" aria-hidden="true"><img src="img/location.svg" alt="map ikon"></span>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Radius -->
-                        <div>
-                            <div class="legend mini-header">Radius</div>
-                            <div class="row radius">
-                            <input class="radius-input" type="number" min="0" value="0" />
-                            <span class="unit">Meter</span>
+                            <!-- Radius -->
+                            <div>
+                                <div class="legend mini-header">Radius</div>
+                                <div class="row radius">
+                                <input id="radiusInput" class="radius-input" type="number" min="0" value="0" />
+                                <span class="unit">Meter</span>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Valgmuligheder -->
-                        <div>
-                            <label class="mini-header" for="options">Valgmuligheder</label>
-                            <input id="options" type="text" placeholder="Valgmuligheder..." />
-                        </div>
+                            <!-- Valgmuligheder -->
+                            <div>
+                                <label id="optionsLabel" class="mini-header" for="options">Valgmuligheder</label>
+                                <input id="options" type="text" placeholder="Valgmuligheder..." />
+                            </div>
 
-                        <!-- Aktiveringsbetingelse -->
-                        <div>
-                            <label class="mini-header" for="condition">Aktiveringsbetingelse</label>
-                            <input id="condition" type="text" placeholder="Betingelse..." />
-                        </div>
-                    </div> 
-                    <!--Ny og Gem knapper-->
-                        <div class="btnContainer">
-                            <button id="tilføjNyBtn" class="btn">Tilføj ny opgave</button>
-                            <button id="gemBtn" class="btn">Gem opgave</button>
-                        </div>
-                     
-                </div> <!--wrapper-->
-                    <!--NY OPGAVE - SLUT-->
+                            <!-- Aktiveringsbetingelse -->
+                            <div>
+                                <label id="conditionLabel" class="mini-header" for="condition">Aktiveringsbetingelse</label>
+                                <input id="condition" type="text" placeholder="Betingelse..." />
+                            </div>
+                        </div> 
+                        <!--Ny og Gem knapper-->
+                            <div class="btnContainer">
+                                <button id="tilføjNyBtn" class="btn">Tilføj ny opgave</button>
+                                <button id="gemBtn" class="btn">Gem opgave</button>
+                            </div>
+                        
+                    </div> <!--wrapper-->
+                        <!--NY OPGAVE - SLUT-->
                     
                 </div>
             </div>
