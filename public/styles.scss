@@ -1,13 +1,4 @@
 
-//DISPLAYS SKAL JUSTERES DYNAMISK MED JS - START
-
-#standardLandingPage{
-    display: none !important; 
-    background-color: blue;
-}
-   
-//DISPLAYS SKAL JUSTERES DYNAMISK MED JS - SLUT
-
 $darkGreen: #3F5C59;
 $darkRed: #8D1B3D;
 $green: #597E50;
@@ -19,11 +10,13 @@ $mainTopMargDesktop: 40px;
 $glHeightDesktop: 10px;
 $heroEleHeightDesktop: 80px;
 $topHeightDesktop: calc($mainTopMargDesktop + $glHeightDesktop + $heroEleHeightDesktop);
+//1200
+$mainTopMargTablet: 5px; 
+$topHeight1200: calc($mainTopMargTablet + $glHeightDesktop + $heroEleHeightDesktop);
 //992
-$mainTopMargTablet: 25px; //done 
-$glHeightTablet: 5px; //done
-$heroEleHeightTablet: 60px; //done
-$settingsContainerHeightTablet: 100px; //done
+$glHeightTablet: 5px; 
+$heroEleHeightTablet: 60px; 
+$settingsContainerHeightTablet: 100px; 
 $topHeightTablet: calc($settingsContainerHeightTablet + $mainTopMargTablet + $glHeightTablet + $heroEleHeightTablet);
 
 
@@ -50,7 +43,6 @@ html {
     font-size: 10px; //note til omregning: hjemmeværnet har 16px. Deres font-size er faktisk forkert. For at rette, så gang deres faktor med 1,0625
 }
 .heroElements {
-    background-color: purple;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -73,21 +65,13 @@ p {
     letter-spacing: -0.5px;
     margin-bottom: 1rem;
 }
-header {
-    height: 110px;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 main {
     width: 1140px;
     margin-left: auto;
     margin-right: auto;
     margin-top: $mainTopMargDesktop;
     height: 100vh;
-    background-color: blue;
-
 }
 
 .greenLine {
@@ -106,7 +90,6 @@ main {
         width: 350px;
         padding-right: 15px;
         padding-left: 15px;
-        //background-color: purple; //TIL DESIGN FASE ONLY
         padding-top: 30px;
         padding-bottom: 20px;
         display: flex;
@@ -116,28 +99,16 @@ main {
     #tasksContainer {
         position: relative;
         width: 100%;
-        background-color: pink;
-        //overflow-y: scroll; 
-        //min-height: 0;
-        //flex: 1;
-        //z-index: -20;
-        //flex-grow: 1;
-        height: calc(100vh - $topHeightDesktop); //CONTAINER HØJDE  CONTAINER HØJDE CONTAINER HØJDE
-        //padding-bottom: 100px;
+        height: calc(100vh - $topHeightDesktop); 
         display: flex;
         flex-direction: column;
 
         #standardLandingPage {
             position: relative;
-            //display: none; //delete!!
-            display: flex; //add
+            display: flex; 
             flex-direction: column;
-            //gap: 5px;
             padding-top: 30px;
-            //padding-bottom: 100px;
-            padding-left: 15px;
-            //background-color: red; //TIL DESIGN FASE ONLY
-            
+            padding-left: 15px;            
         }
 
         .taskContainer { //!! obs på navn
@@ -151,7 +122,6 @@ main {
             overflow-y: scroll;
             width: 100%;
             flex-grow: 1;
-            //z-index: -10;
             background-color: burlywood;
         }
     }
@@ -163,7 +133,6 @@ main {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: orange;
 }
 
 //-----------------------------
@@ -175,13 +144,11 @@ main {
   display: flex;
   flex-direction: column;
   gap: 30px;
-  //background-color: gold;
 }
 .search-filter-sort-wrapper {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    background-color: purple;
 }
 .filter-sort-wrapper{
     display: flex;
@@ -266,9 +233,7 @@ fieldset {
 .file-group {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  //background-color: #8D1B3D;
-
+  gap: 6px;
 }
 
 .file-button {
@@ -481,28 +446,15 @@ fieldset {
 //Ny opg form - START
 //-----------------------------
 .nyOpgWrapper{
-    //position: absolute;
     width: 100%;
-    //width: 790px;
-    //margin-left:auto;
-    //margin-right: auto;
-    //margin-top: 30px;
-    //margin-bottom: 100px;
-    //bottom: 0;
-    //left: 0;
-    //margin-left: 15px;
     border-top: 2px solid black;
-    border-bottom: 1px solid black;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    //border-bottom: 1px solid black;
+    padding-top: 20px;
+    padding-bottom: 25px;
     display: flex;
     flex-direction: column;
     gap: 30px;
-    
     background-color: $lightGray;
-    //background-color: red;
-    //left: 50%;
-    //transform: translateX(-50%);
 }
 
 #task-form {
@@ -515,7 +467,6 @@ fieldset {
     padding: 0 20px ;
     font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
     color: #000;
-    background-color: yellow;
 }
 
 
@@ -638,8 +589,6 @@ textarea {
 .map-icon {
     height: 2rem;  
     transform: translateY(-2px);
-    //background-color: blue;
-
   img {
     height: 100%;
   }
@@ -666,6 +615,7 @@ textarea {
 @media (max-width: 1200px){
     main {
         width: 960px;
+        margin-top: $mainTopMargTablet;
     }
     h1{
         font-size: 2.4rem;
@@ -679,9 +629,13 @@ textarea {
         padding-top: 10px;
         padding-bottom: 5px;
     }
-    /*.nyOpgWrapper{
-        width: 670px;
-    }*/
+    #contentContainer #tasksContainer{
+        height: calc(100vh - $topHeight1200); //CONTAINER HØJDE   CONTAINER HØJDE CONTAINER HØJDE
+    }
+    .heroElements {
+        align-items: end;
+        padding-bottom: 5px;
+    }
     
 }
 @media (max-width: 992px){
@@ -705,12 +659,8 @@ textarea {
     }
     #contentContainer {
         flex-direction: column;
-        //align-items: center;
-        background-color: yellow;
     
         #settingsContainer {
-            //width: 600px;
-            background-color: red; //TIL DESIGN FASE ONLY
             width: 100%;
             padding-right: 0;
             padding-left: 0;
@@ -718,7 +668,7 @@ textarea {
             border-bottom: 2px solid black;
             height: $settingsContainerHeightTablet;
             padding-top: 0;
-            padding-bottom: 2px;
+            padding-bottom: 4px;
             align-items: end;
         }
     
@@ -727,7 +677,6 @@ textarea {
         }
     }
     .toolbar{
-        //background-color: yellow;
         flex-direction: row;
         width: 100%;
         justify-content: space-between;
@@ -735,11 +684,10 @@ textarea {
     .search-filter-sort-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    //background-color: purple;
-    //flex-grow: 1; //add
+    gap: 20px;
+    flex-grow: 1; 
     }
-    .sort-dropdown { //skal være position absolute
+    .sort-dropdown { 
     padding: 15px;
     background-color: white;
     border: 1px solid black;
@@ -749,7 +697,6 @@ textarea {
     justify-content: center;
     align-items: flex-start;
     gap: 0.5rem;
-    //margin-left: 10px;
     position: absolute;
     }
     #typeDropdown,
@@ -776,7 +723,7 @@ textarea {
     }
     .file-group{
         align-items: end;
-        //width: 300px;
+        gap: 4px;
     }
     .info-btn::after { // info-boksen
         transform: translate(-55%, 45%); //problem løst
@@ -833,7 +780,6 @@ textarea {
         gap: 15px;
     }
     #contentContainer #settingsContainer {
-        background-color: blue;
         height: $settingsContainerHeightMobileL;
         padding-top: 0;
         padding-bottom: 2px;
@@ -850,11 +796,6 @@ textarea {
         margin-right: auto;
         margin-left: auto;
     }
-    /*.nyOpgWrapper{
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;  
-    }*/
     .file-button{
         padding: 6px 6px;
         font-size: 1.1rem;

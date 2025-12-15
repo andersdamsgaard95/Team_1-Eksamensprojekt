@@ -1,9 +1,4 @@
 @charset "UTF-8";
-#standardLandingPage {
-  display: none !important;
-  background-color: blue;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -23,7 +18,6 @@ html {
 }
 
 .heroElements {
-  background-color: purple;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -48,21 +42,12 @@ p {
   margin-bottom: 1rem;
 }
 
-header {
-  height: 110px;
-  background-color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 main {
   width: 1140px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 40px;
   height: 100vh;
-  background-color: blue;
 }
 
 .greenLine {
@@ -89,7 +74,6 @@ main {
 #contentContainer #tasksContainer {
   position: relative;
   width: 100%;
-  background-color: pink;
   height: calc(100vh - 130px);
   display: flex;
   flex-direction: column;
@@ -121,7 +105,6 @@ main {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: orange;
 }
 
 /* GENERELT */
@@ -135,7 +118,6 @@ main {
   display: flex;
   flex-direction: column;
   gap: 30px;
-  background-color: purple;
 }
 
 .filter-sort-wrapper {
@@ -221,7 +203,7 @@ fieldset {
 .file-group {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 6px;
 }
 
 .file-button {
@@ -394,9 +376,8 @@ fieldset {
 .nyOpgWrapper {
   width: 100%;
   border-top: 2px solid black;
-  border-bottom: 1px solid black;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-top: 20px;
+  padding-bottom: 25px;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -412,7 +393,6 @@ fieldset {
   padding: 0 20px;
   font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   color: #000;
-  background-color: yellow;
 }
 
 .close-btn {
@@ -545,6 +525,7 @@ textarea {
 @media (max-width: 1200px) {
   main {
     width: 960px;
+    margin-top: 5px;
   }
   h1 {
     font-size: 2.4rem;
@@ -558,14 +539,18 @@ textarea {
     padding-top: 10px;
     padding-bottom: 5px;
   }
-  /*.nyOpgWrapper{
-      width: 670px;
-  }*/
+  #contentContainer #tasksContainer {
+    height: calc(100vh - 95px);
+  }
+  .heroElements {
+    align-items: end;
+    padding-bottom: 5px;
+  }
 }
 @media (max-width: 992px) {
   main {
     width: 720px;
-    margin-top: 25px;
+    margin-top: 5px;
   }
   /*.nyOpgWrapper{
       width: 720px;
@@ -574,7 +559,7 @@ textarea {
     height: 60px;
   }
   #contentContainer #tasksContainer {
-    height: calc(100vh - 190px);
+    height: calc(100vh - 170px);
   }
   .greenLine {
     width: 100%;
@@ -583,10 +568,8 @@ textarea {
   }
   #contentContainer {
     flex-direction: column;
-    background-color: yellow;
   }
   #contentContainer #settingsContainer {
-    background-color: red;
     width: 100%;
     padding-right: 0;
     padding-left: 0;
@@ -594,7 +577,7 @@ textarea {
     border-bottom: 2px solid black;
     height: 100px;
     padding-top: 0;
-    padding-bottom: 2px;
+    padding-bottom: 4px;
     align-items: end;
   }
   #contentContainer #tasksContainer #standardLandingPage {
@@ -608,7 +591,8 @@ textarea {
   .search-filter-sort-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
+    flex-grow: 1;
   }
   .sort-dropdown {
     padding: 15px;
@@ -645,6 +629,7 @@ textarea {
   }
   .file-group {
     align-items: end;
+    gap: 4px;
   }
   .info-btn::after {
     transform: translate(-55%, 45%);
@@ -658,7 +643,7 @@ textarea {
 }
 @media (max-width: 768px) {
   #contentContainer #tasksContainer {
-    height: calc(100vh - 190px);
+    height: calc(100vh - 170px);
   }
   main {
     width: 540px;
@@ -701,7 +686,6 @@ textarea {
     gap: 15px;
   }
   #contentContainer #settingsContainer {
-    background-color: blue;
     height: 100px;
     padding-top: 0;
     padding-bottom: 2px;
@@ -716,11 +700,6 @@ textarea {
     margin-right: auto;
     margin-left: auto;
   }
-  /*.nyOpgWrapper{
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;  
-  }*/
   .file-button {
     padding: 6px 6px;
     font-size: 1.1rem;
