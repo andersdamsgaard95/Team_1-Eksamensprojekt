@@ -1,11 +1,11 @@
 
 //DISPLAYS SKAL JUSTERES DYNAMISK MED JS - START
-/*
+
 #standardLandingPage{
     display: none !important; 
     background-color: blue;
 }
- */   
+   
 //DISPLAYS SKAL JUSTERES DYNAMISK MED JS - SLUT
 
 $darkGreen: #3F5C59;
@@ -14,10 +14,21 @@ $green: #597E50;
 $lightGray: #FAFAFA;
 $darkGray: #D7DBDA;
 $font: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+//alt over 992
 $mainTopMargDesktop: 40px;
 $glHeightDesktop: 10px;
 $heroEleHeightDesktop: 80px;
 $topHeightDesktop: calc($mainTopMargDesktop + $glHeightDesktop + $heroEleHeightDesktop);
+//992
+$mainTopMargTablet: 25px; //done 
+$glHeightTablet: 5px; //done
+$heroEleHeightTablet: 60px; //done
+$settingsContainerHeightTablet: 100px; //done
+$topHeightTablet: calc($settingsContainerHeightTablet + $mainTopMargTablet + $glHeightTablet + $heroEleHeightTablet);
+
+//768
+$settingsContainerHeightMobileL: 100px; //done
+$topHeightMobile: calc($settingsContainerHeightMobileL + $mainTopMargTablet + $glHeightTablet + $heroEleHeightTablet);
 
 *{
     box-sizing: border-box;
@@ -73,7 +84,8 @@ main {
     margin-left: auto;
     margin-right: auto;
     margin-top: $mainTopMargDesktop;
-
+    height: 100vh;
+    background-color: blue;
 
 }
 
@@ -103,27 +115,28 @@ main {
     #tasksContainer {
         position: relative;
         width: 100%;
-        background-color: green;
+        background-color: pink;
         //overflow-y: scroll; 
         //min-height: 0;
         //flex: 1;
         //z-index: -20;
-        flex-grow: 1;
-        height: calc(100vh - 125px); //CONTAINER HØJDE  CONTAINER HØJDE CONTAINER HØJDE
+        //flex-grow: 1;
+        height: calc(100vh - $topHeightDesktop); //CONTAINER HØJDE  CONTAINER HØJDE CONTAINER HØJDE
         //padding-bottom: 100px;
         display: flex;
         flex-direction: column;
 
         #standardLandingPage {
             position: relative;
-            //display: flex; //add
+            //display: none; //delete!!
+            display: flex; //add
             flex-direction: column;
             //gap: 5px;
             padding-top: 30px;
             //padding-bottom: 100px;
             padding-left: 15px;
             //background-color: red; //TIL DESIGN FASE ONLY
-            display: none; //delete!!
+            
         }
 
         .taskContainer { //!! obs på navn
@@ -167,7 +180,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    //background-color: purple;
+    background-color: purple;
 }
 .filter-sort-wrapper{
     display: flex;
@@ -241,6 +254,7 @@ fieldset {
     justify-content: center;
     align-items: flex-start;
     gap: 0.5rem;
+    z-index: 10;
 }
 #typeDropdown,
 #sorteringDropdown {
@@ -270,6 +284,7 @@ fieldset {
 }
 
 .info-btn { // spørgsmåls-ikonet
+    //display: none; //delete
     z-index: 10;
   width: 2.5rem;
   height: 2.5rem;
@@ -288,9 +303,9 @@ fieldset {
   position: relative; // vigtig for absolut tooltip-position
 }
 
-
 /* Fælles tooltip-style – skjult som default */
 .info-btn::after { // info-boksen
+    //display: none; //delete
   position: absolute;
   background: #fff;
   color: #000;
@@ -298,7 +313,7 @@ fieldset {
   border-radius: 4px;
   font-size: 1.2rem;
   border: 1px solid black;
-  transform: translate(50%, -55%);
+  transform: translate(50%, -55%); //problem
   white-space: wrap;
   font-weight: 400;
   width: 200px;
@@ -671,34 +686,39 @@ textarea {
 @media (max-width: 992px){
     main {
         width: 720px;
-        margin-top: 25px;
+        margin-top: $mainTopMargTablet;
     }
     /*.nyOpgWrapper{
         width: 720px;
     }*/
     .heroElements {
-        height: 60px;
+        height: $heroEleHeightTablet;
     }
-     #tasksContainer{
-        height: calc(100vh - 90px); //CONTAINER HØJDE   CONTAINER HØJDE CONTAINER HØJDE
-     }
+    #contentContainer #tasksContainer{
+        height: calc(100vh - $topHeightTablet); //CONTAINER HØJDE   CONTAINER HØJDE CONTAINER HØJDE
+    }
     .greenLine {
         width: 100%;
-        height: 5px;
+        height: $glHeightTablet;
         background-color: $darkGreen;
     }
     #contentContainer {
         flex-direction: column;
-        //background-color: yellow;
+        //align-items: center;
+        background-color: yellow;
     
         #settingsContainer {
-            //background-color: green; //TIL DESIGN FASE ONLY
+            //width: 600px;
+            background-color: red; //TIL DESIGN FASE ONLY
             width: 100%;
             padding-right: 0;
             padding-left: 0;
             flex-direction: row;
             border-bottom: 2px solid black;
-            //background-color: blue;
+            height: $settingsContainerHeightTablet;
+            padding-top: 0;
+            padding-bottom: 2px;
+            align-items: end;
         }
     
         #tasksContainer #standardLandingPage {
@@ -716,7 +736,7 @@ textarea {
     flex-direction: column;
     gap: 30px;
     //background-color: purple;
-    flex-grow: 1;
+    //flex-grow: 1; //add
     }
     .sort-dropdown { //skal være position absolute
     padding: 15px;
@@ -757,13 +777,20 @@ textarea {
         align-items: end;
         //width: 300px;
     }
+    .info-btn::after { // info-boksen
+        transform: translate(-55%, 45%); //problem løst
+    }
+    /*
     .info-btn:hover::after,
     .info-btn.show-info::after {
         transform: translate(-50%, 55%);
     }
-    
+    */
 }
 @media (max-width: 768px){
+    #contentContainer #tasksContainer{
+        height: calc(100vh - $topHeightMobile); //CONTAINER HØJDE   CONTAINER HØJDE CONTAINER HØJDE
+    }
     main {
         width: 540px;
     }
@@ -803,6 +830,14 @@ textarea {
     }
     .filter-sort-wrapper{
         gap: 15px;
+    }
+    #contentContainer #settingsContainer {
+        background-color: blue;
+        height: $settingsContainerHeightMobileL;
+        padding-top: 0;
+        padding-bottom: 2px;
+        align-items: end;
+    
     }
 }
 

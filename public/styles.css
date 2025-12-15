@@ -1,10 +1,9 @@
 @charset "UTF-8";
-/*
-#standardLandingPage{
-    display: none !important; 
-    background-color: blue;
+#standardLandingPage {
+  display: none !important;
+  background-color: blue;
 }
- */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -62,6 +61,8 @@ main {
   margin-left: auto;
   margin-right: auto;
   margin-top: 40px;
+  height: 100vh;
+  background-color: blue;
 }
 
 .greenLine {
@@ -88,18 +89,17 @@ main {
 #contentContainer #tasksContainer {
   position: relative;
   width: 100%;
-  background-color: green;
-  flex-grow: 1;
-  height: calc(100vh - 125px);
+  background-color: pink;
+  height: calc(100vh - 130px);
   display: flex;
   flex-direction: column;
 }
 #contentContainer #tasksContainer #standardLandingPage {
   position: relative;
+  display: flex;
   flex-direction: column;
   padding-top: 30px;
   padding-left: 15px;
-  display: none;
 }
 #contentContainer #tasksContainer .taskContainer {
   display: flex;
@@ -135,6 +135,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  background-color: purple;
 }
 
 .filter-sort-wrapper {
@@ -208,6 +209,7 @@ fieldset {
   justify-content: center;
   align-items: flex-start;
   gap: 0.5rem;
+  z-index: 10;
 }
 
 #typeDropdown,
@@ -571,8 +573,8 @@ textarea {
   .heroElements {
     height: 60px;
   }
-  #tasksContainer {
-    height: calc(100vh - 90px);
+  #contentContainer #tasksContainer {
+    height: calc(100vh - 190px);
   }
   .greenLine {
     width: 100%;
@@ -581,13 +583,19 @@ textarea {
   }
   #contentContainer {
     flex-direction: column;
+    background-color: yellow;
   }
   #contentContainer #settingsContainer {
+    background-color: red;
     width: 100%;
     padding-right: 0;
     padding-left: 0;
     flex-direction: row;
     border-bottom: 2px solid black;
+    height: 100px;
+    padding-top: 0;
+    padding-bottom: 2px;
+    align-items: end;
   }
   #contentContainer #tasksContainer #standardLandingPage {
     padding-left: 0;
@@ -601,7 +609,6 @@ textarea {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    flex-grow: 1;
   }
   .sort-dropdown {
     padding: 15px;
@@ -639,12 +646,20 @@ textarea {
   .file-group {
     align-items: end;
   }
+  .info-btn::after {
+    transform: translate(-55%, 45%);
+  }
+  /*
   .info-btn:hover::after,
   .info-btn.show-info::after {
-    transform: translate(-50%, 55%);
+      transform: translate(-50%, 55%);
   }
+  */
 }
 @media (max-width: 768px) {
+  #contentContainer #tasksContainer {
+    height: calc(100vh - 190px);
+  }
   main {
     width: 540px;
   }
@@ -684,6 +699,13 @@ textarea {
   }
   .filter-sort-wrapper {
     gap: 15px;
+  }
+  #contentContainer #settingsContainer {
+    background-color: blue;
+    height: 100px;
+    padding-top: 0;
+    padding-bottom: 2px;
+    align-items: end;
   }
 }
 @media (max-width: 576px) {
