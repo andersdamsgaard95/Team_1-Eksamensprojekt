@@ -390,12 +390,8 @@ label {
 }
 
 .nyOpgWrapper {
-  position: absolute;
-  width: 790px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
   margin-top: 30px;
-  bottom: 0;
   border-top: 2px solid black;
   border-bottom: 1px solid black;
   padding-top: 30px;
