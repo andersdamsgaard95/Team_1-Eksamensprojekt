@@ -19,9 +19,8 @@ $heroEleHeightTablet: 60px;
 $settingsContainerHeightTablet: 100px; 
 $topHeightTablet: calc($settingsContainerHeightTablet + $mainTopMargTablet + $glHeightTablet + $heroEleHeightTablet);
 
-
 //768
-$settingsContainerHeightMobileL: 100px; //done
+$settingsContainerHeightMobileL: 80px; 
 $topHeightMobile: calc($settingsContainerHeightMobileL + $mainTopMargTablet + $glHeightTablet + $heroEleHeightTablet);
 
 *{
@@ -113,16 +112,17 @@ main {
 
         .taskContainer { //!! obs på navn
             display: flex;
-            gap: 100px;
+            gap: 30px;
             align-items: center;
             border-bottom: 1px solid black;
             padding: 10px 0;
+            margin-right: 10px;
+            justify-content: start;
         }
         #renderedTasks{
             overflow-y: scroll;
             width: 100%;
             flex-grow: 1;
-            background-color: burlywood;
         }
     }
 }
@@ -611,6 +611,72 @@ textarea {
 //Ny opg form - SLUT
 //-----------------------------
 
+//-----------------------------
+//Accordian lukket - START
+//-----------------------------
+.taskPile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    
+    p {
+        margin-top: 7px;
+    }
+}
+.pilOpKnap{
+    padding: none;
+    background: none;
+    border: none;
+    transform: rotate(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+    width: 2rem;
+
+    img {
+        height: 100%;
+        width: 100%;
+    }
+}
+.pilNedKnap{
+    padding: none;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+    width: 2rem;
+
+    img {
+        height: 100%;
+        width: 100%;
+    }
+}
+.accordianTitel{
+    padding-top: 7px;
+}
+.openAccordian{
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+    width: 2rem;
+    border: none;
+    background: none;
+    margin-right: 20px;
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}
+//-----------------------------
+//Accordian lukket - SLUT
+//-----------------------------
 
 @media (max-width: 1200px){
     main {
@@ -774,7 +840,7 @@ textarea {
         font-size: 1.2rem;
     }
     .search-filter-sort-wrapper {
-        gap: 25px;
+        gap: 15px;
     }
     .filter-sort-wrapper{
         gap: 15px;
@@ -785,6 +851,12 @@ textarea {
         padding-bottom: 2px;
         align-items: end;
     
+    }
+    .mini-header {
+        font-weight: 700;
+        font-size: 1.4rem;
+        letter-spacing: .5px; //-0.5px
+        margin-bottom: 5px;
     }
 }
 
