@@ -40,16 +40,16 @@
                                 </legend>
 
                                 <div id="typeDropdown" class="sort-dropdown">
-                                    <label>
+                                    <label class="label">
                                         <input type="radio" name="type" value="alle" checked>
                                         Alle
                                     </label>
-                                    <label>
+                                    <label class="label">
                                         <input type="radio" name="type" value="land">
                                         Land
                                     </label>
 
-                                    <label>
+                                    <label class="label">
                                         <input type="radio" name="type" value="sø">
                                         Sø
                                     </label>
@@ -65,12 +65,12 @@
                                 
 
                                 <div id="sorteringDropdown" class="sort-dropdown">
-                                    <label>
+                                    <label class="label">
                                         <input type="radio" name="sort" value="ældste">
                                         Ældste først
                                     </label>
 
-                                    <label>
+                                    <label class="label">
                                         <input type="radio" name="sort" value="nyeste" checked>
                                         Nyeste først
                                     </label>
@@ -88,10 +88,10 @@
 
                         <!-- Upload -->
                         <div class="btn-info-container">
-                            <button id="uploadBtn" class="file-button">
+                            <label id="uploadBtn" class="label file-button">
                                 Upload fil
                                 <input type="file" class="fileInput" hidden>
-                            </button>
+                            </label>
                             <button id="uploadInfo" class="info-btn" aria-label="Info om upload">?</button>
                         </div>
 
@@ -144,13 +144,13 @@
 
                             <!-- Titel -->
                             <div>
-                                <label class="mini-header" for="title">Titel</label>
+                                <label class="label mini-header" for="title">Titel</label>
                                 <input id="title" type="text" placeholder="Titel..." />
                             </div>
 
                             <!-- Beskrivelse -->
                             <div>
-                                <label class="mini-header" for="desc">Beskrivelse:</label>
+                                <label class="label mini-header" for="desc">Beskrivelse:</label>
                                 <textarea id="desc" placeholder="Beskriv opgaven..."></textarea>
                             </div>
 
@@ -158,12 +158,12 @@
                             <div>
                                 <div class="legend mini-header">Type</div>
                                 <div class="row checks">
-                                <label id="landRadioLabel" class="check">
+                                <label id="landRadioLabel" class="label check">
                                     <input class="typeRadio" id="landRadio" type="radio" name="type" value="land" checked/>
                                     <span>Land</span>
                                 </label>
 
-                                <label id="søRadioLabel" class="check">
+                                <label id="søRadioLabel" class="label check">
                                     <input class="typeRadio" id="søRadio" type="radio" name="type" value="sø" />
                                     <span>Sø</span>
                                 </label>
@@ -207,13 +207,13 @@
 
                             <!-- Valgmuligheder -->
                             <div>
-                                <label id="optionsLabel" class="mini-header" for="options">Valgmuligheder</label>
+                                <label id="optionsLabel" class="label mini-header" for="options">Valgmuligheder</label>
                                 <input id="options" type="text" placeholder="Valgmuligheder..." />
                             </div>
 
                             <!-- Aktiveringsbetingelse -->
                             <div>
-                                <label id="conditionLabel" class="mini-header" for="condition">Aktiveringsbetingelse</label>
+                                <label id="conditionLabel" class="label mini-header" for="condition">Aktiveringsbetingelse</label>
                                 <input id="condition" type="text" placeholder="Betingelse..." />
                             </div>
                         </div> 

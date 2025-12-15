@@ -228,13 +228,14 @@ fieldset {
     gap: 2px;
     position: relative;
 }
-label {
+.label {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 1.4rem;
   white-space: nowrap;
 }
+
 .sort-dropdown { //skal være position absolute
     flex-direction: column;
     justify-content: center;
