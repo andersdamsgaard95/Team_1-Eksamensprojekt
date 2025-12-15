@@ -89,7 +89,6 @@ main {
   position: relative;
   width: 100%;
   background-color: green;
-  z-index: -20;
   flex-grow: 1;
   height: calc(100vh - 125px);
   display: flex;
@@ -237,6 +236,7 @@ fieldset {
 }
 
 .info-btn {
+  z-index: 10;
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
