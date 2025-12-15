@@ -88,10 +88,10 @@
 
                         <!-- Upload -->
                         <div class="btn-info-container">
-                            <label class="file-button">
+                            <button id="uploadBtn" class="file-button">
                                 Upload fil
                                 <input type="file" class="fileInput" hidden>
-                            </label>
+                            </button>
                             <button id="uploadInfo" class="info-btn" aria-label="Info om upload">?</button>
                         </div>
 
@@ -112,11 +112,11 @@
                     <p>Du har endnu ingen opgaver.</p>
                      <p>
                         Klik “Tilføj ny opgave” nedenfor eller 
-                        <button class="inlineBtn tooltip-btn" data-tooltip="Upload en Excel-fil med opgaver i korrekt format">
+                        <label id="inlineUploadBtn" class="inlineBtn tooltip-btn" data-tooltip="Upload en Excel-fil med opgaver i korrekt format">
                             <input type="file" class="fileInput" hidden>
                             upload en Excel-fil
                             <img class="inlineIkon" src="img/upload.svg" alt="upload-ikon">
-                        </button>
+                        </label>
 
                          (skal være formateret<button id="formateretInfo" class="info-btn" aria-label="Info om formateret Excel-fil til upload">
                             ?
