@@ -137,15 +137,11 @@ function renderTasks(tasksToRender) {
         button.addEventListener('click', () => {
             const isOpen = button.dataset.open === "true";
 
-            const toggleImg = document.getElementById(`toggleAccImg${i}`);
-
             if (isOpen) {
                 closeTask(tasksToRender[i], i);
-                toggleImg.src = 'img/plus.svg';
                 button.dataset.open = "false";
             } else {
                 openTask(tasksToRender[i], i);
-                toggleImg.src = 'img/minus.svg';
                 button.dataset.open = "true";
             }
         });
@@ -153,6 +149,9 @@ function renderTasks(tasksToRender) {
 
     function openTask(task, index) {
         const taskInfoContainer = document.getElementById(`taskInfoContainer${index}`);
+
+        const toggleImg = document.getElementById(`toggleAccImg${index}`);
+        toggleImg.src = 'img/minus.svg';
 
         taskInfoContainer.innerHTML = `
             <div class="taskItem">
@@ -199,6 +198,7 @@ function renderTasks(tasksToRender) {
             </div>
 
             <button id="editTask${index}">Redigér opgave</button>
+            <button id="deleteTask${index}">Slet opgave</button>
         `;
 
         const editTaskButton = document.getElementById(`editTask${index}`);
@@ -206,12 +206,28 @@ function renderTasks(tasksToRender) {
             console.log("EDIT CLICK", task, index);
             editTask(task, index);
         });
+
+        const deleteTaskButton = document.getElementById(`deleteTask${index}`);
+        deleteTaskButton.addEventListener('click', async () => {
+
+            const confirmDelete = confirm('Sikker på, at du vil slette opgave?');
+
+            if (!confirmDelete) return;
+
+            tasks.splice(index, 1);
+
+            await updateExcelOnServer(tasks);
+            await loadTasks();
+        })
     }
 
     function closeTask(task, index) {
         const taskInfoContainer = document.getElementById(`taskInfoContainer${index}`);
 
-        taskInfoContainer.innerHTML = `<p>${task.Titel}</p>`;
+        const toggleImg = document.getElementById(`toggleAccImg${index}`);
+        toggleImg.src = 'img/plus.svg';
+
+        taskInfoContainer.innerHTML = `<p class="taskTitel">${task.Titel}</p>`;
     }
 
     function editTask(task, index) {
@@ -230,10 +246,26 @@ function renderTasks(tasksToRender) {
 
             <div class="editItem">
                 <label>Type:</label>
-                <select id="editType${index}">
-                    <option value="Land" ${task.Type === "Land" ? "selected" : ""}>Land</option>
-                    <option value="Sø" ${task.Type === "Sø" ? "selected" : ""}>Sø</option>
-                </select>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="editType${index}"
+                        value="Land"
+                        ${task.Type === "Land" ? "checked" : ""}
+                    >
+                    Land
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="editType${index}"
+                        value="Sø"
+                        ${task.Type === "Sø" ? "checked" : ""}
+                    >
+                    Sø
+                </label>
             </div>
 
             <div class="editItem">
@@ -253,10 +285,12 @@ function renderTasks(tasksToRender) {
             </div>
 
             <div class="editItem">
-                <label>Valgmuligheder:</label>
-                ${task.Valgmuligheder.map((valgmulighed, vIndex) => `
-                    <input id="editValgmulighed${index}-${vIndex}" type="text" value="${valgmulighed}">
-                `).join("")}
+                <label>Valgmuligheder (adskild items med ;):</label>
+                <input
+                    type="text"
+                    id="editValgmuligheder${index}"
+                    value="${task.Valgmuligheder?.join("; ") || ""}"
+                >
             </div>
 
             <div class="editButtons">
@@ -278,16 +312,17 @@ function renderTasks(tasksToRender) {
             ...task,
             Titel: document.getElementById(`editTitle${index}`).value,
             Beskrivelse: document.getElementById(`editDescription${index}`).value,
-            Type: document.getElementById(`editType${index}`).value,
+            Type: document.querySelector(
+                `input[name="editType${index}"]:checked`
+            )?.value,
             Aktiveringsbetingelse: document.getElementById(`editAktiveringsbetingelse${index}`).value,
             Lokation: [
                 Number(document.getElementById(`editLokationLon${index}`).value),
                 Number(document.getElementById(`editLokationLat${index}`).value)
             ],
             Radius: Number(document.getElementById(`editRadius${index}`).value),
-            Valgmuligheder: task.Valgmuligheder.map((_, vIndex) =>
-                document.getElementById(`editValgmulighed${index}-${vIndex}`).value
-            )
+            Valgmuligheder: document.getElementById(`editValgmuligheder${index}`).value.split('; ').map(v => v.trim())
+                .filter(Boolean)
         };
 
         // Opdatér arrayet
@@ -297,6 +332,9 @@ function renderTasks(tasksToRender) {
         await updateExcelOnServer(tasks);
 
         renderTasks(tasks);
+
+        const toggleButton = document.getElementById(`toggleAccordian${index}`);
+        toggleButton.dataset.open = "true";
 
         // Vis opgaven igen
         openTask(updatedTask, index);
