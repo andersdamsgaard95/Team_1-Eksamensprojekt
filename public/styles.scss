@@ -14,6 +14,10 @@ $green: #597E50;
 $lightGray: #FAFAFA;
 $darkGray: #D7DBDA;
 $font: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+$mainTopMargDesktop: 40px;
+$glHeightDesktop: 10px;
+$heroEleHeightDesktop: 80px;
+$topHeightDesktop: calc($mainTopMargDesktop + $glHeightDesktop + $heroEleHeightDesktop);
 
 *{
     box-sizing: border-box;
@@ -40,7 +44,7 @@ html {
     justify-content: space-between;
     align-items: center;
     //padding-bottom: 10px;
-    height: 80px;
+    height: $heroEleHeightDesktop;
 }
 h1{
     margin-top: 5px;
@@ -68,14 +72,14 @@ main {
     max-width: 1140px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 40px;
+    margin-top: $mainTopMargDesktop;
 
 
 }
 
 .greenLine {
     width: 100%;
-    height: 10px;
+    height: $glHeightDesktop;
     background-color: $darkGreen;
 }
 
@@ -96,13 +100,16 @@ main {
     }
 
     #tasksContainer {
+        position: relative;
         width: 100%;
         background-color: green;
         overflow-y: scroll;
         min-height: 0;
         flex: 1;
-        height: calc(100vh - 130px); //CONTAINER HØJDE  CONTAINER HØJDE CONTAINER HØJDE
+        height: calc(100vh - 125px); //CONTAINER HØJDE  CONTAINER HØJDE CONTAINER HØJDE
         padding-bottom: 100px;
+        display: flex;
+        flex-direction: column;
 
         #standardLandingPage {
             position: relative;
@@ -115,17 +122,17 @@ main {
             //background-color: red; //TIL DESIGN FASE ONLY
         }
 
-        .taskContainer {
+        .taskContainer { //!! obs på navn
             display: flex;
             gap: 100px;
             align-items: center;
             border-bottom: 1px solid black;
             padding: 10px 0;
         }
-        #newTask{
+        #renderedTasks{
             width: 100%;
-            height: 90%;
-            background-color: red;
+            flex-grow: 1;
+            background-color: burlywood;
         }
     }
 }
@@ -426,14 +433,13 @@ label {
     .btn {
         display: inline-block;
         padding: 12px 20px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 1.6rem;
-    font-weight: 700;
-    letter-spacing: 0.07rem;
-    font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; //button tag får ikke font-styling fra html{}
-
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 1.6rem;
+        font-weight: 700;
+        letter-spacing: 0.07rem;
+        font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; //button tag får ikke font-styling fra html{}
     }
     #tilføjNyBtn{
         background: $green;
@@ -456,7 +462,7 @@ label {
     margin-left:auto;
     margin-right: auto;
     margin-top: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 100px;
     bottom: 0;
     //left: 0;
     //margin-left: 15px;
@@ -475,7 +481,7 @@ label {
 }
 
 .task-form {
-    //display: none; //til styling til styling til styling til styling til styling til styling
+    display: none; //til styling til styling til styling til styling til styling til styling
     //display: flex;
     flex-direction: column;
     gap: 15px;
@@ -484,6 +490,7 @@ label {
   padding: 0 20px ;
   font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   color: #000;
+  background-color: yellow;
 }
 
 
