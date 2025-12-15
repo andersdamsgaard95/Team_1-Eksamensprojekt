@@ -76,15 +76,15 @@ function renderTasks(tasksToRender) {
         const taskHTML =
             `<div class="taskContainer">
                 <div class="taskPile">
-                    <button>
+                    <button class="pilOpKnap">
                         <img src="img/chevron.svg" id="arrowUp${i}" class="pil-op ${i === 0 ? 'hiddenArrow' : ''}" />
                     </button>
                     <p>${i + 1}</p>
-                    <button>
+                    <button class='pilNedKnap'>
                         <img src="img/chevron.svg" id="arrowDown${i}" class="pil-ned ${i === tasks.length - 1 ? 'hiddenArrow' : ''}" />
                     </button>
                 </div>
-                <div id="taskInfoContainer${i}">
+                <div class='accordianTitel' id="taskInfoContainer${i}">
                     <p class="taskTitel">${task.Titel}</p>
                 </div>
                 <button id="toggleAccordian${i}" class="openAccordian">
