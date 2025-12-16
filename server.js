@@ -41,7 +41,7 @@ function validateExcelFile(filePath) {
             throw new Error(`Række ${rowNr}: Titel mangler`);
         }
 
-        if (!["Land", "Sø"].includes(row.Type)) {
+        if (!["Land", "land", "Sø", "sø"].includes(row.Type)) {
             throw new Error(`Række ${rowNr}: Type skal være Land eller Sø`);
         }
 
@@ -227,8 +227,8 @@ const server = http.createServer((req, res) => {
 
 
     // --- DOWNLOAD TEMPLATE ---
-    if (pathname === "/template" && req.method === "GET") {
-        const headers = [{ A: "ID", B: "Titel", C: "Beskrivelse", D: "Type", E: "Lokation", F: 'Radius', G: "Valgmuligheder", H: 'Aktiveringsbetingelse' }];
+    /*if (pathname === "/template" && req.method === "GET") {
+        const headers = [{ A: "ID", B: "Titel", C: "Beskrivelse", D: "Type", E: "Aktiveringsbetingelse", F: 'Lokation', G: 'Radius', H: "Valgmuligheder" }];
         const wb = xlsx.utils.book_new();
         const ws = xlsx.utils.json_to_sheet(headers, { skipHeader: true });
         xlsx.utils.book_append_sheet(wb, ws, "Template");
@@ -237,7 +237,68 @@ const server = http.createServer((req, res) => {
         res.writeHead(200, { "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Content-Disposition": "attachment; filename=skabelon.xlsx" });
         fs.createReadStream(tempPath).pipe(res);
         return;
+    }*/
+
+    if (pathname === "/template" && req.method === "GET") {
+
+        // Kolonneoverskrifter
+        const headers = ["ID", "Titel", "Beskrivelse", "Type", "Aktiveringsbetingelse", "Lokation", "Radius", "Valgmuligheder"];
+
+        // Eksempelrække
+        const exampleTask = [1, "Eksempel på en titel", "Eksempel på en beskrivelse", "Land", "Lokation", "12.1234, 56.6789", 100, "Valgmulighed1; Valgmulighed2; Valgmulighed3"];
+
+        const wb = xlsx.utils.book_new();
+
+        // Brug array-of-arrays: første række = headers, anden række = eksempel
+        const ws = xlsx.utils.aoa_to_sheet([headers, exampleTask]);
+        xlsx.utils.book_append_sheet(wb, ws, "Template");
+
+        const tempPath = path.join(__dirname, "uploads", "template.xlsx");
+        xlsx.writeFile(wb, tempPath);
+
+        res.writeHead(200, {
+            "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "Content-Disposition": "attachment; filename=skabelon.xlsx"
+        });
+        fs.createReadStream(tempPath).pipe(res);
+        return;
     }
+
+
+    /*if (pathname === "/template" && req.method === "GET") {
+        // Kolonneoverskrifter
+        const headers = ["ID", "Titel", "Beskrivelse", "Type", "Aktiveringsbetingelse", "Lokation", "Radius", "Valgmuligheder"];
+
+        // Eksempelrække
+        const exampleTask = [
+            1,
+            "Fjeldtur",
+            "En tur op på fjeldet med alle deltagere",
+            "Land",
+            "Alle deltagere",
+            "55.6761, 12.5683",
+            100,
+            "Option1; Option2; Option3"
+        ];
+
+        const wb = xlsx.utils.book_new();
+
+        // Opret sheet med eksempelrække
+        const ws = xlsx.utils.aoa_to_sheet([headers, exampleTask]); // bruger array-of-arrays
+        xlsx.utils.book_append_sheet(wb, ws, "Template");
+
+        const tempPath = path.join(__dirname, "uploads", "template.xlsx");
+        xlsx.writeFile(wb, tempPath);
+
+        res.writeHead(200, {
+            "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "Content-Disposition": "attachment; filename=skabelon.xlsx"
+        });
+        fs.createReadStream(tempPath).pipe(res);
+        return;
+    }*/
+
+
 
     // --- SERVE FRONTEND FILES ---
     if (req.method === "GET") {

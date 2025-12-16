@@ -394,23 +394,35 @@ function renderTasks(tasksToRender) {
 
 //Tilføj ny opgave i frontend
 const saveNewTaskButton = document.getElementById('gemBtn');
+saveNewTaskButton.style.display = 'none';
 saveNewTaskButton.addEventListener('click', addNewTaskInUI);
 
 const openNewTaskFormButton = document.getElementById('tilføjNyBtn');
 
 openNewTaskFormButton.addEventListener('click', () => {
+    //skjul tilføj ny knap
+    openNewTaskFormButton.style.display = 'none';
+
     const newTaskFormContainer = document.getElementById('task-form');
 
     const closeTaskButton = document.getElementById('closeTaskForm');
     closeTaskButton.addEventListener('click', () => {
         newTaskFormContainer.style.display = 'none';
+        saveNewTaskButton.style.display = 'none';
+        openNewTaskFormButton.style.display = 'block';
     })
 
     newTaskFormContainer.style.display = 'flex';
+    saveNewTaskButton.style.display = 'block';
 })
 
 
 async function addNewTaskInUI() {
+    if (document.getElementById("title").value === '') {
+        alert('Ny opgave skal have en titel');
+        return;
+    }
+
     const newTask = {
         Titel: document.getElementById("title").value,
         Beskrivelse: document.getElementById("desc").value,
@@ -438,11 +450,24 @@ async function addNewTaskInUI() {
     // re-render
     renderTasks(tasks);
 
+    // Hent den sidste task-container
+    const lastTask = document.querySelector('#renderedTasks .taskContainer:last-child');
+
+    if (lastTask) {
+        lastTask.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+
     console.log("Ny opgave tilføjet:", newTask);
 
     //Skjul form container
     const newTaskFormContainer = document.getElementById('task-form');
     newTaskFormContainer.style.display = 'none';
+
+    //skjul gem knap
+    saveNewTaskButton.style.display = 'none';
+
+    //vis ny opg knap
+    openNewTaskFormButton.style.display = 'block';
 
     //Nulstil input felter
     resetNewTaskForm();
