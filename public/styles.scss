@@ -22,6 +22,12 @@ $topHeightTablet: calc($settingsContainerHeightTablet + $mainTopMargTablet + $gl
 $settingsContainerHeightMobileL: 80px;
 $topHeightMobile: calc($settingsContainerHeightMobileL + $mainTopMargTablet + $glHeightTablet + $heroEleHeightTablet);
 
+//main width
+$main1200width: 1140px;
+$main992width: 720px;
+$main768width: 540px;
+$main576width: 100%;
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -110,6 +116,7 @@ main {
       flex-direction: column;
       padding-top: 30px;
       padding-left: 15px;
+      z-index: 0;
     }
 
     #renderedTasks {
@@ -266,12 +273,11 @@ fieldset {
   border-radius: 4px;
   font-size: 1.2rem;
   border: 1px solid black;
-  transform: translate(50%, -55%); //problem
   white-space: wrap;
   font-weight: 400;
-  width: 200px;
+  //width: 200px;
   height: auto;
-
+  z-index: 100;
   opacity: 0; // skjult som default
   pointer-events: none; // så klik går “igennem” til dokumentet
   transition: opacity .15s ease;
@@ -282,25 +288,40 @@ fieldset {
 .info-btn.show-info::after {
   opacity: 1;
 }
-
+#uploadInfo {
+  position: relative;
+  z-index: 20;
+}
+#downloadInfo {
+  position: relative;
+  z-index: 10;
+}
 /* Tekster – UDEN :hover */
 #uploadInfo::after {
   content: "Det anbefales at du opretter opgaver her på siden. Hvis du uploader en ny Excel-fil (.xcel), overrider du de opgaver, der allerede ligger på siden. Hvis du har opgaver her på siden, bør du overveje først at downloade dem, før du uploader en ny fil, så du ikke mister dem. Filen du uploader SKAL være .xcel og i første række indeholde felter med henholdsvis: Titel, Beskrivelse, Type, Lokation, Radius, Valgmuligheder og Aktiveringsbetingelse. Hvis du er i tvivl, så download enten eksisterende opgaver, og arbejd så videre i den fil, eller (hvis der ingen opgaver findes på siden) download en template.";
   display: block;
   text-align: left;
+  //transform: translate(50%, -55%); 
+  //position: absolute;
+  z-index: 100;
+  width: calc( $main1200width - 500px);
+  transform: translate(50%, -53%); 
 }
 
 #downloadInfo::after {
   content: "Ved at klikke 'Download fil', downloader du en kopi af opgaverne her på siden. Opgaverne bliver gemt lokalt på din computer som Excel-fil (.xcel).";
   display: block;
   text-align: left;
+  width: calc( $main1200width - 600px);
+  transform: translate(50%, -53%); 
 }
 
 #formateretInfo::after {
   content: "Første række skal indeholde felter med henholdsvis: Titel, Beskrivelse, Type, Lokation, Radius, Valgmuligheder og Aktiveringsbetingelse. I kolonnerne under hvert felt, udfylder du indhold til opgaver (én opgave per række). Vær opmærksom på at koordinater (longitude, latitude) skilles ad med komma og mellemrum (', '), og at Valgmuligheder deles med semikolon (';'). Er du i tvivl om format, så opret opgaver her på siden og download derefter filen. I denne fil vil formatet være åbenlyst.";
   display: block;
   text-align: left;
-  transform: translate(-50%, 55%);
+  width: calc( $main1200width - 600px);
+  transform: translate(-51%, -5%);
 }
 
 
@@ -364,11 +385,8 @@ fieldset {
 .tooltip-btn::after {
   content: attr(data-tooltip);
   text-align: left;
-  position: absolute;
-  left: 0;
-  top: 100%;
+  
   margin-top: 6px;
-
   background: #fff;
   color: #000;
   border: 1px solid #000;
@@ -383,6 +401,10 @@ fieldset {
   pointer-events: none;
   transition: opacity 0.15s ease;
   z-index: 10;
+
+  position: absolute;
+  width: 100px;
+  transform: translate(-150px, 1.5rem);
 }
 
 /* Hover */
@@ -774,6 +796,15 @@ li {
     padding-bottom: 5px;
   }
 
+  #uploadInfo::after {
+    width: calc( $main992width - 200px);
+    transform: translate(50%, -53%); 
+  }
+  #downloadInfo::after {
+    width: calc( $main1200width - 800px);
+    transform: translate(50%, -53%); 
+  }
+
 }
 
 @media (max-width: 992px) {
@@ -782,9 +813,6 @@ li {
     margin-top: $mainTopMargTablet;
   }
 
-  /*.nyOpgWrapper{
-        width: 720px;
-    }*/
   .heroElements {
     height: $heroEleHeightTablet;
   }
@@ -874,18 +902,15 @@ li {
     align-items: end;
     gap: 4px;
   }
-
-  .info-btn::after {
-    // info-boksen
-    transform: translate(-55%, 45%); //problem løst
+  #uploadInfo::after {
+    width: calc( $main992width - 400px);
+    transform: translate(-52%, 53%); 
+  }
+  #downloadInfo::after {
+    width: calc( $main1200width - 800px);
+    transform: translate(-52%, 53%); 
   }
 
-  /*
-    .info-btn:hover::after,
-    .info-btn.show-info::after {
-        transform: translate(-50%, 55%);
-    }
-    */
 }
 
 @media (max-width: 768px) {
@@ -957,12 +982,13 @@ li {
     letter-spacing: .5px; //-0.5px
     margin-bottom: 5px;
   }
+  
   #formateretInfo::after {
-    position: absolute;
-    left: 10vw;
-    top: -50px;
-    //transform: translate(30%, 55%);
-    width: 80vw;
+    width: calc( $main768width - 50px);
+    transform: translate(20%, -20%);
+  }
+  #logo {
+    height: 4.3rem;
   }
 }
 
@@ -983,5 +1009,40 @@ li {
   .info-btn {
     margin-left: 5px;
   }
+   #uploadInfo::after {
+    width: 250px;
+    transform: translate(-52%, 53%);
+    /*
+    position: fixed;
+    right: -40vw;
+    top: -20px;
+    width: 80vw; 
+    */
+  }
+  #downloadInfo::after {
+    width: 100px;
+    transform: translate(-52%, 53%); 
+  }
+   #formateretInfo::after {
+    position: fixed;
+    left: -15vw;
+    right: 0;
+    top: 150px;
+    width: 80vw;
+  }
+  .tooltip-btn::after {
+  display: none;
+}
   
+}
+@media (max-width: 350px) {
+  .legend-group {
+    font-size: 1.2rem;
+  }
+    #uploadInfo {
+    display: none; 
+  }
+  #downloadInfo {
+    display: none;
+  }
 }
