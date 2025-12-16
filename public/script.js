@@ -187,47 +187,63 @@ function renderTasks(tasksToRender) {
 
         taskInfoContainer.innerHTML = `
             <div class="taskItem">
-                <p class='label mini-header' >Titel:</p>
-                <p class='fieldDisplay' >${task.Titel}</p>
+                <p class='label mini-header p2' >Titel</p>
+                <p class='fieldDisplay p2' >${task.Titel}</p>
             </div>
 
             <div class="taskItem">
-                <p class='label mini-header' >Beskrivelse:</p>
-                <p class='fieldDisplay' >${task.Beskrivelse || "-"}</p>
+                <p class='label mini-header p2' >Beskrivelse</p>
+                <p class='fieldDisplay p2' >${task.Beskrivelse || "-"}</p>
             </div>
             
             <div class="taskItem">
-                <p class='label mini-header' >Type:</p>
-                <p>${task.Type}</p>
+                <p class='label mini-header p2' >Type</p>
+                <p class='fieldDisplay p2' >${task.Type}</p>
             </div>
             
             <div class="taskItem">
-               <p class='label mini-header' >Aktiveringsbetingelse:</p>
-                <p>${task.Aktiveringsbetingelse || "-"}</p> 
-            </div>
-            
-            <div class="taskItem">
-                <p class='label mini-header' >Lokation:</p>
-                <p>
-                    Lon: ${task.Lokation?.[0] ?? "-"} <br>
-                    Lat: ${task.Lokation?.[1] ?? "-"}
-                </p>
+                <p class='label mini-header p2' >Lokation</p>
+                <div class="row location">
+                    <div class="mini-group">
+                        <div class="mini-labels-displayer">
+                            <span>Longitude</span>
+                            <span>Latitude</span>
+                        </div>
+
+                        <div class="mini-inputs-displayer">
+                            <p class='fieldDisplay p2' >
+                                ${task.Lokation?.[0] ?? "-"} <br>
+                            </p>
+                            <p class='fieldDisplay p2' >
+                                ${task.Lokation?.[1] ?? "-"}
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
+            
+
             <div class="taskItem">
-                <p class='label mini-header' >Radius:</p>
-                <p>${task.Radius ?? "-"}</p>
+                <p class='label mini-header p2' >Radius</p>
+                <p class='fieldDisplay p2' >${task.Radius ?? "-"}</p>
             </div>
             
             <div class="taskItem">
-                <p class='label mini-header' >Valgmuligheder:</p>
+                <p class='label mini-header p2' >Valgmuligheder</p>
                 <ul>
                     ${task.Valgmuligheder?.length
-                ? task.Valgmuligheder.map(v => `<li>${v}</li>`).join("")
+                ? task.Valgmuligheder.map(v => `<li class='fieldDisplay' >${v}</li>`).join("")
                 : "<li>-</li>"
             }
                 </ul>
             </div>
+
+            <div class="taskItem">
+               <p class='label mini-header p2' >Aktiveringsbetingelse</p>
+                <p class='fieldDisplay p2' >${task.Aktiveringsbetingelse || "-"}</p> 
+            </div>
+
             <div class="btnContainer">
                 <button class='btn btn1' id="editTask${index}">Redigér opgave</button>
                 <button class='btn btn2' id="deleteTask${index}">Slet opgave</button>

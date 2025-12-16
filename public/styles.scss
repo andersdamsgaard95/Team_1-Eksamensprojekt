@@ -716,14 +716,45 @@ textarea {
 //Accordian åben - START
 //-----------------------------
 .fieldDisplay {
-  width: 100%;
-  border: 1px solid #000;
+  max-width: fit-content;
+  //border: 1px solid #000;
   border-radius: 2px;
-  padding: 2px 8px;
+  padding: 4px 10px;
   font-size: 1.4rem;
   font-family: inherit;
+  background-color: $darkGray;
 }
-
+.mini-labels-displayer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  font-size: 1.1rem;
+  margin-left: 4px;
+  margin-bottom: -2px;
+}
+.mini-inputs-displayer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+li {
+  padding: 7px 8px !important;
+  list-style: none;
+}
+.taskItem{
+    display: flex;
+    flex-direction: column;
+    gap: -2px;
+}
+.p2 {
+    line-height: 2.2rem !important;
+}
 //-----------------------------
 //Accordian åben - SLUT
 //-----------------------------
