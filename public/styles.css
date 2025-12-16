@@ -197,7 +197,8 @@ fieldset {
 
 #typeDropdown,
 #sorteringDropdown {
-  display: flex; /* default på store skærme */
+  display: flex;
+  /* default på store skærme */
 }
 
 /* FILE BUTTONS */
@@ -615,8 +616,8 @@ textarea {
     margin-top: 5px;
   }
   /*.nyOpgWrapper{
-      width: 720px;
-  }*/
+        width: 720px;
+    }*/
   .heroElements {
     height: 60px;
   }
@@ -697,11 +698,11 @@ textarea {
     transform: translate(-55%, 45%);
   }
   /*
-  .info-btn:hover::after,
-  .info-btn.show-info::after {
-      transform: translate(-50%, 55%);
-  }
-  */
+    .info-btn:hover::after,
+    .info-btn.show-info::after {
+        transform: translate(-50%, 55%);
+    }
+    */
 }
 @media (max-width: 768px) {
   #contentContainer #tasksContainer {
@@ -711,8 +712,8 @@ textarea {
     width: 540px;
   }
   /*.nyOpgWrapper{
-      width: 540px;
-  }*/
+        width: 540px;
+    }*/
   h1 {
     padding-bottom: 2px;
   }

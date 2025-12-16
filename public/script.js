@@ -12,6 +12,19 @@ Array.from(fileInputs).forEach((fileInput) => {
         //tag fat i fil
         const file = fileInput.files[0];
 
+        if (!file) return;
+
+        // tilladt filtype
+        const allowedTypes = [
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        ];
+
+        if (!allowedTypes.includes(file.type)) {
+            alert("Kun Excel-filer (.xlsx) er tilladt");
+            fileInput.value = "";
+            return;
+        }
+
         //opret ny formdata og append fil
         const formData = new FormData();
         formData.append('file', file);
@@ -37,10 +50,29 @@ Array.from(fileInputs).forEach((fileInput) => {
 async function uploadNewExcel(file) {
 
     //send fil til server
-    await fetch("http://localhost:3000/upload", {
+    const res = await fetch("http://localhost:3000/upload", {
         method: 'post',
         body: file
     });
+
+    if (!res.ok) {
+        let message = "Upload fejlede";
+
+        try {
+            const data = await res.json();
+
+            if (data.details) {
+                message += "\n\n" + data.details.join("\n");
+            } else if (data.error) {
+                message += "\n\n" + data.error;
+            }
+        } catch {
+            message += "\n\n" + await res.text();
+        }
+
+        alert(message);
+        return;
+    }
 
     //fetch json efter upload
     loadTasks();

@@ -8,6 +8,55 @@ const xlsx = require("xlsx");
 
 if (!fs.existsSync("./uploads")) fs.mkdirSync("./uploads");
 
+function validateExcelFile(filePath) {
+    const workbook = xlsx.readFile(filePath);
+    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const rows = xlsx.utils.sheet_to_json(sheet, { defval: "" });
+
+    if (rows.length === 0) {
+        throw new Error("Excel-filen er tom");
+    }
+
+    const requiredHeaders = [
+        "Titel",
+        "Beskrivelse",
+        "Type",
+        "Lokation",
+        "Radius",
+        "Valgmuligheder"
+    ];
+
+    const fileHeaders = Object.keys(rows[0]);
+
+    for (const header of requiredHeaders) {
+        if (!fileHeaders.includes(header)) {
+            throw new Error(`Manglende kolonne: ${header}`);
+        }
+    }
+
+    rows.forEach((row, i) => {
+        const rowNr = i + 2;
+
+        if (!row.Titel) {
+            throw new Error(`Række ${rowNr}: Titel mangler`);
+        }
+
+        if (!["Land", "Sø"].includes(row.Type)) {
+            throw new Error(`Række ${rowNr}: Type skal være Land eller Sø`);
+        }
+
+        if (isNaN(Number(row.Radius))) {
+            throw new Error(`Række ${rowNr}: Radius skal være et tal`);
+        }
+
+        if (row.Lokation && !row.Lokation.includes(",")) {
+            throw new Error(`Række ${rowNr}: Lokation skal være "lon, lat"`);
+        }
+    });
+
+    return true;
+}
+
 const server = http.createServer((req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
@@ -49,17 +98,37 @@ const server = http.createServer((req, res) => {
                 return;
             }
 
-            const dataPath = path.join(__dirname, "uploads", "data.xlsx");
+            //filtype validering
+            const allowedMime = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+            if (uploadedFile.mimetype !== allowedMime) {
+                fs.unlinkSync(uploadedFile.filepath);
+                res.writeHead(400);
+                res.end("Kun .xlsx filer er tilladt");
+                return;
+            }
+
+            //const dataPath = path.join(__dirname, "uploads", "data.xlsx");
 
             try {
-                // Overskriv altid eksisterende fil
+                // valider Excel indhold før gem
+                validateExcelFile(uploadedFile.filepath);
+
+                const dataPath = path.join(__dirname, "uploads", "data.xlsx");
+
+                // gem først når alt er OK
                 fs.renameSync(uploadedFile.filepath, dataPath);
+
                 res.writeHead(200);
-                res.end("Excel uploadet");
-            } catch (err) {
-                console.error(err);
-                res.writeHead(500);
-                res.end("Kunne ikke gemme fil");
+                res.end("Excel uploadet og valideret");
+
+            } catch (validationError) {
+                fs.unlinkSync(uploadedFile.filepath);
+
+                res.writeHead(400, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({
+                    error: validationError.message
+                }));
             }
         });
 
@@ -159,7 +228,7 @@ const server = http.createServer((req, res) => {
 
     // --- DOWNLOAD TEMPLATE ---
     if (pathname === "/template" && req.method === "GET") {
-        const headers = [{ A: "ID", B: "Titel", C: "Beskrivelse", D: "Type", E: "Lokation", F: 'Radius', G: "Valgmuligheder", H: 'Aktiveringsbetingelser' }];
+        const headers = [{ A: "ID", B: "Titel", C: "Beskrivelse", D: "Type", E: "Lokation", F: 'Radius', G: "Valgmuligheder", H: 'Aktiveringsbetingelse' }];
         const wb = xlsx.utils.book_new();
         const ws = xlsx.utils.json_to_sheet(headers, { skipHeader: true });
         xlsx.utils.book_append_sheet(wb, ws, "Template");

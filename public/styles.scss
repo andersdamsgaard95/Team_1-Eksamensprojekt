@@ -1,4 +1,3 @@
-
 $darkGreen: #3F5C59;
 $darkRed: #8D1B3D;
 $green: #597E50;
@@ -11,128 +10,133 @@ $glHeightDesktop: 10px;
 $heroEleHeightDesktop: 80px;
 $topHeightDesktop: calc($mainTopMargDesktop + $glHeightDesktop + $heroEleHeightDesktop);
 //1200
-$mainTopMargTablet: 5px; 
+$mainTopMargTablet: 5px;
 $topHeight1200: calc($mainTopMargTablet + $glHeightDesktop + $heroEleHeightDesktop);
 //992
-$glHeightTablet: 5px; 
-$heroEleHeightTablet: 60px; 
-$settingsContainerHeightTablet: 100px; 
+$glHeightTablet: 5px;
+$heroEleHeightTablet: 60px;
+$settingsContainerHeightTablet: 100px;
 $topHeightTablet: calc($settingsContainerHeightTablet + $mainTopMargTablet + $glHeightTablet + $heroEleHeightTablet);
 
 //768
-$settingsContainerHeightMobileL: 80px; 
+$settingsContainerHeightMobileL: 80px;
 $topHeightMobile: calc($settingsContainerHeightMobileL + $mainTopMargTablet + $glHeightTablet + $heroEleHeightTablet);
 
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    height: 100vh;
-    margin: 0;
-    //overflow: hidden;   
-    display: flex;
-    flex-direction: column;
+  height: 100vh;
+  margin: 0;
+  //overflow: hidden;   
+  display: flex;
+  flex-direction: column;
 }
 
 html {
-    font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 10px; //note til omregning: hjemmeværnet har 16px. Deres font-size er faktisk forkert. For at rette, så gang deres faktor med 1,0625
+  font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 10px; //note til omregning: hjemmeværnet har 16px. Deres font-size er faktisk forkert. For at rette, så gang deres faktor med 1,0625
 }
+
 .heroElements {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    //padding-bottom: 10px;
-    height: $heroEleHeightDesktop;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  //padding-bottom: 10px;
+  height: $heroEleHeightDesktop;
 }
-h1{
-    margin-top: 5px;
-    font-size: 4.6rem; 
-    font-weight: 700;
-    color: $darkGreen;
-    line-height: 1.5;
-    letter-spacing: -2px;
-    padding-bottom: 4px;
+
+h1 {
+  margin-top: 5px;
+  font-size: 4.6rem;
+  font-weight: 700;
+  color: $darkGreen;
+  line-height: 1.5;
+  letter-spacing: -2px;
+  padding-bottom: 4px;
 }
+
 p {
-    font-size: 1.7rem;
-    line-height: 2.7rem;
-    letter-spacing: -0.5px;
-    margin-bottom: 1rem;
+  font-size: 1.7rem;
+  line-height: 2.7rem;
+  letter-spacing: -0.5px;
+  margin-bottom: 1rem;
 }
 
 main {
-    width: 1140px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: $mainTopMargDesktop;
-    height: 100vh;
+  width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: $mainTopMargDesktop;
+  height: 100vh;
 }
 
 .greenLine {
-    width: 100%;
-    height: $glHeightDesktop;
-    background-color: $darkGreen;
+  width: 100%;
+  height: $glHeightDesktop;
+  background-color: $darkGreen;
 }
 
 #contentContainer {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+
+  #settingsContainer {
+    background-color: $lightGray;
+    width: 350px;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 30px;
+    padding-bottom: 20px;
     display: flex;
-    flex-direction: row;
-    width: auto;
+    flex-direction: column;
+  }
 
-    #settingsContainer {
-        background-color: $lightGray;
-        width: 350px;
-        padding-right: 15px;
-        padding-left: 15px;
-        padding-top: 30px;
-        padding-bottom: 20px;
-        display: flex;
-        flex-direction: column;
+  #tasksContainer {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - $topHeightDesktop);
+    display: flex;
+    flex-direction: column;
+
+    #standardLandingPage {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding-top: 30px;
+      padding-left: 15px;
     }
 
-    #tasksContainer {
-        position: relative;
-        width: 100%;
-        height: calc(100vh - $topHeightDesktop); 
-        display: flex;
-        flex-direction: column;
-
-        #standardLandingPage {
-            position: relative;
-            display: flex; 
-            flex-direction: column;
-            padding-top: 30px;
-            padding-left: 15px;            
-        }
-
-        .taskContainer { //!! obs på navn
-            display: flex;
-            gap: 30px;
-            align-items: center;
-            border-bottom: 1px solid black;
-            padding: 10px 0;
-            margin-right: 10px;
-            justify-content: start;
-        }
-        #renderedTasks{
-            overflow-y: scroll;
-            width: 100%;
-            flex-grow: 1;
-        }
+    .taskContainer {
+      //!! obs på navn
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      border-bottom: 1px solid black;
+      padding: 10px 0;
+      margin-right: 10px;
+      justify-content: start;
     }
+
+    #renderedTasks {
+      overflow-y: scroll;
+      width: 100%;
+      flex-grow: 1;
+    }
+  }
 }
 
 #askToMergeOrReplacePopUp {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 //-----------------------------
@@ -145,15 +149,17 @@ main {
   flex-direction: column;
   gap: 30px;
 }
+
 .search-filter-sort-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
-.filter-sort-wrapper{
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+
+.filter-sort-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 /* SEARCH */
@@ -175,7 +181,7 @@ fieldset {
 }
 
 .filter-group {
-    gap: 2px;
+  gap: 2px;
 }
 
 .mini-header {
@@ -184,31 +190,34 @@ fieldset {
   letter-spacing: .5px; //-0.5px
   margin-bottom: 5px;
 }
-.legend-group{
-    display: flex;
-    justify-content: center;
-    gap: 5px;
+
+.legend-group {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
 }
 
 /* CHECKBOXES / RADIO BUTTONS */
-.sort-toggle{
-    display: none;
-    //padding: 0;
-    //background: none;
-    //width: 2rem;
-    //height: 2rem;
-    //border: none;
+.sort-toggle {
+  display: none;
+  //padding: 0;
+  //background: none;
+  //width: 2rem;
+  //height: 2rem;
+  //border: none;
 }
+
 .sort-toggle img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .sort-group {
-    gap: 2px;
-    position: relative;
+  gap: 2px;
+  position: relative;
 }
+
 .label {
   display: flex;
   align-items: center;
@@ -217,16 +226,19 @@ fieldset {
   white-space: nowrap;
 }
 
-.sort-dropdown { //skal være position absolute
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 0.5rem;
-    z-index: 10;
+.sort-dropdown {
+  //skal være position absolute
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.5rem;
+  z-index: 10;
 }
+
 #typeDropdown,
 #sorteringDropdown {
-  display: flex; /* default på store skærme */
+  display: flex;
+  /* default på store skærme */
 }
 
 /* FILE BUTTONS */
@@ -249,9 +261,10 @@ fieldset {
 
 }
 
-.info-btn { // spørgsmåls-ikonet
-    //display: none; //delete
-    z-index: 10;
+.info-btn {
+  // spørgsmåls-ikonet
+  //display: none; //delete
+  z-index: 10;
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
@@ -270,8 +283,9 @@ fieldset {
 }
 
 /* Fælles tooltip-style – skjult som default */
-.info-btn::after { // info-boksen
-    //display: none; //delete
+.info-btn::after {
+  // info-boksen
+  //display: none; //delete
   position: absolute;
   background: #fff;
   color: #000;
@@ -285,8 +299,8 @@ fieldset {
   width: 200px;
   height: auto;
 
-  opacity: 0;              // skjult som default
-  pointer-events: none;    // så klik går “igennem” til dokumentet
+  opacity: 0; // skjult som default
+  pointer-events: none; // så klik går “igennem” til dokumentet
   transition: opacity .15s ease;
 }
 
@@ -299,23 +313,24 @@ fieldset {
 /* Tekster – UDEN :hover */
 #uploadInfo::after {
   content: "upload: Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...";
-   display: block;
-   text-align: left;
+  display: block;
+  text-align: left;
 }
 
 #downloadInfo::after {
   content: "download: Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...";
-   display: block;
-   text-align: left;
+  display: block;
+  text-align: left;
 }
 
 #formateretInfo::after {
-    content: "formateret: Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...";
-    display: block;
-    text-align: left;
-    transform: translate(-50%, 55%);
+  content: "formateret: Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...";
+  display: block;
+  text-align: left;
+  transform: translate(-50%, 55%);
 
 }
+
 /*#formateretInfo {
     width: 2rem !important; 
     height: 2rem !important;
@@ -323,9 +338,9 @@ fieldset {
 
 
 .btn-info-container {
-    display: flex;
-    gap: 1px;
-    align-items: center;
+  display: flex;
+  gap: 1px;
+  align-items: center;
 }
 
 //-----------------------------
@@ -356,15 +371,15 @@ fieldset {
 //-----------------------------
 
 .inlineBtn {
-    color: $darkRed;
-    border-bottom: 1px solid $darkRed;
-    cursor: pointer;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    background: none;
-    font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; //button tag får ikke font-styling fra html{}
-    font-size: 1.7rem;
+  color: $darkRed;
+  border-bottom: 1px solid $darkRed;
+  cursor: pointer;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  background: none;
+  font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; //button tag får ikke font-styling fra html{}
+  font-size: 1.7rem;
 }
 
 //-----------------------------
@@ -375,38 +390,39 @@ fieldset {
 //tooltip på upload og download styling - START
 //-----------------------------
 .tooltip-btn {
-    position: relative;
+  position: relative;
 }
 
 /* Tooltip-box */
 .tooltip-btn::after {
-    content: attr(data-tooltip);
-    text-align: left;
-    position: absolute;
-    left: 0;
-    top: 100%;
-    margin-top: 6px;
+  content: attr(data-tooltip);
+  text-align: left;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  margin-top: 6px;
 
-    background: #fff;
-    color: #000;
-    border: 1px solid #000;
-    border-radius: 4px;
-    padding: 8px 10px;
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 4px;
+  padding: 8px 10px;
 
-    font-size: 1.2rem;
-    line-height: 1.4;
-    width: 220px;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  width: 220px;
 
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.15s ease;
-    z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 10;
 }
 
 /* Hover */
 .tooltip-btn:hover::after {
-    opacity: 1;
+  opacity: 1;
 }
+
 //-----------------------------
 //tooltip på upload og download styling - SLUT
 //-----------------------------
@@ -414,30 +430,34 @@ fieldset {
 //-----------------------------
 //Tilføj ny opg knap - START
 //-----------------------------
-    .btnContainer{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .btn {
-        display: inline-block;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-        font-size: 1.6rem;
-        font-weight: 700;
-        letter-spacing: 0.07rem;
-        font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; //button tag får ikke font-styling fra html{}
-    }
-    #tilføjNyBtn{
-        background: $green;
-        color: white;
-    }
-    #gemBtn{
-        background: $darkRed;
-        color: white;
-    }
+.btnContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.07rem;
+  font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; //button tag får ikke font-styling fra html{}
+}
+
+#tilføjNyBtn {
+  background: $green;
+  color: white;
+}
+
+#gemBtn {
+  background: $darkRed;
+  color: white;
+}
+
 //-----------------------------
 //Tilføj ny opg knap - SLUT
 //-----------------------------
@@ -445,28 +465,28 @@ fieldset {
 //-----------------------------
 //Ny opg form - START
 //-----------------------------
-.nyOpgWrapper{
-    width: 100%;
-    border-top: 2px solid black;
-    //border-bottom: 1px solid black;
-    padding-top: 20px;
-    padding-bottom: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    background-color: $lightGray;
+.nyOpgWrapper {
+  width: 100%;
+  border-top: 2px solid black;
+  //border-bottom: 1px solid black;
+  padding-top: 20px;
+  padding-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: $lightGray;
 }
 
 #task-form {
-    display: none; //til styling til styling til styling til styling til styling til styling
-    //display: flex;
-    flex-direction: column;
-    gap: 15px;
-    position: relative;
-    width: 100%;
-    padding: 0 20px ;
-    font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    color: #000;
+  display: none; //til styling til styling til styling til styling til styling til styling
+  //display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: relative;
+  width: 100%;
+  padding: 0 20px;
+  font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  color: #000;
 }
 
 
@@ -587,8 +607,9 @@ textarea {
 }
 
 .map-icon {
-    height: 2rem;  
-    transform: translateY(-2px);
+  height: 2rem;
+  transform: translateY(-2px);
+
   img {
     height: 100%;
   }
@@ -614,146 +635,164 @@ textarea {
 //-----------------------------
 //Accordian lukket - START
 //-----------------------------
-.taskPile{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    
-    p {
-        margin-top: 7px;
-    }
-}
-.pilOpKnap{
-    padding: none;
-    background: none;
-    border: none;
-    transform: rotate(180deg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 2rem;
-    width: 2rem;
+.taskPile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
 
-    img {
-        height: 100%;
-        width: 100%;
-    }
+  p {
+    margin-top: 7px;
+  }
 }
-.pilNedKnap{
-    padding: none;
-    background: none;
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 2rem;
-    width: 2rem;
 
-    img {
-        height: 100%;
-        width: 100%;
-    }
-}
-.accordianTitel{
-    padding-top: 7px;
-}
-.openAccordian{
-    margin-left: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 2rem;
-    width: 2rem;
-    border: none;
-    background: none;
-    margin-right: 20px;
+.pilOpKnap {
+  padding: none;
+  background: none;
+  border: none;
+  transform: rotate(180deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  width: 2rem;
 
-    img {
-        width: 100%;
-        height: 100%;
-    }
+  img {
+    height: 100%;
+    width: 100%;
+  }
 }
+
+.pilNedKnap {
+  padding: none;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  width: 2rem;
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.accordianTitel {
+  padding-top: 7px;
+}
+
+.openAccordian {
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  width: 2rem;
+  border: none;
+  background: none;
+  margin-right: 20px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
 //-----------------------------
 //Accordian lukket - SLUT
 //-----------------------------
 
-@media (max-width: 1200px){
-    main {
-        width: 960px;
-        margin-top: $mainTopMargTablet;
-    }
-    h1{
-        font-size: 2.4rem;
-        padding-bottom: 3px;
-    }
-    #logo{
-        height: 5rem;
-    }
-    #contentContainer #settingsContainer {
-        width: 290px;
-        padding-top: 10px;
-        padding-bottom: 5px;
-    }
-    #contentContainer #tasksContainer{
-        height: calc(100vh - $topHeight1200); //CONTAINER HØJDE   CONTAINER HØJDE CONTAINER HØJDE
-    }
-    .heroElements {
-        align-items: end;
-        padding-bottom: 5px;
-    }
-    
+@media (max-width: 1200px) {
+  main {
+    width: 960px;
+    margin-top: $mainTopMargTablet;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    padding-bottom: 3px;
+  }
+
+  #logo {
+    height: 5rem;
+  }
+
+  #contentContainer #settingsContainer {
+    width: 290px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+  }
+
+  #contentContainer #tasksContainer {
+    height: calc(100vh - $topHeight1200); //CONTAINER HØJDE   CONTAINER HØJDE CONTAINER HØJDE
+  }
+
+  .heroElements {
+    align-items: end;
+    padding-bottom: 5px;
+  }
+
 }
-@media (max-width: 992px){
-    main {
-        width: 720px;
-        margin-top: $mainTopMargTablet;
-    }
-    /*.nyOpgWrapper{
+
+@media (max-width: 992px) {
+  main {
+    width: 720px;
+    margin-top: $mainTopMargTablet;
+  }
+
+  /*.nyOpgWrapper{
         width: 720px;
     }*/
-    .heroElements {
-        height: $heroEleHeightTablet;
+  .heroElements {
+    height: $heroEleHeightTablet;
+  }
+
+  #contentContainer #tasksContainer {
+    height: calc(100vh - $topHeightTablet); //CONTAINER HØJDE   CONTAINER HØJDE CONTAINER HØJDE
+  }
+
+  .greenLine {
+    width: 100%;
+    height: $glHeightTablet;
+    background-color: $darkGreen;
+  }
+
+  #contentContainer {
+    flex-direction: column;
+
+    #settingsContainer {
+      width: 100%;
+      padding-right: 0;
+      padding-left: 0;
+      flex-direction: row;
+      border-bottom: 2px solid black;
+      height: $settingsContainerHeightTablet;
+      padding-top: 0;
+      padding-bottom: 4px;
+      align-items: end;
     }
-    #contentContainer #tasksContainer{
-        height: calc(100vh - $topHeightTablet); //CONTAINER HØJDE   CONTAINER HØJDE CONTAINER HØJDE
+
+    #tasksContainer #standardLandingPage {
+      padding-left: 0;
     }
-    .greenLine {
-        width: 100%;
-        height: $glHeightTablet;
-        background-color: $darkGreen;
-    }
-    #contentContainer {
-        flex-direction: column;
-    
-        #settingsContainer {
-            width: 100%;
-            padding-right: 0;
-            padding-left: 0;
-            flex-direction: row;
-            border-bottom: 2px solid black;
-            height: $settingsContainerHeightTablet;
-            padding-top: 0;
-            padding-bottom: 4px;
-            align-items: end;
-        }
-    
-        #tasksContainer #standardLandingPage {
-            padding-left: 0;
-        }
-    }
-    .toolbar{
-        flex-direction: row;
-        width: 100%;
-        justify-content: space-between;
-    }
-    .search-filter-sort-wrapper {
+  }
+
+  .toolbar {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .search-filter-sort-wrapper {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    flex-grow: 1; 
-    }
-    .sort-dropdown { 
+    flex-grow: 1;
+  }
+
+  .sort-dropdown {
     padding: 15px;
     background-color: white;
     border: 1px solid black;
@@ -764,115 +803,137 @@ textarea {
     align-items: flex-start;
     gap: 0.5rem;
     position: absolute;
-    }
-    #typeDropdown,
-    #sorteringDropdown {
-        display: none;
-    }
+  }
 
-    #typeDropdown.open,
-    #sorteringDropdown.open {
-        display: flex;
-    }
-    .filter-sort-wrapper{
-        flex-direction: row;
-        gap: 50px;
-    }
-    .sort-toggle{
-        margin-top: 2px;
-        display: block;
-        padding: 0;
-        background: none;
-        width: 1.5rem;
-        height: 1.5rem;
-        border: none;
-    }
-    .file-group{
-        align-items: end;
-        gap: 4px;
-    }
-    .info-btn::after { // info-boksen
-        transform: translate(-55%, 45%); //problem løst
-    }
-    /*
+  #typeDropdown,
+  #sorteringDropdown {
+    display: none;
+  }
+
+  #typeDropdown.open,
+  #sorteringDropdown.open {
+    display: flex;
+  }
+
+  .filter-sort-wrapper {
+    flex-direction: row;
+    gap: 50px;
+  }
+
+  .sort-toggle {
+    margin-top: 2px;
+    display: block;
+    padding: 0;
+    background: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: none;
+  }
+
+  .file-group {
+    align-items: end;
+    gap: 4px;
+  }
+
+  .info-btn::after {
+    // info-boksen
+    transform: translate(-55%, 45%); //problem løst
+  }
+
+  /*
     .info-btn:hover::after,
     .info-btn.show-info::after {
         transform: translate(-50%, 55%);
     }
     */
 }
-@media (max-width: 768px){
-    #contentContainer #tasksContainer{
-        height: calc(100vh - $topHeightMobile); //CONTAINER HØJDE   CONTAINER HØJDE CONTAINER HØJDE
-    }
-    main {
-        width: 540px;
-    }
-    /*.nyOpgWrapper{
+
+@media (max-width: 768px) {
+  #contentContainer #tasksContainer {
+    height: calc(100vh - $topHeightMobile); //CONTAINER HØJDE   CONTAINER HØJDE CONTAINER HØJDE
+  }
+
+  main {
+    width: 540px;
+  }
+
+  /*.nyOpgWrapper{
         width: 540px;
     }*/
-    h1{
-        padding-bottom: 2px;
-    }
-    .search-group input {
-        font-size: 1.2rem;
-    }
-    legend {
-        font-size: 1.2rem;
-        margin-bottom: 2px;
-    }
-    label {
-        font-size: 1.2rem;
-    }
-    .sort-toggle{
-        width: 1.1rem;
-        height: 1.1rem;
-    }
-    .file-button {
-        padding: 6px 14px;
-        border: 2px solid black;
-        border-radius: 3px;
-        font-size: 1.2rem;
-    }
-    .info-btn {
-        width: 2.2rem;
-        height: 2.2rem;
-        font-size: 1.2rem;
-    }
-    .search-filter-sort-wrapper {
-        gap: 15px;
-    }
-    .filter-sort-wrapper{
-        gap: 15px;
-    }
-    #contentContainer #settingsContainer {
-        height: $settingsContainerHeightMobileL;
-        padding-top: 0;
-        padding-bottom: 2px;
-        align-items: end;
-    
-    }
-    .mini-header {
-        font-weight: 700;
-        font-size: 1.4rem;
-        letter-spacing: .5px; //-0.5px
-        margin-bottom: 5px;
-    }
+  h1 {
+    padding-bottom: 2px;
+  }
+
+  .search-group input {
+    font-size: 1.2rem;
+  }
+
+  legend {
+    font-size: 1.2rem;
+    margin-bottom: 2px;
+  }
+
+  label {
+    font-size: 1.2rem;
+  }
+
+  .sort-toggle {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .file-button {
+    padding: 6px 14px;
+    border: 2px solid black;
+    border-radius: 3px;
+    font-size: 1.2rem;
+  }
+
+  .info-btn {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1.2rem;
+  }
+
+  .search-filter-sort-wrapper {
+    gap: 15px;
+  }
+
+  .filter-sort-wrapper {
+    gap: 15px;
+  }
+
+  #contentContainer #settingsContainer {
+    height: $settingsContainerHeightMobileL;
+    padding-top: 0;
+    padding-bottom: 2px;
+    align-items: end;
+
+  }
+
+  .mini-header {
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: .5px; //-0.5px
+    margin-bottom: 5px;
+  }
 }
 
-@media (max-width: 576px){
-    main {
-        width: 100%;
-        padding-right: 5px;
-        padding-left: 5px;
-        margin-right: auto;
-        margin-left: auto;
-    }
-    .file-button{
-        padding: 6px 6px;
-        font-size: 1.1rem;
-    }
-    .info-btn{
-        margin-left: 5px;
-    }
+@media (max-width: 576px) {
+  main {
+    width: 100%;
+    padding-right: 5px;
+    padding-left: 5px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .file-button {
+    padding: 6px 6px;
+    font-size: 1.1rem;
+  }
+
+  .info-btn {
+    margin-left: 5px;
+  }
 }
