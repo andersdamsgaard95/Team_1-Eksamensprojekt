@@ -155,27 +155,27 @@ function renderTasks(tasksToRender) {
 
         taskInfoContainer.innerHTML = `
             <div class="taskItem">
-                <p>Titel:</p>
-                <p>${task.Titel}</p>
+                <p class='label mini-header' >Titel:</p>
+                <p class='fieldDisplay' >${task.Titel}</p>
             </div>
 
             <div class="taskItem">
-                <p>Beskrivelse:</p>
-                <p>${task.Beskrivelse || "-"}</p>
+                <p class='label mini-header' >Beskrivelse:</p>
+                <p class='fieldDisplay' >${task.Beskrivelse || "-"}</p>
             </div>
             
             <div class="taskItem">
-                <p>Type:</p>
+                <p class='label mini-header' >Type:</p>
                 <p>${task.Type}</p>
             </div>
             
             <div class="taskItem">
-               <p>Aktiveringsbetingelse:</p>
+               <p class='label mini-header' >Aktiveringsbetingelse:</p>
                 <p>${task.Aktiveringsbetingelse || "-"}</p> 
             </div>
             
             <div class="taskItem">
-                <p>Lokation:</p>
+                <p class='label mini-header' >Lokation:</p>
                 <p>
                     Lon: ${task.Lokation?.[0] ?? "-"} <br>
                     Lat: ${task.Lokation?.[1] ?? "-"}
@@ -183,12 +183,12 @@ function renderTasks(tasksToRender) {
             </div>
 
             <div class="taskItem">
-                <p>Radius:</p>
+                <p class='label mini-header' >Radius:</p>
                 <p>${task.Radius ?? "-"}</p>
             </div>
             
             <div class="taskItem">
-                <p>Valgmuligheder:</p>
+                <p class='label mini-header' >Valgmuligheder:</p>
                 <ul>
                     ${task.Valgmuligheder?.length
                 ? task.Valgmuligheder.map(v => `<li>${v}</li>`).join("")
@@ -196,9 +196,10 @@ function renderTasks(tasksToRender) {
             }
                 </ul>
             </div>
-
-            <button id="editTask${index}">Redigér opgave</button>
-            <button id="deleteTask${index}">Slet opgave</button>
+            <div class="btnContainer">
+                <button class='btn btn1' id="editTask${index}">Redigér opgave</button>
+                <button class='btn btn2' id="deleteTask${index}">Slet opgave</button>
+            </div>
         `;
 
         const editTaskButton = document.getElementById(`editTask${index}`);
