@@ -120,14 +120,6 @@ main {
   }
 }
 
-#askToMergeOrReplacePopUp {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 //-----------------------------
 //aside styling - START
 //-----------------------------
@@ -189,11 +181,6 @@ fieldset {
 /* CHECKBOXES / RADIO BUTTONS */
 .sort-toggle {
   display: none;
-  //padding: 0;
-  //background: none;
-  //width: 2rem;
-  //height: 2rem;
-  //border: none;
 }
 
 .sort-toggle img {
@@ -216,7 +203,6 @@ fieldset {
 }
 
 .sort-dropdown {
-  //skal være position absolute
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -227,7 +213,6 @@ fieldset {
 #typeDropdown,
 #sorteringDropdown {
   display: flex;
-  /* default på store skærme */
 }
 
 /* FILE BUTTONS */
@@ -252,7 +237,6 @@ fieldset {
 
 .info-btn {
   // spørgsmåls-ikonet
-  //display: none; //delete
   z-index: 10;
   width: 2.5rem;
   height: 2.5rem;
@@ -317,13 +301,7 @@ fieldset {
   display: block;
   text-align: left;
   transform: translate(-50%, 55%);
-
 }
-
-/*#formateretInfo {
-    width: 2rem !important; 
-    height: 2rem !important;
-}*/
 
 
 .btn-info-container {
@@ -979,6 +957,13 @@ li {
     letter-spacing: .5px; //-0.5px
     margin-bottom: 5px;
   }
+  #formateretInfo::after {
+    position: absolute;
+    left: 10vw;
+    top: -50px;
+    //transform: translate(30%, 55%);
+    width: 80vw;
+  }
 }
 
 @media (max-width: 576px) {
@@ -998,4 +983,5 @@ li {
   .info-btn {
     margin-left: 5px;
   }
+  
 }

@@ -42,16 +42,16 @@
 
                                 <div id="typeDropdown" class="sort-dropdown">
                                     <label class="label">
-                                        <input type="radio" name="type" value="Alle" checked>
+                                        <input class="filterTypeRadio" type="radio" name="type" value="Alle" checked>
                                         Alle
                                     </label>
                                     <label class="label">
-                                        <input type="radio" name="type" value="Land">
+                                        <input class="filterTypeRadio" type="radio" name="type" value="Land">
                                         Land
                                     </label>
 
                                     <label class="label">
-                                        <input type="radio" name="type" value="Sø">
+                                        <input class="filterTypeRadio" type="radio" name="type" value="Sø">
                                         Sø
                                     </label>
                                 </div>
@@ -68,12 +68,12 @@
 
                                 <div id="sorteringDropdown" class="sort-dropdown">
                                     <label class="label">
-                                        <input type="radio" name="sort" value="ældste">
+                                        <input class="fiterSortRadio" type="radio" name="sort" value="ældste">
                                         Ældste først
                                     </label>
 
                                     <label class="label">
-                                        <input type="radio" name="sort" value="nyeste" checked>
+                                        <input class="fiterSortRadio" type="radio" name="sort" value="nyeste" checked>
                                         Nyeste først
                                     </label>
                                 </div>
@@ -121,10 +121,10 @@
                             <img class="inlineIkon" src="img/upload.svg" alt="upload-ikon">
                         </label>
 
-                        (skal være formateret<div id="formateretInfo" class="info-btn"
+                        (skal være formateret<span id="formateretInfo" class="info-btn"
                             aria-label="Info om formateret Excel-fil til upload">
                             ?
-                    </div>) for at tilføje opgaver.
+                    </span>) for at tilføje opgaver.
                     </p>
                     <p>
                         Udfyld denne
