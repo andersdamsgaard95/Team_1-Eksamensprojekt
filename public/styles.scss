@@ -301,19 +301,19 @@ fieldset {
 
 /* Tekster – UDEN :hover */
 #uploadInfo::after {
-  content: "upload: Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...";
+  content: "Det anbefales at du opretter opgaver her på siden. Hvis du uploader en ny Excel-fil (.xcel), overrider du de opgaver, der allerede ligger på siden. Hvis du har opgaver her på siden, bør du overveje først at downloade dem, før du uploader en ny fil, så du ikke mister dem. Filen du uploader SKAL være .xcel og i første række indeholde felter med henholdsvis: Titel, Beskrivelse, Type, Lokation, Radius, Valgmuligheder og Aktiveringsbetingelse. Hvis du er i tvivl, så download enten eksisterende opgaver, og arbejd så videre i den fil, eller (hvis der ingen opgaver findes på siden) download en template.";
   display: block;
   text-align: left;
 }
 
 #downloadInfo::after {
-  content: "download: Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...";
+  content: "Ved at klikke 'Download fil', downloader du en kopi af opgaverne her på siden. Opgaverne bliver gemt lokalt på din computer som Excel-fil (.xcel).";
   display: block;
   text-align: left;
 }
 
 #formateretInfo::after {
-  content: "formateret: Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...Her skriver du info...";
+  content: "Første række skal indeholde felter med henholdsvis: Titel, Beskrivelse, Type, Lokation, Radius, Valgmuligheder og Aktiveringsbetingelse. I kolonnerne under hvert felt, udfylder du indhold til opgaver (én opgave per række). Vær opmærksom på at koordinater (longitude, latitude) skilles ad med komma og mellemrum (', '), og at Valgmuligheder deles med semikolon (';'). Er du i tvivl om format, så opret opgaver her på siden og download derefter filen. I denne fil vil formatet være åbenlyst.";
   display: block;
   text-align: left;
   transform: translate(-50%, 55%);
@@ -641,7 +641,6 @@ textarea {
 }
 
 .taskPile {
-  background-color: blue;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -686,7 +685,6 @@ textarea {
 }
 
 .accordianTitel {
-  //background-color: yellow;
   padding-top: 7px;
   margin-top: 20px;
   width: 100%;
@@ -694,7 +692,6 @@ textarea {
 
 .openAccordian {
   margin-top: 32px;
-  background-color: green;
   margin-left: auto;
   display: flex;
   justify-content: center;
@@ -702,8 +699,9 @@ textarea {
   height: 2rem;
   width: 2rem;
   border: none;
-  //background: none;
+  background: none;
   margin-right: 20px;
+  cursor: pointer;
 
   img {
     width: 100%;
