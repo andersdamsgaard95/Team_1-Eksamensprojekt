@@ -85,15 +85,6 @@ main {
   padding-top: 30px;
   padding-left: 15px;
 }
-#contentContainer #tasksContainer .taskContainer {
-  display: flex;
-  gap: 30px;
-  align-items: center;
-  border-bottom: 1px solid black;
-  padding: 10px 0;
-  margin-right: 10px;
-  justify-content: start;
-}
 #contentContainer #tasksContainer #renderedTasks {
   overflow-y: scroll;
   width: 100%;
@@ -351,6 +342,7 @@ fieldset {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 8px;
 }
 
 .btn {
@@ -370,7 +362,7 @@ fieldset {
   color: white;
 }
 
-#gemBtn {
+.btn1 {
   background: #8D1B3D;
   color: white;
 }
@@ -423,7 +415,7 @@ textarea {
   border: 1px solid #000;
   border-radius: 2px;
   padding: 6px 8px;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-family: inherit;
 }
 
@@ -524,7 +516,19 @@ textarea {
   font-size: 1.4rem;
 }
 
+.taskContainer {
+  display: flex;
+  gap: 30px;
+  align-items: start;
+  border-bottom: 1px solid black;
+  padding: 10px 0;
+  margin-right: 10px;
+  margin-left: 10px;
+  justify-content: start;
+}
+
 .taskPile {
+  background-color: blue;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -567,9 +571,13 @@ textarea {
 
 .accordianTitel {
   padding-top: 7px;
+  margin-top: 20px;
+  width: 100%;
 }
 
 .openAccordian {
+  margin-top: 32px;
+  background-color: green;
   margin-left: auto;
   display: flex;
   justify-content: center;
@@ -577,12 +585,20 @@ textarea {
   height: 2rem;
   width: 2rem;
   border: none;
-  background: none;
   margin-right: 20px;
 }
 .openAccordian img {
   width: 100%;
   height: 100%;
+}
+
+.fieldDisplay {
+  width: 100%;
+  border: 1px solid #000;
+  border-radius: 2px;
+  padding: 2px 8px;
+  font-size: 1.4rem;
+  font-family: inherit;
 }
 
 @media (max-width: 1200px) {
