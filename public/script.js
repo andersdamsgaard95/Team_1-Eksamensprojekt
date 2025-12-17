@@ -93,6 +93,8 @@ async function loadTasks() {
 
     tasks = await response.json(); //Opdaterer globalt array
 
+    console.log('tasks fra backend', tasks);
+
     renderTasks(tasks);
     return tasks;
 }
@@ -635,3 +637,33 @@ function applyFiltersAndSort() {
 
     renderTasks(result, reversed);
 }
+
+//Download eksisterende excel fil
+const downloadExcistingFileButton = document.getElementById('downloadExistingExcelFileButton');
+
+downloadExcistingFileButton.addEventListener('click', async () => {
+    const doesFileExist = await checkForExistingXcel();
+    if (!doesFileExist) {
+        alert('Der findes endnu ingen excel fil på serveren');
+        return;
+    }
+
+    try {
+        const res = await fetch('http://localhost:3000/downloadExistingFile');
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'opgaver.xlsx'; // eller et andet navn
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+
+        // Frigør blob URL
+        setTimeout(() => URL.revokeObjectURL(url), 10000);
+
+    } catch (err) {
+        console.error('Fejl ved download:', err);
+    }
+})

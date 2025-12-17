@@ -18,6 +18,7 @@ function validateExcelFile(filePath) {
     }
 
     const requiredHeaders = [
+        "ID",
         "Titel",
         "Beskrivelse",
         "Type",
@@ -228,20 +229,6 @@ const server = http.createServer((req, res) => {
         return;
     }
 
-
-    // --- DOWNLOAD TEMPLATE ---
-    /*if (pathname === "/template" && req.method === "GET") {
-        const headers = [{ A: "ID", B: "Titel", C: "Beskrivelse", D: "Type", E: "Aktiveringsbetingelse", F: 'Lokation', G: 'Radius', H: "Valgmuligheder" }];
-        const wb = xlsx.utils.book_new();
-        const ws = xlsx.utils.json_to_sheet(headers, { skipHeader: true });
-        xlsx.utils.book_append_sheet(wb, ws, "Template");
-        const tempPath = path.join(__dirname, "uploads", "template.xlsx");
-        xlsx.writeFile(wb, tempPath);
-        res.writeHead(200, { "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Content-Disposition": "attachment; filename=skabelon.xlsx" });
-        fs.createReadStream(tempPath).pipe(res);
-        return;
-    }*/
-
     if (pathname === "/template" && req.method === "GET") {
 
         // Kolonneoverskrifter
@@ -267,40 +254,33 @@ const server = http.createServer((req, res) => {
         return;
     }
 
+    // DOWNLOAD EKSISTERENDE EXCEL FIL
+    if (pathname === "/downloadExistingFile" && req.method === "GET") {
+        const dataPath = path.join(__dirname, "uploads", "data.xlsx");
 
-    /*if (pathname === "/template" && req.method === "GET") {
-        // Kolonneoverskrifter
-        const headers = ["ID", "Titel", "Beskrivelse", "Type", "Aktiveringsbetingelse", "Lokation", "Radius", "Valgmuligheder"];
+        if (!fs.existsSync(dataPath)) {
+            res.writeHead(404, { "Content-Type": "text/plain" });
+            res.end("Ingen Excel-fil fundet");
+            return;
+        }
 
-        // Eksempelrække
-        const exampleTask = [
-            1,
-            "Fjeldtur",
-            "En tur op på fjeldet med alle deltagere",
-            "Land",
-            "Alle deltagere",
-            "55.6761, 12.5683",
-            100,
-            "Option1; Option2; Option3"
-        ];
-
-        const wb = xlsx.utils.book_new();
-
-        // Opret sheet med eksempelrække
-        const ws = xlsx.utils.aoa_to_sheet([headers, exampleTask]); // bruger array-of-arrays
-        xlsx.utils.book_append_sheet(wb, ws, "Template");
-
-        const tempPath = path.join(__dirname, "uploads", "template.xlsx");
-        xlsx.writeFile(wb, tempPath);
-
+        // Send fil som attachment
         res.writeHead(200, {
             "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            "Content-Disposition": "attachment; filename=skabelon.xlsx"
+            "Content-Disposition": "attachment; filename=opgaver.xlsx"
         });
-        fs.createReadStream(tempPath).pipe(res);
-        return;
-    }*/
 
+        const fileStream = fs.createReadStream(dataPath);
+        fileStream.pipe(res);
+
+        fileStream.on("error", (err) => {
+            console.error("Fejl under streaming af fil:", err);
+            res.writeHead(500);
+            res.end("Fejl ved download af fil");
+        });
+
+        return;
+    }
 
 
     // --- SERVE FRONTEND FILES ---
