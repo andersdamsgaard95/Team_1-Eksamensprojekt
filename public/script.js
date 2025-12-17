@@ -97,7 +97,7 @@ async function loadTasks() {
     return tasks;
 }
 
-function renderTasks(tasksToRender) {
+function renderTasks(tasksToRender, reversed) {
     const standardLandingPage = document.getElementById('standardLandingPage');
     standardLandingPage.style.display = 'none';
 
@@ -111,7 +111,7 @@ function renderTasks(tasksToRender) {
                     <button class="pilOpKnap">
                         <img src="img/chevron.svg" id="arrowUp${i}" class="pil-op ${i === 0 ? 'hiddenArrow' : ''}" />
                     </button>
-                    <p>${i + 1}</p>
+                    <p>${reversed ? tasksToRender.length - i : i + 1}</p>
                     <button class='pilNedKnap'>
                         <img src="img/chevron.svg" id="arrowDown${i}" class="pil-ned ${i === tasks.length - 1 ? 'hiddenArrow' : ''}" />
                     </button>
@@ -390,6 +390,8 @@ function renderTasks(tasksToRender) {
 
         console.log("Opgave opdateret:", updatedTask);
     }
+
+    console.log('Renderede tasks:', tasksToRender);
 }
 
 //Tilføj ny opgave i frontend
@@ -489,8 +491,6 @@ function resetNewTaskForm() {
     document.getElementById("condition").value = "";
 }
 
-
-
 //Opdater excel-fil på server
 async function updateExcelOnServer(tasks) {
     const res = await fetch("http://localhost:3000/update-excel", {
@@ -553,4 +553,67 @@ function renderStandardLandingPage() {
             console.error("Fejl ved download af skabelon:", err);
         }
     });
+}
+
+//Filtrér renderede liste
+
+//type filter radios
+const filterTasksByTypeRadios = document.querySelectorAll('.filterTypeRadio');
+
+//Sortering radios
+const sortTasksRadios = document.querySelectorAll('.fiterSortRadio');
+
+let currentTypeFilter = "Alle";   // Alle | Land | Sø
+let currentSort = "nyeste";       // nyeste | ældste
+
+filterTasksByTypeRadios.forEach((radio) => {
+    radio.addEventListener('change', (e) => {
+        if (tasks.length === 0) return;
+
+        currentTypeFilter = e.target.value;
+        applyFiltersAndSort();
+    })
+})
+
+sortTasksRadios.forEach(radio => {
+    radio.addEventListener('change', (e) => {
+        if (tasks.length === 0) return;
+
+        currentSort = e.target.value;
+        applyFiltersAndSort();
+    })
+})
+
+function applyFiltersAndSort() {
+    let result = [...tasks]; // kopi af tasks
+
+    //FILTER
+    if (currentTypeFilter !== "Alle") {
+        result = result.filter(task =>
+            task.Type.toLowerCase() === currentTypeFilter.toLowerCase()
+        );
+    }
+
+    //SORTERING
+    const reversed = currentSort === "ældste";
+
+    if (reversed) {
+        result.reverse(); // vender bare rækkefølgen
+    }
+
+    renderTasks(result, reversed);
+}
+
+
+//TIL TEAM2
+export async function fetchFraTeam1() {
+    const res = await fetch('http://localhost:3000/data');
+
+    if (!res.ok) {
+        alert('Kunne ikke fetche opgaver');
+    }
+
+    const data = res.json();
+
+    return data;
 }

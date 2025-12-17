@@ -49,9 +49,12 @@ function validateExcelFile(filePath) {
             throw new Error(`Række ${rowNr}: Radius skal være et tal`);
         }
 
-        if (row.Lokation && !row.Lokation.includes(",")) {
-            throw new Error(`Række ${rowNr}: Lokation skal være "lon, lat"`);
+        const locationRegex = /^-?\d+(\.\d+)?,\s-?\d+(\.\d+)?$/;
+
+        if (row.Lokation && !locationRegex.test(row.Lokation)) {
+            throw new Error(`Række ${rowNr}: Lokation skal være "lon, lat" (fx "12.5683, 55.6761")`);
         }
+
     });
 
     return true;
