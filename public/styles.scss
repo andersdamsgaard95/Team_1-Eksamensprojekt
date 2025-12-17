@@ -447,11 +447,19 @@ fieldset {
 #tilføjNyBtn {
   background: $green;
   color: white;
+
+  &:hover {
+    background: $darkGreen;
+  }
 }
 
 .btn1 {
   background: $darkRed;
   color: white;
+
+  &:hover {
+    background: $darkGreen;
+  }
 }
 
 //-----------------------------
@@ -776,6 +784,11 @@ li {
   border: 2px solid $darkRed !important;
   color: $darkRed;
   background-color: white;
+
+  &:hover {
+    border: 2px solid black !important;
+    color: black;
+  }
 }
 
 //-----------------------------

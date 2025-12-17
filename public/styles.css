@@ -364,10 +364,16 @@ fieldset {
   background: #597E50;
   color: white;
 }
+#tilføjNyBtn:hover {
+  background: #3F5C59;
+}
 
 .btn1 {
   background: #8D1B3D;
   color: white;
+}
+.btn1:hover {
+  background: #3F5C59;
 }
 
 .nyOpgWrapper {
@@ -650,6 +656,10 @@ li {
   border: 2px solid #8D1B3D !important;
   color: #8D1B3D;
   background-color: white;
+}
+.btn2:hover {
+  border: 2px solid black !important;
+  color: black;
 }
 
 @media (max-width: 1200px) {

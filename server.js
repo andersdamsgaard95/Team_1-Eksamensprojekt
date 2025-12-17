@@ -82,7 +82,7 @@ const server = http.createServer((req, res) => {
         return;
     }
 
-    // --- STANDARD UPLOAD (første gang) ---
+    // --- STANDARD UPLOAD ---
     if (pathname === "/upload" && req.method === "POST") {
         const form = new formidable.IncomingForm({ multiples: false });
 
