@@ -470,9 +470,10 @@ fieldset {
   background-color: $lightGray;
 }
 
-#task-form {
-  display: none; //til styling til styling til styling til styling til styling til styling
-  //display: flex;
+// #task-form {}
+.task-form{
+  //display: none; //til styling til styling til styling til styling til styling til styling
+  display: flex;
   flex-direction: column;
   gap: 15px;
   position: relative;

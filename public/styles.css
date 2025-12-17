@@ -381,8 +381,8 @@ fieldset {
   background-color: #FAFAFA;
 }
 
-#task-form {
-  display: none;
+.task-form {
+  display: flex;
   flex-direction: column;
   gap: 15px;
   position: relative;

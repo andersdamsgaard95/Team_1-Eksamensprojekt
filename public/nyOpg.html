@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="nyOpgWrapper"> <!--wrapper start-->
+
+        <div class="task-form">
+
+            <div class="editItem">
+                <label class="label mini-header" for="editTitle${index}">Titel</label >
+                <input id="editTitle${index}" type="text" value="${task.Titel}">
+            </div>
+
+            <div class="editItem">
+                <label class="label mini-header" for="editDescription${index}">Beskrivelse</label>
+                <textarea id="editDescription${index}">${task.Beskrivelse || ""}</textarea>
+            </div>
+
+            <div class="editItem">
+                <label class="label mini-header">Type</label>
+                <div class="row checks">
+                    <label class="label check">
+                        <input type="radio" name="editType${index}" value="Land" ${task.Type === "Land" ? "checked" : ""}>
+                        Land
+                    </label>
+                    <label class="label check">
+                        <input type="radio" name="editType${index}" value="Sø" ${task.Type === "Sø" ? "checked" : ""}>
+                        Sø
+                    </label>
+                </div> 
+            </div>
+
+            <div class="editItem">
+                <label class="label mini-header">Lokation</label>
+
+                <div class="row location">
+                    <div class="mini-group">
+                        <div class="mini-labels">
+                            <span>Longitude</span>
+                            <span>Latitude</span>
+                        </div>
+
+                        <div class="mini-inputs">
+                            <input id="editLokationLon${index}" type="number" value="${task.Lokation[0]}">
+                            <input id="editLokationLat${index}" type="number" value="${task.Lokation[1]}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="editItem">
+                <label class="label mini-header">Radius</label>
+                <div class="row radius">
+                    <input class="radius-input" id="editRadius${index}" type="number" value="${task.Radius}">
+                    <span class="unit">Meter</span>
+                </div>
+            </div>
+
+            <div class="editItem">
+                <label class="label mini-header">Valgmuligheder (adskild muligheder med semikolen ; )</label>
+                <input
+                    type="text"
+                    id="editValgmuligheder${index}"
+                    value="${task.Valgmuligheder?.join("; ") || ""}"
+                >
+            </div>
+
+            <div class="editItem">
+                <label class="label mini-header">Aktiveringsbetingelse</label>
+                <input id="editAktiveringsbetingelse${index}" type="text" value="${task.Aktiveringsbetingelse}">
+            </div>
+        </div>
+
+            <div class="btnContainer">
+                <button class="btn btn1" id="saveTask${index}">Gem ændringer</button>
+                <button class="btn btn2" id="cancelEdit${index}">Annuller</button>
+            </div>
+        
+    
+    </div> <!--wrapper slut-->
+</body>
+</html>
