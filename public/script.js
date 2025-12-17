@@ -283,58 +283,62 @@ function renderTasks(tasksToRender, reversed) {
         const taskInfoContainer = document.getElementById(`taskInfoContainer${index}`);
 
         taskInfoContainer.innerHTML = `
+        <div class="nyOpgWrapper">
+
+        <div class="task-form edit">
+
             <div class="editItem">
-                <label>Titel:</label >
+                <label class="label mini-header" for="editTitle${index}">Titel</label >
                 <input id="editTitle${index}" type="text" value="${task.Titel}">
             </div>
 
             <div class="editItem">
-                <label>Beskrivelse:</label>
+                <label class="label mini-header" for="editDescription${index}">Beskrivelse</label>
                 <textarea id="editDescription${index}">${task.Beskrivelse || ""}</textarea>
             </div>
 
             <div class="editItem">
-                <label>Type:</label>
-
-                <label>
-                    <input
-                        type="radio"
-                        name="editType${index}"
-                        value="Land"
-                        ${task.Type === "Land" ? "checked" : ""}
-                    >
-                    Land
-                </label>
-
-                <label>
-                    <input
-                        type="radio"
-                        name="editType${index}"
-                        value="Sø"
-                        ${task.Type === "Sø" ? "checked" : ""}
-                    >
-                    Sø
-                </label>
+                <label class="label mini-header">Type</label>
+                <div class="row checks">
+                    <label class="label check">
+                        <input type="radio" name="editType${index}" value="Land" ${task.Type === "Land" ? "checked" : ""}>
+                        Land
+                    </label>
+                    <label class="label check">
+                        <input type="radio" name="editType${index}" value="Sø" ${task.Type === "Sø" ? "checked" : ""}>
+                        Sø
+                    </label>
+                </div> 
             </div>
 
             <div class="editItem">
-                <label>Aktiveringsbetingelse:</label>
-                <input id="editAktiveringsbetingelse${index}" type="text" value="${task.Aktiveringsbetingelse}">
+                <label class="label mini-header">Lokation</label>
+
+                <div class="row location">
+                    <div class="mini-group">
+                        <div class="mini-labels">
+                            <span>Longitude</span>
+                            <span>Latitude</span>
+                        </div>
+
+                        <div class="mini-inputs">
+                            <input id="editLokationLon${index}" type="number" value="${task.Lokation[0]}">
+                            <input id="editLokationLat${index}" type="number" value="${task.Lokation[1]}">
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="editItem">
-                <label>Lokation</label>
-                <input id="editLokationLon${index}" type="number" value="${task.Lokation[0]}">
-                <input id="editLokationLat${index}" type="number" value="${task.Lokation[1]}">
+                <label class="label mini-header">Radius</label>
+                <div class="row radius">
+                    <input class="radius-input" id="editRadius${index}" type="number" value="${task.Radius}">
+                    <span class="unit">Meter</span>
+                </div>
             </div>
 
             <div class="editItem">
-                <label>Radius:</label>
-                <input id="editRadius${index}" type="number" value="${task.Radius}">
-            </div>
-
-            <div class="editItem">
-                <label>Valgmuligheder (adskild items med ;):</label>
+                <label class="label mini-header">Valgmuligheder (adskild muligheder med semikolen ; )</label>
                 <input
                     type="text"
                     id="editValgmuligheder${index}"
@@ -342,10 +346,19 @@ function renderTasks(tasksToRender, reversed) {
                 >
             </div>
 
-            <div class="editButtons">
-                <button id="saveTask${index}">Gem</button>
-                <button id="cancelEdit${index}">Annuller</button>
+            <div class="editItem">
+                <label class="label mini-header">Aktiveringsbetingelse</label>
+                <input id="editAktiveringsbetingelse${index}" type="text" value="${task.Aktiveringsbetingelse}">
             </div>
+        </div>
+
+            <div class="btnContainer">
+                <button class="btn btn1" id="saveTask${index}">Gem ændringer</button>
+                <button class="btn btn2" id="cancelEdit${index}">Annuller</button>
+            </div>
+        
+    
+    </div>
         `;
 
         const saveTaskButton = document.getElementById(`saveTask${index}`);
@@ -370,7 +383,7 @@ function renderTasks(tasksToRender, reversed) {
                 Number(document.getElementById(`editLokationLat${index}`).value)
             ],
             Radius: Number(document.getElementById(`editRadius${index}`).value),
-            Valgmuligheder: document.getElementById(`editValgmuligheder${index}`).value.split('; ').map(v => v.trim())
+            Valgmuligheder: document.getElementById(`editValgmuligheder${index}`).value.split(';').map(v => v.trim())
                 .filter(Boolean)
         };
 
@@ -563,8 +576,21 @@ const filterTasksByTypeRadios = document.querySelectorAll('.filterTypeRadio');
 //Sortering radios
 const sortTasksRadios = document.querySelectorAll('.fiterSortRadio');
 
+//Søgefelt
+const searchField = document.getElementById('searchField');
+
 let currentTypeFilter = "Alle";   // Alle | Land | Sø
 let currentSort = "nyeste";       // nyeste | ældste
+let searchWord = '';
+
+searchField.addEventListener('input', (e) => {
+    searchWord = e.target.value;
+    applyFiltersAndSort();
+})
+searchField.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') e.preventDefault(); // forhindrer form submit
+});
+
 
 filterTasksByTypeRadios.forEach((radio) => {
     radio.addEventListener('change', (e) => {
@@ -596,24 +622,16 @@ function applyFiltersAndSort() {
 
     //SORTERING
     const reversed = currentSort === "ældste";
-
     if (reversed) {
         result.reverse(); // vender bare rækkefølgen
     }
 
-    renderTasks(result, reversed);
-}
-
-
-//TIL TEAM2
-export async function fetchFraTeam1() {
-    const res = await fetch('http://localhost:3000/data');
-
-    if (!res.ok) {
-        alert('Kunne ikke fetche opgaver');
+    //SEARCH
+    if (searchWord !== '') {
+        result = result.filter((task) =>
+            task.Titel.toLowerCase().includes(searchWord.toLowerCase())
+        );
     }
 
-    const data = res.json();
-
-    return data;
+    renderTasks(result, reversed);
 }

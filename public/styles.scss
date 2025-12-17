@@ -288,14 +288,17 @@ fieldset {
 .info-btn.show-info::after {
   opacity: 1;
 }
+
 #uploadInfo {
   position: relative;
   z-index: 20;
 }
+
 #downloadInfo {
   position: relative;
   z-index: 10;
 }
+
 /* Tekster – UDEN :hover */
 #uploadInfo::after {
   content: "Det anbefales at du opretter opgaver her på siden. Hvis du uploader en ny Excel-fil (.xcel), overrider du de opgaver, der allerede ligger på siden. Hvis du har opgaver her på siden, bør du overveje først at downloade dem, før du uploader en ny fil, så du ikke mister dem. Filen du uploader SKAL være .xcel og i første række indeholde felter med henholdsvis: Titel, Beskrivelse, Type, Lokation, Radius, Valgmuligheder og Aktiveringsbetingelse. Hvis du er i tvivl, så download enten eksisterende opgaver, og arbejd så videre i den fil, eller (hvis der ingen opgaver findes på siden) download en template.";
@@ -304,23 +307,23 @@ fieldset {
   //transform: translate(50%, -55%); 
   //position: absolute;
   z-index: 100;
-  width: calc( $main1200width - 500px);
-  transform: translate(50%, -53%); 
+  width: calc($main1200width - 500px);
+  transform: translate(50%, -53%);
 }
 
 #downloadInfo::after {
   content: "Ved at klikke 'Download fil', downloader du en kopi af opgaverne her på siden. Opgaverne bliver gemt lokalt på din computer som Excel-fil (.xcel).";
   display: block;
   text-align: left;
-  width: calc( $main1200width - 600px);
-  transform: translate(50%, -53%); 
+  width: calc($main1200width - 600px);
+  transform: translate(50%, -53%);
 }
 
 #formateretInfo::after {
   content: "Første række skal indeholde felter med henholdsvis: Titel, Beskrivelse, Type, Lokation, Radius, Valgmuligheder og Aktiveringsbetingelse. I kolonnerne under hvert felt, udfylder du indhold til opgaver (én opgave per række). Vær opmærksom på at koordinater (longitude, latitude) skilles ad med komma og mellemrum (', '), og at Valgmuligheder deles med semikolon (';'). Er du i tvivl om format, så opret opgaver her på siden og download derefter filen. I denne fil vil formatet være åbenlyst.";
   display: block;
   text-align: left;
-  width: calc( $main1200width - 600px);
+  width: calc($main1200width - 600px);
   transform: translate(-51%, -5%);
 }
 
@@ -385,7 +388,7 @@ fieldset {
 .tooltip-btn::after {
   content: attr(data-tooltip);
   text-align: left;
-  
+
   margin-top: 6px;
   background: #fff;
   color: #000;
@@ -427,10 +430,10 @@ fieldset {
 }
 
 .btn {
-   
+
   display: inline-block;
   padding: 10px 18px;
-   border: 2px solid transparent;
+  border: 2px solid transparent;
   //padding: 12px 20px;
   //border: none;
   border-radius: 3px;
@@ -471,9 +474,9 @@ fieldset {
 }
 
 // #task-form {}
-.task-form{
-  //display: none; //til styling til styling til styling til styling til styling til styling
-  display: flex;
+.task-form {
+  display: none; //til styling til styling til styling til styling til styling til styling
+  //display: flex;
   flex-direction: column;
   gap: 15px;
   position: relative;
@@ -481,6 +484,10 @@ fieldset {
   padding: 0 20px;
   font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   color: #000;
+
+  &.edit {
+    display: flex;
+  }
 }
 
 
@@ -727,6 +734,7 @@ textarea {
   font-family: inherit;
   background-color: $darkGray;
 }
+
 .mini-labels-displayer {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -735,34 +743,41 @@ textarea {
   margin-left: 4px;
   margin-bottom: -2px;
 }
+
 .mini-inputs-displayer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
+
 ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
+
 li {
   padding: 7px 8px !important;
   list-style: none;
 }
-.taskItem{
-    display: flex;
-    flex-direction: column;
-    gap: -2px;
+
+.taskItem {
+  display: flex;
+  flex-direction: column;
+  gap: -2px;
 }
+
 .p2 {
-    line-height: 2.2rem !important;
+  line-height: 2.2rem !important;
 }
-.btn2{
-    border: 2px solid $darkRed !important;
-    color: $darkRed;
-    background-color: white;
+
+.btn2 {
+  border: 2px solid $darkRed !important;
+  color: $darkRed;
+  background-color: white;
 }
+
 //-----------------------------
 //Accordian åben - SLUT
 //-----------------------------
@@ -798,12 +813,13 @@ li {
   }
 
   #uploadInfo::after {
-    width: calc( $main992width - 200px);
-    transform: translate(50%, -53%); 
+    width: calc($main992width - 200px);
+    transform: translate(50%, -53%);
   }
+
   #downloadInfo::after {
-    width: calc( $main1200width - 800px);
-    transform: translate(50%, -53%); 
+    width: calc($main1200width - 800px);
+    transform: translate(50%, -53%);
   }
 
 }
@@ -903,13 +919,15 @@ li {
     align-items: end;
     gap: 4px;
   }
+
   #uploadInfo::after {
-    width: calc( $main992width - 400px);
-    transform: translate(-52%, 53%); 
+    width: calc($main992width - 400px);
+    transform: translate(-52%, 53%);
   }
+
   #downloadInfo::after {
-    width: calc( $main1200width - 800px);
-    transform: translate(-52%, 53%); 
+    width: calc($main1200width - 800px);
+    transform: translate(-52%, 53%);
   }
 
 }
@@ -983,11 +1001,12 @@ li {
     letter-spacing: .5px; //-0.5px
     margin-bottom: 5px;
   }
-  
+
   #formateretInfo::after {
-    width: calc( $main768width - 50px);
+    width: calc($main768width - 50px);
     transform: translate(20%, -20%);
   }
+
   #logo {
     height: 4.3rem;
   }
@@ -1010,7 +1029,8 @@ li {
   .info-btn {
     margin-left: 5px;
   }
-   #uploadInfo::after {
+
+  #uploadInfo::after {
     width: 250px;
     transform: translate(-52%, 53%);
     /*
@@ -1020,29 +1040,35 @@ li {
     width: 80vw; 
     */
   }
+
   #downloadInfo::after {
     width: 100px;
-    transform: translate(-52%, 53%); 
+    transform: translate(-52%, 53%);
   }
-   #formateretInfo::after {
+
+  #formateretInfo::after {
     position: fixed;
     left: -15vw;
     right: 0;
     top: 150px;
     width: 80vw;
   }
+
   .tooltip-btn::after {
-  display: none;
+    display: none;
+  }
+
 }
-  
-}
+
 @media (max-width: 350px) {
   .legend-group {
     font-size: 1.2rem;
   }
-    #uploadInfo {
-    display: none; 
+
+  #uploadInfo {
+    display: none;
   }
+
   #downloadInfo {
     display: none;
   }
