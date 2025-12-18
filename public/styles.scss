@@ -239,7 +239,10 @@ fieldset {
   font-size: 1.4rem;
   letter-spacing: 0.05rem;
   font-family: Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; //button tag får ikke font-styling fra html{}
-
+}
+.file-button:hover {
+  background: black;
+  color: white;
 }
 
 .info-btn {
