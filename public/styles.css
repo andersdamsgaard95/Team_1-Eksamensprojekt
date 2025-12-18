@@ -280,7 +280,7 @@ fieldset {
 }
 
 #formateretInfo::after {
-  content: "Første række skal indeholde felter med henholdsvis: Titel, Beskrivelse, Type, Lokation, Radius, Valgmuligheder og Aktiveringsbetingelse. I kolonnerne under hvert felt, udfylder du indhold til opgaver (én opgave per række). Vær opmærksom på at koordinater (longitude, latitude) skilles ad med komma og mellemrum (', '), og at Valgmuligheder deles med semikolon (';'). Er du i tvivl om format, så opret opgaver her på siden og download derefter filen. I denne fil vil formatet være åbenlyst.";
+  content: "Første række skal indeholde felter med henholdsvis: Titel, Beskrivelse, Type, Lokation, Radius, Valgmuligheder og Aktiveringsbetingelse. I kolonnerne under hvert felt, udfylder du indhold til opgaver (én opgave per række). Vær opmærksom på at koordinater (longitude, latitude) skilles ad med komma og mellemrum (', '), og at Valgmuligheder deles med semikolon ('; '). Er du i tvivl om format, så download templaten nedenfor eller opret opgaver her på siden og download derefter filen. I disse filer vil formatet være åbenlyst.";
   display: block;
   text-align: left;
   width: 540px;
