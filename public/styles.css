@@ -138,6 +138,8 @@ fieldset {
   font-size: 1.6rem;
   letter-spacing: 0.5px;
   margin-bottom: 5px;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
 }
 
 .legend-group {
@@ -893,6 +895,21 @@ li {
   .tooltip-btn::after {
     display: none;
   }
+  .btnContainer {
+    flex-direction: column;
+  }
+  .btn {
+    padding: 10px 18px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.07rem;
+  }
+  .taskContainer {
+    gap: 15px;
+  }
+  .mini-inputs input {
+    width: 80px;
+  }
 }
 @media (max-width: 350px) {
   .legend-group {
@@ -903,5 +920,9 @@ li {
   }
   #downloadInfo {
     display: none;
+  }
+  .mini-inputs input {
+    width: 70px;
+    padding: 4px 1px;
   }
 }/*# sourceMappingURL=styles.css.map */
